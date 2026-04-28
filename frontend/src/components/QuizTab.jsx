@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getProgress, saveProgress } from "../utils/progress";
 import { motion } from "framer-motion";
+import { BASE_URL } from "../config/api";
 
 export default function QuizTab({ isCompleted, onComplete, onChange }) {
   const { topic } = useParams();
@@ -44,7 +45,7 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
       console.log("Fetching quiz for topic:", topic);
 
       try {
-        const response = await fetch("http://127.0.0.1:8000/quiz", {
+        const response = await fetch(`${BASE_URL}/quiz`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ topic })

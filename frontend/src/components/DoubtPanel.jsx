@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
+import { BASE_URL } from "../config/api";
 
-const API_URL = "http://127.0.0.1:8000/doubt";
+const API_URL = `${BASE_URL}/doubt`;
 
 export default function DoubtPanel({ isOpen, onClose, contextData, messages, onAddMessage }) {
   const [input, setInput] = useState("");
