@@ -130,7 +130,7 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
     return (
       <div className="flex flex-col items-center justify-center h-full space-y-4">
         <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-xl text-zinc-400 animate-pulse">
+        <p className="text-xl text-slate-500 animate-pulse">
           Generating quiz...
         </p>
       </div>
@@ -149,10 +149,10 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
 
   return (
     <div className="flex flex-col h-full">
-      <h2 className="text-2xl font-bold mb-6">Knowledge Check</h2>
+      <h2 className="text-2xl font-bold mb-6 text-slate-900">Knowledge Check</h2>
 
-      <div className="bg-zinc-800/50 p-6 rounded-xl border border-zinc-700/50 mb-8">
-        <p className="text-xl text-zinc-100 font-medium">{question}</p>
+      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm mb-8">
+        <p className="text-xl text-slate-900 font-medium">{question}</p>
       </div>
 
       <div className="space-y-4 mb-10">
@@ -161,22 +161,22 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
           const isSelected = selectedOption === index;
 
           let optStyle =
-            "border-zinc-700/60 hover:border-zinc-500 bg-zinc-800/30";
+            "border-slate-200 hover:border-[#1E3A8A] bg-white shadow-sm text-slate-700";
 
           if (!isSubmitted) {
             if (isSelected)
               optStyle =
-                "border-blue-500 bg-blue-500/10 text-blue-400";
+                "border-[#1E3A8A] bg-blue-50 text-[#1E3A8A] shadow-md";
           } else {
             if (isCorrectOption) {
               optStyle =
-                "border-green-500 bg-green-500/10 text-green-400";
+                "border-green-500 bg-green-50 text-green-700 shadow-sm";
             } else if (isSelected && !isCorrectOption) {
               optStyle =
-                "border-red-500 bg-red-500/10 text-red-400";
+                "border-red-500 bg-red-50 text-red-700 shadow-sm";
             } else {
               optStyle =
-                "border-zinc-800 bg-zinc-900/30 text-zinc-600";
+                "border-slate-200 bg-slate-50 text-slate-400 shadow-none opacity-60";
             }
           }
 
@@ -194,7 +194,7 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
             >
               <div
                 className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                  isSelected ? "border-current" : "border-zinc-600"
+                  isSelected ? "border-current" : "border-slate-300"
                 }`}
               >
                 {isSelected && (
@@ -215,31 +215,31 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
             whileTap={selectedOption !== null ? { scale: 0.95 } : {}}
             onClick={handleSubmit}
             disabled={selectedOption === null}
-            className="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 disabled:bg-zinc-800 disabled:opacity-50 text-white font-bold rounded-xl shadow-lg transition-colors"
+            className="px-8 py-3.5 bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 disabled:bg-slate-200 disabled:text-slate-400 text-white font-bold rounded-xl shadow-md transition-colors"
           >
             Submit Answer
           </motion.button>
         ) : (
           <div className="space-y-6">
             <div
-              className={`p-6 rounded-xl border ${
+              className={`p-6 rounded-xl border shadow-sm ${
                 isCorrect
-                  ? "bg-green-500/10 border-green-500/30"
-                  : "bg-red-500/10 border-red-500/30"
+                  ? "bg-green-50 border-green-200"
+                  : "bg-red-50 border-red-200"
               }`}
             >
               <h3
                 className={`font-bold text-xl mb-3 ${
-                  isCorrect ? "text-green-400" : "text-red-400"
+                  isCorrect ? "text-green-700" : "text-red-700"
                 }`}
               >
                 {isCorrect ? "Correct ✅" : "Wrong ❌"}
               </h3>
 
               {!isCorrect && options[correctAnswer] && (
-                <p className="text-zinc-300 mb-2">
+                <p className="text-slate-600 mb-2">
                   Correct answer:{" "}
-                  <span className="font-semibold">
+                  <span className="font-semibold text-slate-900">
                     {options[correctAnswer]}
                   </span>
                 </p>
@@ -247,8 +247,8 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
             </div>
 
             {explanation && (
-              <p className="text-zinc-300 text-lg leading-relaxed">
-                <span className="font-bold text-zinc-100">Explanation: </span>
+              <p className="text-slate-600 text-lg leading-relaxed">
+                <span className="font-bold text-slate-900">Explanation: </span>
                 {explanation}
               </p>
             )}
@@ -258,7 +258,7 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
               whileTap={!isContinuing ? { scale: 0.95 } : {}}
               onClick={handleContinue}
               disabled={isContinuing}
-              className="px-8 py-3.5 bg-zinc-100 hover:bg-white disabled:bg-zinc-500 disabled:cursor-not-allowed text-zinc-900 font-bold rounded-xl shadow-lg transition-colors"
+              className="px-8 py-3.5 bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 disabled:bg-slate-200 disabled:text-slate-400 text-white font-bold rounded-xl shadow-md transition-colors"
             >
               {isContinuing ? "Loading..." : "Continue →"}
             </motion.button>

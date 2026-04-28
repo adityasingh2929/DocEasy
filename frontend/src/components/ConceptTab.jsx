@@ -10,28 +10,28 @@ export default function ConceptTab({ topicName, isCompleted, onComplete }) {
 
   if (!concept) {
     return (
-      <div className="flex flex-col h-full items-center justify-center">
-        <p className="text-xl text-zinc-400">Concept not available</p>
+    <div className="flex flex-col h-full items-center justify-center">
+        <p className="text-xl text-slate-500">Concept not available</p>
       </div>
     );
   }
 
   return (
     <div className="flex flex-col h-full">
-      <h2 className="text-3xl font-bold mb-6 text-white">{concept.title}</h2>
+      <h2 className="text-3xl font-bold mb-6 text-slate-900">{concept.title}</h2>
       
-      <div className="bg-zinc-950 rounded-xl p-8 mb-10 border border-zinc-800/50 shadow-inner overflow-y-auto flex-1">
+      <div className="bg-white rounded-xl p-8 mb-10 border border-slate-200 shadow-sm overflow-y-auto flex-1">
         
         {/* Explanation */}
-        <p className="text-zinc-300 text-[16px] leading-relaxed mb-6">
+        <p className="text-slate-600 text-[16px] leading-relaxed mb-6">
           {concept.explanation}
         </p>
 
         {/* Bullet Points */}
         {concept.points && concept.points.length > 0 && (
-          <ul className="list-disc list-inside space-y-2 mb-8 text-zinc-300 text-[16px]">
+          <ul className="list-disc list-inside space-y-2 mb-8 text-slate-600 text-[16px]">
             {concept.points.map((point, idx) => (
-              <li key={idx} className="leading-relaxed pl-2 marker:text-blue-500">
+              <li key={idx} className="leading-relaxed pl-2 marker:text-[#1E3A8A]">
                 {point}
               </li>
             ))}
@@ -40,7 +40,7 @@ export default function ConceptTab({ topicName, isCompleted, onComplete }) {
 
         {/* Code Example */}
         {concept.example && (
-          <div className="bg-[#111] border border-zinc-800/80 rounded-lg p-5 overflow-x-auto shadow-sm">
+          <div className="bg-slate-900 border border-slate-800 rounded-lg p-5 overflow-x-auto shadow-sm">
             <pre className="font-mono text-[14px] leading-relaxed text-blue-300 whitespace-pre">
               {concept.example}
             </pre>
@@ -55,8 +55,8 @@ export default function ConceptTab({ topicName, isCompleted, onComplete }) {
           onClick={onComplete}
           className={`px-8 py-3.5 rounded-xl font-bold transition-all duration-300
             ${isCompleted 
-              ? 'bg-green-500/10 text-green-400 border border-green-500/30 cursor-default' 
-              : 'bg-blue-600 hover:bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]'}
+              ? 'bg-green-50 text-green-700 border border-green-200 cursor-default shadow-sm' 
+              : 'bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-md hover:shadow-lg'}
           `}
         >
           {isCompleted ? '✓ Marked as Complete' : 'Mark as Complete'}

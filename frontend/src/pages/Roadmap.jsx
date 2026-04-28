@@ -77,8 +77,15 @@ export default function Roadmap() {
     }
   };
 
+  const handleResetProgress = () => {
+    if (window.confirm("Are you sure you want to reset your progress?")) {
+      localStorage.removeItem("docs_made_easy_progress");
+      window.location.reload();
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#0B1020] text-white flex flex-col items-center py-16 px-4 md:px-6 relative overflow-x-hidden selection:bg-blue-500/30">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col items-center py-16 px-4 md:px-6 relative overflow-x-hidden selection:bg-blue-500/30">
       
       <div className="absolute top-6 left-6 md:top-8 md:left-12 z-50">
         <Logo />
@@ -91,21 +98,21 @@ export default function Roadmap() {
         transition={{ duration: 0.6 }}
         className="mt-12 md:mt-4 mb-20 text-center z-10 w-full max-w-xl"
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight text-white">
+        <h1 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight text-slate-900">
           Your Journey
         </h1>
         
-        <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-6 shadow-xl backdrop-blur-sm">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-md backdrop-blur-sm">
           <div className="flex justify-between items-end mb-4">
-            <span className="text-zinc-400 font-medium tracking-wide">Course Progress</span>
-            <span className="text-3xl font-bold text-blue-400">{progressPercentage}%</span>
+            <span className="text-slate-600 font-medium tracking-wide">Course Progress</span>
+            <span className="text-3xl font-bold text-blue-700">{progressPercentage}%</span>
           </div>
-          <div className="w-full bg-zinc-800 rounded-full h-3.5 overflow-hidden">
+          <div className="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden">
             <motion.div 
               initial={{ width: 0 }}
               animate={{ width: `${progressPercentage}%` }}
               transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-              className="bg-blue-500 h-full rounded-full shadow-[0_0_15px_rgba(59,130,246,0.6)] relative"
+              className="bg-blue-600 h-full rounded-full shadow-sm relative"
             >
               {/* Highlight inside progress bar */}
               <div className="absolute inset-0 bg-white/20 w-full h-1/2"></div>
@@ -122,7 +129,7 @@ export default function Roadmap() {
           initial={{ height: 0 }}
           animate={{ height: "100%" }}
           transition={{ duration: 2.5, ease: "easeInOut" }}
-          className="absolute top-0 w-1.5 bg-zinc-800 z-0 left-1/2 -translate-x-1/2 rounded-full"
+          className="absolute top-0 w-1.5 bg-slate-200 z-0 left-1/2 -translate-x-1/2 rounded-full"
         />
 
         {/* Nodes */}
@@ -149,10 +156,10 @@ export default function Roadmap() {
                   whileHover={!isLocked ? { scale: 1.15 } : {}}
                   whileTap={!isLocked ? { scale: 0.95 } : {}}
                   onClick={() => handleNodeClick(topic.id, status)}
-                  className={`w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center border-4 shadow-xl transition-all duration-300 z-10 relative
-                    ${isCompleted ? 'bg-green-600 border-green-400 cursor-pointer shadow-[0_0_30px_rgba(34,197,94,0.3)]' : ''}
-                    ${isUnlocked ? 'bg-blue-600 border-blue-400 cursor-pointer shadow-[0_0_35px_rgba(59,130,246,0.5)]' : ''}
-                    ${isLocked ? 'bg-zinc-900 border-zinc-700 cursor-not-allowed opacity-50' : ''}
+                  className={`w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center border-4 shadow-md transition-all duration-300 z-10 relative
+                    ${isCompleted ? 'bg-green-100 border-green-500 cursor-pointer text-green-600' : ''}
+                    ${isUnlocked ? 'bg-blue-100 border-blue-500 cursor-pointer text-blue-700' : ''}
+                    ${isLocked ? 'bg-slate-100 border-slate-300 cursor-not-allowed opacity-60 text-slate-400' : ''}
                   `}
                 >
                   {/* Pulse effect for current (unlocked) node */}
@@ -163,15 +170,15 @@ export default function Roadmap() {
                   {/* Icons */}
                   <div className="z-10 relative">
                     {isCompleted && (
-                      <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-10 h-10 md:w-12 md:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                     )}
                     {isUnlocked && (
-                      <span className="text-white font-black tracking-wider text-sm md:text-base shadow-sm">START</span>
+                      <span className="font-black tracking-wider text-sm md:text-base">START</span>
                     )}
                     {isLocked && (
-                      <svg className="w-8 h-8 md:w-10 md:h-10 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
                     )}
@@ -179,10 +186,10 @@ export default function Roadmap() {
                 </motion.div>
 
                 {/* Node Title */}
-                <div className={`mt-4 md:mt-5 text-center transition-colors duration-300 bg-[#0B1020]/90 backdrop-blur-md px-5 py-1.5 rounded-full border border-transparent
-                  ${isCompleted ? 'text-green-400 font-bold border-green-500/20' : ''}
-                  ${isUnlocked ? 'text-blue-400 font-bold border-blue-500/20' : ''}
-                  ${isLocked ? 'text-zinc-500 font-medium' : ''}
+                <div className={`mt-4 md:mt-5 text-center transition-colors duration-300 bg-white/90 backdrop-blur-md px-5 py-1.5 rounded-full border border-slate-200 shadow-sm
+                  ${isCompleted ? 'text-green-700 font-bold' : ''}
+                  ${isUnlocked ? 'text-blue-700 font-bold' : ''}
+                  ${isLocked ? 'text-slate-500 font-medium' : ''}
                 `}>
                   <h2 className="text-lg md:text-xl tracking-wide">{topic.title}</h2>
                 </div>
@@ -191,6 +198,18 @@ export default function Roadmap() {
           })}
         </motion.div>
 
+      </div>
+
+      {/* Reset Progress Button */}
+      <div className="mt-16 mb-8 z-10 relative">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleResetProgress}
+          className="px-6 py-2.5 border border-red-500 text-red-500 font-semibold rounded-lg hover:bg-red-50 transition-colors bg-white shadow-sm"
+        >
+          Reset Progress
+        </motion.button>
       </div>
     </div>
   );

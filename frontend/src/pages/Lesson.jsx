@@ -84,33 +84,33 @@ export default function Lesson() {
   }, [topic]);
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-white p-6 md:p-10 flex flex-col items-center relative overflow-x-hidden selection:bg-blue-500/30">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 p-6 md:p-10 flex flex-col items-center relative overflow-x-hidden selection:bg-blue-500/30">
       <div className="w-full max-w-5xl mt-2 md:mt-4 flex flex-col items-center">
         
         {/* Header Section */}
         <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
           <div className="flex flex-col">
             {/* Breadcrumbs */}
-            <div className="text-zinc-400 font-medium tracking-wide mb-4 flex items-center text-sm md:text-sm">
-              <Link to="/roadmap/javascript" className="hover:text-white transition-colors bg-zinc-800/60 px-3 py-1.5 rounded-lg border border-zinc-700/50 backdrop-blur-sm">
+            <div className="text-slate-500 font-medium tracking-wide mb-4 flex items-center text-sm md:text-sm">
+              <Link to="/roadmap/javascript" className="hover:text-slate-900 transition-colors bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
                 Roadmap
               </Link>
-              <span className="mx-3 text-zinc-600">{'>'}</span>
-              <span className="text-blue-300 bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/20 backdrop-blur-sm">
+              <span className="mx-3 text-slate-400">{'>'}</span>
+              <span className="text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-200">
                 {topicName}
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">{topicName}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">{topicName}</h1>
           </div>
           
-          <div className="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50 backdrop-blur-sm">
+          <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
             <Logo />
           </div>
         </div>
 
         {/* Custom Animated Tabs */}
-        <div className="w-full flex space-x-2 mb-8 bg-zinc-900/40 p-2 rounded-2xl border border-zinc-800/50 backdrop-blur-sm self-start overflow-x-auto no-scrollbar">
+        <div className="w-full flex space-x-2 mb-8 bg-white p-2 rounded-2xl border border-slate-200 shadow-sm self-start overflow-x-auto no-scrollbar">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -118,14 +118,14 @@ export default function Lesson() {
                 key={tab.id}
                 onClick={() => handleTabClick(tab.id, tab.locked)}
                 className={`relative px-6 md:px-10 py-3 md:py-4 rounded-xl font-bold text-sm md:text-base transition-colors duration-300 flex items-center gap-2 whitespace-nowrap
-                  ${isActive ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}
-                  ${tab.locked ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-zinc-800/50'}
+                  ${isActive ? 'text-white' : 'text-slate-500 hover:text-slate-800'}
+                  ${tab.locked ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-slate-50'}
                 `}
               >
                 {isActive && (
                   <motion.div
                     layoutId="lessonTabIndicator"
-                    className="absolute inset-0 bg-blue-600 rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                    className="absolute inset-0 bg-[#1E3A8A] rounded-xl shadow-md"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -151,7 +151,7 @@ export default function Lesson() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -15, scale: 0.98 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="bg-[#0e1324] border border-zinc-800 rounded-[2rem] p-6 md:p-12 min-h-[500px] shadow-2xl relative w-full"
+              className="bg-white border border-slate-200 rounded-[2rem] p-6 md:p-12 min-h-[500px] shadow-lg relative w-full"
             >
               {activeTab === 'concept' && (
                 <ConceptTab 
@@ -195,14 +195,14 @@ export default function Lesson() {
         whileTap={{ scale: 0.9 }}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
         onClick={() => setIsDoubtPanelOpen(true)}
-        className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-500 text-white p-5 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-blue-400/30 transition-colors z-40 group flex items-center justify-center cursor-pointer"
+        className="fixed bottom-8 right-8 bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white p-5 rounded-full shadow-lg border border-[#1E3A8A]/30 transition-colors z-40 group flex items-center justify-center cursor-pointer"
       >
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
         </svg>
         
         {/* Tooltip */}
-        <span className="absolute right-full mr-4 bg-zinc-800 text-white text-sm font-bold py-2 px-4 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-zinc-700 shadow-2xl tracking-wide">
+        <span className="absolute right-full mr-4 bg-white text-slate-900 text-sm font-bold py-2 px-4 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-slate-200 shadow-xl tracking-wide">
           Ask Tutor
         </span>
       </motion.button>
