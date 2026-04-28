@@ -1,53 +1,37 @@
-import joblib
+# app/rag/retriever.py
+
+import json
 import os
-from sklearn.metrics.pairwise import cosine_similarity
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-EMBEDDINGS_PATH = os.path.join(BASE_DIR, "data", "embeddings.joblib")
+CHUNKS_PATH = os.path.join(BASE_DIR, "data", "chunks.json")
 
-data = joblib.load(EMBEDDINGS_PATH)
+# load chunks only (lightweight)
+with open(CHUNKS_PATH, "r", encoding="utf-8") as f:
+    data = json.load(f)
 
 
 def retrieve_chunks(query_embedding, topic=None, top_k=2):
     """
-    Robust retriever:
-    - Topic filtering first
-    - Similarity ranking
-    - Safe fallback (full dataset if topic is empty)
-    - No hard thresholds (always returns results)
+    Lightweight retriever:
+    - NO embeddings
+    - topic-based filtering
     """
 
-    # 1. Filter by topic (if available)
-    filtered_data = []
     if topic:
-        filtered_data = [item for item in data if item["topic"] == topic]
+        filtered = [item for item in data if item["topic"] == topic]
+    else:
+        filtered = data
 
-    # 2. If no topic matches -> fallback to full dataset
-    if not filtered_data:
-        filtered_data = list(data)
+    if not filtered:
+        filtered = data
 
-    # 3. Compute cosine similarity
-    embeddings = [item["embedding"] for item in filtered_data]
-    similarities = cosine_similarity(
-        [query_embedding],
-        embeddings
-    )[0]
-
-    # 4. Sort by similarity
-    ranked = sorted(
-        zip(filtered_data, similarities),
-        key=lambda x: x[1],
-        reverse=True
-    )
-
-    # 5. ALWAYS return top_k results (never return empty list)
-    results = [
+    # just return first few chunks
+    return [
         {
             "text": item["text"],
             "topic": item["topic"],
-            "score": float(score)
+            "score": 1.0
         }
-        for item, score in ranked
-    ][:top_k]
-
-    return results
+        for item in filtered[:top_k]
+    ]
