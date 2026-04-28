@@ -1,0 +1,112 @@
+[
+  {
+    "id": "variables",
+    "title": "Variables (var, let, const)",
+    "explanation": "Variables are used to store data in JavaScript. You can declare them using var, let, or const. The main difference lies in scope and reassignment behavior.",
+    "points": [
+      "var is function-scoped and can be redeclared",
+      "let is block-scoped and can be reassigned",
+      "const is block-scoped and cannot be reassigned"
+    ],
+    "example": "let age = 20;\nage = 25;\n\nconst name = \"Aditya\";\n// name = \"John\"; ❌ Error"
+  },
+  {
+    "id": "data-types",
+    "title": "Data Types",
+    "explanation": "JavaScript has different types of values, broadly categorized into primitive and non-primitive types.",
+    "points": [
+      "Primitive types include string, number, boolean, null, undefined, symbol, bigint",
+      "Non-primitive types include objects, arrays, and functions",
+      "typeof is used to check the data type"
+    ],
+    "example": "let x = 10;           // number\nlet y = \"hello\";    // string\nlet z = true;       // boolean\n\ntypeof x; // \"number\""
+  },
+  {
+    "id": "functions",
+    "title": "Functions",
+    "explanation": "Functions are reusable blocks of code that perform a specific task. They can accept inputs and return outputs.",
+    "points": [
+      "Functions can be declared or expressed",
+      "Arrow functions provide a shorter syntax",
+      "Functions help improve code reusability"
+    ],
+    "example": "function add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(2, 3)); // 5"
+  },
+  {
+    "id": "scope",
+    "title": "Scope",
+    "explanation": "Scope determines where variables can be accessed in your code. JavaScript has global, function, and block scope.",
+    "points": [
+      "Global scope: accessible everywhere",
+      "Function scope: accessible inside functions",
+      "Block scope: created with let and const"
+    ],
+    "example": "let x = 10;\n\nfunction test() {\n  let y = 20;\n  console.log(x); // accessible\n}\n\nconsole.log(y); // ❌ Error"
+  },
+  {
+    "id": "closures",
+    "title": "Closures",
+    "explanation": "A closure is a function that remembers variables from its outer scope even after that scope has finished executing.",
+    "points": [
+      "Closures retain access to outer variables",
+      "Used for data privacy and encapsulation",
+      "Common in callbacks and event handlers"
+    ],
+    "example": "function outer() {\n  let count = 0;\n\n  return function inner() {\n    count++;\n    return count;\n  };\n}\n\nconst fn = outer();\nfn(); // 1\nfn(); // 2"
+  },
+  {
+    "id": "hoisting",
+    "title": "Hoisting",
+    "explanation": "Hoisting is JavaScript's behavior of moving variable and function declarations to the top of their scope before execution.",
+    "points": [
+      "var is hoisted and initialized as undefined",
+      "let and const are hoisted but not initialized",
+      "Function declarations are fully hoisted"
+    ],
+    "example": "console.log(a); // undefined\nvar a = 5;\n\n// console.log(b); ❌ ReferenceError\nlet b = 10;"
+  },
+  {
+    "id": "this",
+    "title": "this Keyword",
+    "explanation": "The 'this' keyword refers to the object that is executing the current function. Its value depends on how the function is called.",
+    "points": [
+      "In global scope, this refers to the global object",
+      "Inside objects, this refers to the object",
+      "Arrow functions do not have their own this"
+    ],
+    "example": "const obj = {\n  name: \"JS\",\n  show() {\n    console.log(this.name);\n  }\n};\n\nobj.show(); // JS"
+  },
+  {
+    "id": "arrays-objects",
+    "title": "Arrays & Objects",
+    "explanation": "Arrays store ordered collections of data, while objects store data as key-value pairs.",
+    "points": [
+      "Arrays use index-based access",
+      "Objects use key-based access",
+      "Array methods include map, filter, reduce"
+    ],
+    "example": "const arr = [1, 2, 3];\narr.map(x => x * 2);\n\nconst obj = { name: \"Adi\" };\nconsole.log(obj.name);"
+  },
+  {
+    "id": "event-loop",
+    "title": "Event Loop",
+    "explanation": "The event loop allows JavaScript to handle asynchronous operations by managing the call stack and callback queue.",
+    "points": [
+      "JavaScript is single-threaded",
+      "Async tasks go to the callback queue",
+      "Event loop processes tasks after call stack is empty"
+    ],
+    "example": "console.log(\"Start\");\n\nsetTimeout(() => {\n  console.log(\"Async\");\n}, 0);\n\nconsole.log(\"End\");\n\n// Output:\n// Start → End → Async"
+  },
+  {
+    "id": "async",
+    "title": "Promises & Async/Await",
+    "explanation": "Promises represent the result of an asynchronous operation. Async/await simplifies working with promises.",
+    "points": [
+      "Promises have states: pending, fulfilled, rejected",
+      "then() handles resolved values",
+      "async/await makes async code easier to read"
+    ],
+    "example": "async function fetchData() {\n  return \"Done\";\n}\n\nfetchData().then(console.log);"
+  }
+]

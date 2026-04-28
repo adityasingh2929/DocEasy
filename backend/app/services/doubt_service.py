@@ -3,6 +3,11 @@ from app.rag.embedder import embed_query
 from app.rag.retriever import retrieve_chunks
 from app.llm.groq_api import call_groq
 
+ALLOWED_TOPICS = [
+    "variables", "data-types", "functions", "scope", "closures",
+    "hoisting", "this", "arrays-objects", "event-loop", "async"
+]
+
 def build_chat_prompt(request: DoubtRequest, context_chunks: list) -> str:
     context_text = "\n".join([f"{i+1}. {c['text']}" for i, c in enumerate(context_chunks)])
     
@@ -65,6 +70,9 @@ You are a JavaScript tutor.
     return prompt
 
 def handle_doubt(request: DoubtRequest) -> str:
+    if request.topic not in ALLOWED_TOPICS:
+        request.topic = "variables"
+
     if request.contextChunks and len(request.contextChunks) > 0:
         chunks = request.contextChunks
     else:

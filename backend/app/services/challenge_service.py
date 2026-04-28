@@ -5,6 +5,11 @@ from app.rag.retriever import retrieve_chunks
 from app.schemas.challenge_schema import ChallengeResponse
 from app.llm.groq_api import call_groq
 
+ALLOWED_TOPICS = [
+    "variables", "data-types", "functions", "scope", "closures",
+    "hoisting", "this", "arrays-objects", "event-loop", "async"
+]
+
 CHALLENGE_FALLBACK = ChallengeResponse(
     question="What does the following JavaScript code output?",
     code='console.log(typeof null);',
@@ -113,7 +118,10 @@ def normalize_answer(ans: str) -> str:
     return ans.strip().lower().replace('"', '').replace("'", "")
 
 def generate_challenge(topic: str) -> ChallengeResponse:
-    query_embedding = embed_query(topic)
+    if topic not in ALLOWED_TOPICS:
+        topic = "variables"
+
+    query_embedding = embed_query(f"Explain {topic} in JavaScript")
     chunks = retrieve_chunks(query_embedding, topic=topic)
 
     if not chunks:

@@ -3,29 +3,39 @@ import { useNavigate } from "react-router-dom";
 import ProgressBar from "../components/ProgressBar";
 import RoadmapNode from "../components/RoadmapNode";
 import Logo from "../components/Logo";
+import { TOPICS } from "../data/topics";
+import { getProgress as getGlobalProgress } from "../utils/progress";
 
-export const TOPICS = [
-  { id: 'variables', title: 'Variables' },
-  { id: 'data-types', title: 'Data Types' },
-  { id: 'functions', title: 'Functions' },
-  { id: 'closures', title: 'Closures' }
-];
+export { TOPICS };
 
 export const getProgress = () => {
-  const saved = localStorage.getItem('js_roadmap_progress');
-  if (saved) return JSON.parse(saved);
-  // Default values to structure if none exist
-  return {
-    "variables": "completed",
-    "data-types": "unlocked",
-    "functions": "locked",
-    "closures": "locked"
-  };
+  const globalProgress = getGlobalProgress();
+  const mappedProgress = {};
+  
+  TOPICS.forEach((topic, index) => {
+    const isCompleted = 
+      (globalProgress.quizScores && globalProgress.quizScores[topic.id]) || 
+      (globalProgress.challengesSolved && globalProgress.challengesSolved[topic.id]);
+      
+    if (isCompleted) {
+      mappedProgress[topic.id] = 'completed';
+    } else if (index === 0) {
+      mappedProgress[topic.id] = 'unlocked';
+    } else {
+      const prevTopicId = TOPICS[index - 1].id;
+      const isPrevCompleted = 
+        globalProgress.topicsCompleted?.includes(prevTopicId) || 
+        globalProgress.quizScores?.[prevTopicId] || 
+        globalProgress.challengesSolved?.[prevTopicId];
+      
+      mappedProgress[topic.id] = isPrevCompleted ? 'unlocked' : 'locked';
+    }
+  });
+  
+  return mappedProgress;
 };
 
-export const saveProgress = (progress) => {
-  localStorage.setItem('js_roadmap_progress', JSON.stringify(progress));
-};
+export const saveProgress = () => {};
 
 export default function Roadmap() {
   const navigate = useNavigate();

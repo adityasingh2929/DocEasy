@@ -5,6 +5,11 @@ from app.rag.retriever import retrieve_chunks
 from app.schemas.quiz_schema import QuizResponse
 from app.llm.groq_api import call_groq
 
+ALLOWED_TOPICS = [
+    "variables", "data-types", "functions", "scope", "closures",
+    "hoisting", "this", "arrays-objects", "event-loop", "async"
+]
+
 def get_fallback(topic: str):
     return QuizResponse(
         question=f"What is {topic} in JavaScript?",
@@ -95,7 +100,10 @@ def call_llm_with_retry(prompt: str, retry_builder) -> dict:
     return extract_json(raw_retry)
 
 def generate_quiz(topic: str) -> QuizResponse:
-    query_embedding = embed_query(topic)
+    if topic not in ALLOWED_TOPICS:
+        topic = "variables"
+
+    query_embedding = embed_query(f"Explain {topic} in JavaScript")
     
     # 1. Retrieve chunks (guaranteed to not be empty by the updated retriever)
     chunks = retrieve_chunks(query_embedding, topic=topic, top_k=2)
