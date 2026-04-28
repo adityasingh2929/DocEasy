@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import Tabs from "../components/Tabs";
+import { motion, AnimatePresence } from "framer-motion";
 import ConceptTab from "../components/ConceptTab";
 import QuizTab from "../components/QuizTab";
 import ChallengeTab from "../components/ChallengeTab";
@@ -47,10 +47,10 @@ export default function Lesson() {
   const handleChallengeSuccess = () => {
     const progress = getProgress();
     
-    // Mark current as completed
+    // Mark current as completed using legacy mapping fallback just in case
+    // Though new utils/progress saves automatically, we preserve legacy flow
     progress[topic] = 'completed';
     
-    // Unlock next topic if exists
     const currentIndex = TOPICS.findIndex(t => t.id === topic);
     if (currentIndex !== -1 && currentIndex < TOPICS.length - 1) {
       const nextTopicId = TOPICS[currentIndex + 1].id;
@@ -59,12 +59,10 @@ export default function Lesson() {
       }
     }
 
-    // Save and redirect
     saveProgress(progress);
     navigate('/roadmap/javascript');
   };
 
-  // Compute context data for the mock function
   const doubtContextData = {
     topic: topic,
     topicName: topicName,
@@ -73,7 +71,6 @@ export default function Lesson() {
     userAnswer: activeTab === 'quiz' ? quizOption : (activeTab === 'challenge' ? challengeInput : null)
   };
 
-  // Add a new message to the active tab's history
   const handleAddMessage = (message) => {
     setChatHistory(prev => ({
       ...prev,
@@ -81,66 +78,136 @@ export default function Lesson() {
     }));
   };
 
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [topic]);
+
   return (
-    <div className="min-h-screen bg-zinc-900 text-white p-6 flex flex-col items-center relative">
-      <div className="w-full max-w-4xl mt-2 md:mt-6">
+    <div className="min-h-screen bg-[#0B1020] text-white p-6 md:p-10 flex flex-col items-center relative overflow-x-hidden selection:bg-blue-500/30">
+      <div className="w-full max-w-5xl mt-2 md:mt-4 flex flex-col items-center">
         
-        {/* Logo */}
-        <div className="mb-8 md:mb-12">
-          <Logo />
-        </div>
-
-        {/* Header containing Breadcrumb and Ask Doubt button */}
-        <div className="flex justify-between items-center mb-10">
-          <div className="text-zinc-400 font-medium tracking-wide">
-            <Link to="/roadmap/javascript" className="hover:text-blue-400 transition-colors">JavaScript</Link>
-            <span className="mx-3 text-zinc-600">{'>'}</span>
-            <span className="text-zinc-200">{topicName}</span>
+        {/* Header Section */}
+        <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
+          <div className="flex flex-col">
+            {/* Breadcrumbs */}
+            <div className="text-zinc-400 font-medium tracking-wide mb-4 flex items-center text-sm md:text-sm">
+              <Link to="/roadmap/javascript" className="hover:text-white transition-colors bg-zinc-800/60 px-3 py-1.5 rounded-lg border border-zinc-700/50 backdrop-blur-sm">
+                Roadmap
+              </Link>
+              <span className="mx-3 text-zinc-600">{'>'}</span>
+              <span className="text-blue-300 bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/20 backdrop-blur-sm">
+                {topicName}
+              </span>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">{topicName}</h1>
           </div>
-
-          <button 
-            onClick={() => setIsDoubtPanelOpen(true)}
-            className="bg-zinc-800 hover:bg-zinc-700 text-white px-5 py-2.5 rounded-lg font-medium shadow-lg border border-zinc-700 transition-all duration-300 flex items-center gap-2 hover:shadow-zinc-700/50"
-          >
-            Ask Doubt 💬
-          </button>
+          
+          <div className="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800/50 backdrop-blur-sm">
+            <Logo />
+          </div>
         </div>
 
-        <Tabs tabs={tabs} activeTab={activeTab} onTabClick={handleTabClick} />
+        {/* Custom Animated Tabs */}
+        <div className="w-full flex space-x-2 mb-8 bg-zinc-900/40 p-2 rounded-2xl border border-zinc-800/50 backdrop-blur-sm self-start overflow-x-auto no-scrollbar">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => handleTabClick(tab.id, tab.locked)}
+                className={`relative px-6 md:px-10 py-3 md:py-4 rounded-xl font-bold text-sm md:text-base transition-colors duration-300 flex items-center gap-2 whitespace-nowrap
+                  ${isActive ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}
+                  ${tab.locked ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-zinc-800/50'}
+                `}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="lessonTabIndicator"
+                    className="absolute inset-0 bg-blue-600 rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center gap-2 tracking-wide">
+                  {tab.label}
+                  {tab.locked && (
+                    <svg className="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  )}
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-        <div className="bg-zinc-800/30 border border-zinc-800 rounded-2xl p-8 md:p-12 min-h-[450px] shadow-xl">
-          {activeTab === 'concept' && (
-            <ConceptTab 
-              topicName={topicName} 
-              isCompleted={conceptCompleted} 
-              onComplete={() => {
-                setConceptCompleted(true);
-                setActiveTab('quiz');
-              }} 
-            />
-          )}
-          
-          {activeTab === 'quiz' && (
-            <QuizTab 
-              key={`${topic}-quiz`}
-              isCompleted={false}
-              onComplete={() => {
-                setQuizCompleted(true);
-                setActiveTab('challenge');
-              }}
-              onChange={(opt) => setQuizOption(opt)}
-            />
-          )}
-          
-          {activeTab === 'challenge' && (
-            <ChallengeTab 
-              onChallengeSuccess={handleChallengeSuccess}
-              onChange={(ans) => setChallengeInput(ans)}
-            />
-          )}
+        {/* Tab Content Area with Framer Motion Fade/Slide */}
+        <div className="w-full relative z-10">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 15, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -15, scale: 0.98 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="bg-[#0e1324] border border-zinc-800 rounded-[2rem] p-6 md:p-12 min-h-[500px] shadow-2xl relative w-full"
+            >
+              {activeTab === 'concept' && (
+                <ConceptTab 
+                  topicName={topicName} 
+                  isCompleted={conceptCompleted} 
+                  onComplete={() => {
+                    setConceptCompleted(true);
+                    setActiveTab('quiz');
+                  }} 
+                />
+              )}
+              
+              {activeTab === 'quiz' && (
+                <QuizTab 
+                  key={`${topic}-quiz`}
+                  isCompleted={false}
+                  onComplete={() => {
+                    setQuizCompleted(true);
+                    setActiveTab('challenge');
+                  }}
+                  onChange={(opt) => setQuizOption(opt)}
+                />
+              )}
+              
+              {activeTab === 'challenge' && (
+                <ChallengeTab 
+                  onChallengeSuccess={handleChallengeSuccess}
+                  onChange={(ans) => setChallengeInput(ans)}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
 
+      {/* Floating Ask Doubt Button */}
+      <motion.button 
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        onClick={() => setIsDoubtPanelOpen(true)}
+        className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-500 text-white p-5 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-blue-400/30 transition-colors z-40 group flex items-center justify-center cursor-pointer"
+      >
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+        
+        {/* Tooltip */}
+        <span className="absolute right-full mr-4 bg-zinc-800 text-white text-sm font-bold py-2 px-4 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-zinc-700 shadow-2xl tracking-wide">
+          Ask Tutor
+        </span>
+      </motion.button>
+
+      {/* Render the actual panel off-canvas */}
       <DoubtPanel 
         isOpen={isDoubtPanelOpen} 
         onClose={() => setIsDoubtPanelOpen(false)} 

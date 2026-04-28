@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getProgress, saveProgress } from "../utils/progress";
+import { motion } from "framer-motion";
 
 export default function ChallengeTab({ onChallengeSuccess, onChange }) {
   const { topic } = useParams();
@@ -137,13 +138,15 @@ export default function ChallengeTab({ onChallengeSuccess, onChange }) {
 
       <div className="mt-auto">
         {!showResult ? (
-          <button
+          <motion.button
+            whileHover={userInput.trim() ? { scale: 1.05 } : {}}
+            whileTap={userInput.trim() ? { scale: 0.95 } : {}}
             onClick={handleSubmit}
             disabled={!userInput.trim()}
-            className="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all"
+            className="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 disabled:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-lg transition-colors"
           >
             Submit Answer
-          </button>
+          </motion.button>
         ) : (
           <div className="space-y-6">
             <div
@@ -176,10 +179,12 @@ export default function ChallengeTab({ onChallengeSuccess, onChange }) {
               )}
             </div>
 
-            <button
+            <motion.button
+              whileHover={!isContinuing ? { scale: 1.05 } : {}}
+              whileTap={!isContinuing ? { scale: 0.95 } : {}}
               onClick={handleContinue}
               disabled={isContinuing}
-              className="px-8 py-3.5 bg-zinc-100 hover:bg-white disabled:bg-zinc-500 disabled:cursor-not-allowed text-zinc-900 font-bold rounded-xl transition-all flex items-center gap-2 group"
+              className="px-8 py-3.5 bg-zinc-100 hover:bg-white disabled:bg-zinc-500 disabled:cursor-not-allowed text-zinc-900 font-bold rounded-xl shadow-lg transition-colors flex items-center gap-2 group"
             >
               {isContinuing ? "Loading..." : (
                 <>
@@ -189,7 +194,7 @@ export default function ChallengeTab({ onChallengeSuccess, onChange }) {
                   </span>
                 </>
               )}
-            </button>
+            </motion.button>
           </div>
         )}
       </div>

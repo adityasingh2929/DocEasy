@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getProgress, saveProgress } from "../utils/progress";
+import { motion } from "framer-motion";
 
 export default function QuizTab({ isCompleted, onComplete, onChange }) {
   const { topic } = useParams();
@@ -180,8 +181,10 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
           }
 
           return (
-            <div
+            <motion.div
               key={index}
+              whileHover={!isSubmitted ? { scale: 1.02, y: -2, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)" } : {}}
+              whileTap={!isSubmitted ? { scale: 0.98 } : {}}
               onClick={() =>
                 !isSubmitted && setSelectedOption(index)
               }
@@ -200,20 +203,22 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
               </div>
 
               <span className="text-lg">{opt}</span>
-            </div>
+            </motion.div>
           );
         })}
       </div>
 
       <div className="mt-auto">
         {!isSubmitted ? (
-          <button
+          <motion.button
+            whileHover={selectedOption !== null ? { scale: 1.05 } : {}}
+            whileTap={selectedOption !== null ? { scale: 0.95 } : {}}
             onClick={handleSubmit}
             disabled={selectedOption === null}
-            className="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 disabled:bg-zinc-800 text-white font-bold rounded-xl"
+            className="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 disabled:bg-zinc-800 disabled:opacity-50 text-white font-bold rounded-xl shadow-lg transition-colors"
           >
             Submit Answer
-          </button>
+          </motion.button>
         ) : (
           <div className="space-y-6">
             <div
@@ -248,13 +253,15 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
               </p>
             )}
 
-            <button
+            <motion.button
+              whileHover={!isContinuing ? { scale: 1.05 } : {}}
+              whileTap={!isContinuing ? { scale: 0.95 } : {}}
               onClick={handleContinue}
               disabled={isContinuing}
-              className="px-8 py-3.5 bg-zinc-100 hover:bg-white disabled:bg-zinc-500 disabled:cursor-not-allowed text-zinc-900 font-bold rounded-xl"
+              className="px-8 py-3.5 bg-zinc-100 hover:bg-white disabled:bg-zinc-500 disabled:cursor-not-allowed text-zinc-900 font-bold rounded-xl shadow-lg transition-colors"
             >
               {isContinuing ? "Loading..." : "Continue →"}
-            </button>
+            </motion.button>
           </div>
         )}
       </div>

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import concepts from "../data/concepts.json";
+import { motion } from "framer-motion";
 
 export default function ConceptTab({ topicName, isCompleted, onComplete }) {
   const { topic } = useParams();
@@ -48,7 +49,9 @@ export default function ConceptTab({ topicName, isCompleted, onComplete }) {
       </div>
 
       <div className="mt-auto pt-4">
-        <button 
+        <motion.button 
+          whileHover={!isCompleted ? { scale: 1.05 } : {}}
+          whileTap={!isCompleted ? { scale: 0.95 } : {}}
           onClick={onComplete}
           className={`px-8 py-3.5 rounded-xl font-bold transition-all duration-300
             ${isCompleted 
@@ -57,7 +60,7 @@ export default function ConceptTab({ topicName, isCompleted, onComplete }) {
           `}
         >
           {isCompleted ? '✓ Marked as Complete' : 'Mark as Complete'}
-        </button>
+        </motion.button>
       </div>
     </div>
   );
