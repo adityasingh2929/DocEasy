@@ -1,0 +1,14 @@
+# Backend
+backend/.venv/
+
+# Frontend
+frontend/node_modules/
+
+# Env files
+.env
+
+# Python cache
+__pycache__/
+
+# Vite
+frontend/dist/
