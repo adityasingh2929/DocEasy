@@ -12,7 +12,10 @@ ALLOWED_TOPICS = [
 def build_chat_prompt(request: DoubtRequest, context_chunks: list) -> str:
     context_text = "\n".join([f"{i+1}. {c['text']}" for i, c in enumerate(context_chunks)])
 
-    prompt = f"TOPIC: {request.topic}\n\n"
+    prompt = """You are a careful JavaScript tutor. Keep the answer concise (under 250 words).
+FORMAT: Use plain text paragraphs, numbered steps or simple bullets. Do not use Markdown tables, headings, bold markers or code fences; code can be indented.
+ACCURACY: let and const bindings exist from the start of their scope but remain uninitialized in the temporal dead zone until declaration; accessing them early throws ReferenceError. Reassigning const throws TypeError, not ReferenceError. const objects can still have their properties changed. Scope depends on whether code runs inside a function, a module, or a classic script; do not assume these are equivalent. If the documentation cannot establish a detail, say so rather than inventing one. Avoid unsubstantiated performance claims.
+""" + f"TOPIC: {request.topic}\n\n"
 
     if request.mode == "quiz":
         if request.currentQuestion:

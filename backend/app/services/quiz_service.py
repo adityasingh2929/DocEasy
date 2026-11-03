@@ -26,6 +26,9 @@ TOPIC: {topic}
 
 RULES:
 - Must test understanding of {topic}.
+- Prefer clear beginner-level concepts over obscure edge cases.
+- If a question depends on scope or runtime, explicitly specify function/module/classic script and strict/non-strict mode. Never call a top-level var local without defining the enclosing function.
+- Provide a complete code example when needed; no implicit execution context.
 - Provide exactly 4 options.
 - The correctAnswer MUST exactly match one of the options.
 - Explanation MUST be short (2-3 lines) and explain WHY.

@@ -44,6 +44,10 @@ STRICT RULES:
 - MUST include console.log(...)
 - MUST be 2–4 lines.
 - MUST be valid JavaScript.
+- Avoid output that varies by browser, Node.js, module mode or strict mode.
+- Use a complete function wrapper if behavior depends on local function scope.
+- For multiple console.log calls, put each output on a separate line in correctAnswer.
+- Do not put surrounding display quotes around a logged string unless the string actually contains those quotes.
 
 4. TOPIC ISOLATION
 - ONLY use {topic}
