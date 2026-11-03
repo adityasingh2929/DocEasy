@@ -50,7 +50,7 @@ def build_quiz_retry_prompt(bad_output: str) -> str:
 """
 
 def call_llm(prompt: str) -> str:
-    return call_groq(prompt)
+    return call_groq(prompt, json_mode=True)
 
 def extract_json(raw: str) -> dict:
     cleaned = raw.strip()

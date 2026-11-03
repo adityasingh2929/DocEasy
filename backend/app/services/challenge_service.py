@@ -34,7 +34,7 @@ STRICT RULES:
 - NO variations
 
 2. TOPIC DEPTH & REASONING
-- MUST deeply test the user's conceptual understanding of the topic.
+- Test the user's understanding with a clear beginner-friendly example.
 - MUST NOT test simple syntax.
 - MUST require reasoning to predict the output.
 - NEVER use trivial examples (e.g. DO NOT use `let a = "hello"; console.log(a);`).
@@ -42,7 +42,9 @@ STRICT RULES:
 
 3. CODE RULES
 - MUST include console.log(...)
-- MUST be 2–4 lines.
+- MUST be 2–6 lines.
+- Never use eval, with, catch-parameter shadowing, deprecated syntax, or other obscure legacy edge cases.
+- For variables, focus on reassignment, var hoisting, let block scope, or const bindings.
 - MUST be valid JavaScript.
 - Avoid output that varies by browser, Node.js, module mode or strict mode.
 - Use a complete function wrapper if behavior depends on local function scope.
@@ -79,7 +81,7 @@ def build_challenge_retry_prompt(bad_output: str) -> str:
 """
 
 def call_llm(prompt: str) -> str:
-    return call_groq(prompt)
+    return call_groq(prompt, json_mode=True)
 
 def extract_json(raw: str) -> dict:
     cleaned = raw.strip()
