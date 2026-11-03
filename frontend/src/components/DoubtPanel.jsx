@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { postJSON } from "../config/api";
 
 
@@ -113,7 +115,24 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
                     : "bg-white text-slate-700 rounded-bl-sm border border-slate-200"
                 }`}
               >
-                {msg.text}
+                {msg.role === "user" ? msg.text : (
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    skipHtml
+                    disallowedElements={["img"]}
+                    components={{
+                      p: ({ children }) => <p className="mb-3 last:mb-0 whitespace-normal">{children}</p>,
+                      ul: ({ children }) => <ul className="list-disc pl-4 mb-3 whitespace-normal">{children}</ul>,
+                      ol: ({ children }) => <ol className="list-decimal pl-4 mb-3 whitespace-normal">{children}</ol>,
+                      pre: ({ children }) => <pre className="overflow-x-auto bg-slate-900 text-blue-100 p-3 rounded-lg my-3 text-xs whitespace-pre">{children}</pre>,
+                      code: ({ children }) => <code className="font-mono break-words">{children}</code>,
+                      table: ({ children }) => <div className="overflow-x-auto my-3"><table className="border-collapse text-xs whitespace-normal">{children}</table></div>,
+                      th: ({ children }) => <th className="border border-slate-300 p-2 text-left">{children}</th>,
+                      td: ({ children }) => <td className="border border-slate-300 p-2">{children}</td>,
+                      a: ({ href, children }) => <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-800 underline">{children}</a>,
+                    }}
+                  >{msg.text}</ReactMarkdown>
+                )}
               </div>
             </div>
           ))}
