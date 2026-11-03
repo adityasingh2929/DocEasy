@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProgress, saveProgress } from "../utils/progress";
 import { motion } from "framer-motion";
-import { BASE_URL } from "../config/api";
+import { postJSON } from "../config/api";
 
-export default function QuizTab({ isCompleted, onComplete, onChange }) {
+export default function QuizTab({ onComplete, onContext }) {
   const { topic } = useParams();
 
   const [question, setQuestion] = useState("");
@@ -20,102 +20,51 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
   const [isCorrect, setIsCorrect] = useState(false);
   const [isContinuing, setIsContinuing] = useState(false);
 
-  // 🔥 FIX 1: prevent stale overwrite
-  const requestIdRef = useRef(0);
-
-  // 🔥 FIX 2: prevent multiple fetches
-  const hasFetchedRef = useRef(false);
-
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
-    if (hasFetchedRef.current) return;
-
-    hasFetchedRef.current = true;
-
-    setSelectedOption(null);
-    setIsSubmitted(false);
+    const controller = new AbortController();
+    let active = true;
+    (async () => {
+      await Promise.resolve();
+      if (!active) return;
+    setLoading(true);
+    setError(false);
+    setSelectedOption(null); setIsSubmitted(false);
     setIsCorrect(false);
     setIsContinuing(false);
-    setError(false);
-    setLoading(true);
-
-    const currentRequestId = Date.now();
-    requestIdRef.current = currentRequestId;
-
-    const fetchQuiz = async () => {
-      console.log("Fetching quiz for topic:", topic);
-
       try {
-        const response = await fetch(`${BASE_URL}/quiz`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ topic })
-        });
-
-        if (!response.ok) throw new Error("Failed");
-
-        const data = await response.json();
-
-        // 🚫 Ignore stale response
-        if (requestIdRef.current !== currentRequestId) return;
-
+        const data = await postJSON("/quiz", { topic }, controller.signal);
+        if (!active) return;
+        if (!Array.isArray(data.options) || data.options.length !== 4 || new Set(data.options).size !== 4 || !data.options.every(opt => typeof opt === "string" && opt.trim())) throw new Error("Invalid quiz");
+        const answerIndex = data.options.indexOf(data.correctAnswer);
+        if (answerIndex < 0) throw new Error("Invalid quiz answer");
         setQuestion(data.question);
-
-        const cleanText = (text) =>
-          typeof text === "string"
-            ? text.replace(/<[^>]+>\s*/, "")
-            : text;
-
-        const cleanedOptions = data.options.map(cleanText);
-        setOptions(cleanedOptions);
-
-        const cleanedCorrect = cleanText(data.correctAnswer);
-
-        let correctIdx = cleanedOptions.indexOf(cleanedCorrect);
-
-        if (correctIdx === -1) {
-          const letters =
-            typeof data.correctAnswer === "string"
-              ? data.correctAnswer.replace(/[^A-D]/g, "")
-              : "";
-
-          if (letters.length > 0) {
-            correctIdx = letters.charCodeAt(0) - 65;
-          } else {
-            correctIdx = 0;
-          }
-        }
-
-        setCorrectAnswer(correctIdx);
+        setOptions(data.options);
+        setCorrectAnswer(answerIndex);
         setExplanation(data.explanation || "");
-      } catch (err) {
-        setError(true);
+        onContext?.({ currentQuestion: data.question, options: data.options, correctAnswer: data.correctAnswer, explanation: data.explanation });
+      } catch {
+        if (active) setError(true);
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
-    };
+    })();
+    return () => { active = false; controller.abort(); };
+    // Context is published only when a new question arrives.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topic, attempt]);
 
-    fetchQuiz();
-  }, [topic]);
 
-  // 🔥 Reset fetch guard when topic changes
-  useEffect(() => {
-    hasFetchedRef.current = false;
-  }, [topic]);
-
-  // Sync to parent
-  useEffect(() => {
-    if (onChange) onChange(selectedOption);
-  }, [selectedOption, onChange]);
 
   const handleSubmit = () => {
-    if (selectedOption !== null) {
+    if (!isSubmitted && selectedOption !== null) {
       const correct = selectedOption === correctAnswer;
       setIsCorrect(correct);
       setIsSubmitted(true);
 
       if (correct) {
         const progress = getProgress();
-        progress.quizScores[topic] = (progress.quizScores[topic] || 0) + 1;
+        progress.quizScores[topic] = 1;
         saveProgress(progress);
       }
     }
@@ -141,9 +90,10 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-full">
-        <p className="text-xl text-red-400 mb-4">
-          Failed to load quiz
+        <p role="alert" className="text-xl text-red-400 mb-4">
+          Could not load quiz. The server may be waking up. Please try again.
         </p>
+        <button onClick={() => setAttempt(value => value + 1)} className="px-6 py-3 bg-blue-900 text-white rounded-xl">Try again</button>
       </div>
     );
   }
@@ -182,14 +132,17 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
           }
 
           return (
-            <motion.div
+            <motion.button
+              type="button"
+              disabled={isSubmitted}
+              aria-pressed={isSelected}
               key={index}
               whileHover={!isSubmitted ? { scale: 1.02, y: -2, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)" } : {}}
               whileTap={!isSubmitted ? { scale: 0.98 } : {}}
               onClick={() =>
                 !isSubmitted && setSelectedOption(index)
               }
-              className={`p-5 border rounded-xl transition-all flex items-center gap-5 ${
+              className={`w-full text-left p-5 border rounded-xl transition-all flex items-center gap-5 ${
                 !isSubmitted ? "cursor-pointer" : ""
               } ${optStyle}`}
             >
@@ -204,7 +157,7 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
               </div>
 
               <span className="text-lg">{opt}</span>
-            </motion.div>
+            </motion.button>
           );
         })}
       </div>
@@ -257,11 +210,11 @@ export default function QuizTab({ isCompleted, onComplete, onChange }) {
             <motion.button
               whileHover={!isContinuing ? { scale: 1.05 } : {}}
               whileTap={!isContinuing ? { scale: 0.95 } : {}}
-              onClick={handleContinue}
+              onClick={isCorrect ? handleContinue : () => { setIsSubmitted(false); setSelectedOption(null); }}
               disabled={isContinuing}
               className="px-8 py-3.5 bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 disabled:bg-slate-200 disabled:text-slate-400 text-white font-bold rounded-xl shadow-md transition-colors"
             >
-              {isContinuing ? "Loading..." : "Continue →"}
+              {isContinuing ? "Loading..." : isCorrect ? "Continue →" : "Try again"}
             </motion.button>
           </div>
         )}

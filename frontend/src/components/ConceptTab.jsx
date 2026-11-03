@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import concepts from "../data/concepts.json";
 import { motion } from "framer-motion";
 
-export default function ConceptTab({ topicName, isCompleted, onComplete }) {
+export default function ConceptTab({ isCompleted, onComplete }) {
   const { topic } = useParams();
-  
+
   // Find concept by id
   const concept = concepts.find(c => c.id === topic);
 
@@ -19,9 +19,9 @@ export default function ConceptTab({ topicName, isCompleted, onComplete }) {
   return (
     <div className="flex flex-col h-full">
       <h2 className="text-3xl font-bold mb-6 text-slate-900">{concept.title}</h2>
-      
-      <div className="bg-white rounded-xl p-8 mb-10 border border-slate-200 shadow-sm overflow-y-auto flex-1">
-        
+
+      <div className="bg-white rounded-xl p-5 md:p-8 mb-10 border border-slate-200 shadow-sm overflow-y-auto flex-1">
+
         {/* Explanation */}
         <p className="text-slate-600 text-[16px] leading-relaxed mb-6">
           {concept.explanation}
@@ -49,13 +49,13 @@ export default function ConceptTab({ topicName, isCompleted, onComplete }) {
       </div>
 
       <div className="mt-auto pt-4">
-        <motion.button 
+        <motion.button
           whileHover={!isCompleted ? { scale: 1.05 } : {}}
           whileTap={!isCompleted ? { scale: 0.95 } : {}}
           onClick={onComplete}
           className={`px-8 py-3.5 rounded-xl font-bold transition-all duration-300
-            ${isCompleted 
-              ? 'bg-green-50 text-green-700 border border-green-200 cursor-default shadow-sm' 
+            ${isCompleted
+              ? 'bg-green-50 text-green-700 border border-green-200 cursor-default shadow-sm'
               : 'bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-md hover:shadow-lg'}
           `}
         >

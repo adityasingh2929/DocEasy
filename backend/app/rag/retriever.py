@@ -1,37 +1,32 @@
-# app/rag/retriever.py
-
+"""Lightweight topic and keyword retrieval without an embedding model."""
 import json
-import os
+import re
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-CHUNKS_PATH = os.path.join(BASE_DIR, "data", "chunks.json")
+with (Path(__file__).resolve().parents[2] / "data" / "chunks.json").open(encoding="utf-8") as source:
+    data = json.load(source)
 
-# load chunks only (lightweight)
-with open(CHUNKS_PATH, "r", encoding="utf-8") as f:
-    data = json.load(f)
-
+TOPIC_SOURCES = {
+    "variables": ("var", "let", "const"),
+    "data-types": ("data-types",),
+    "functions": ("functions",),
+    "scope": ("closures", "let", "var", "const"),
+    "closures": ("closures",),
+    "hoisting": ("var", "let", "const", "functions"),
+    "this": ("this",),
+    "arrays-objects": ("array", "object", "working-with-objects"),
+    "event-loop": ("execution-model",),
+    "async": ("using-promises", "promise", "async-function", "await"),
+}
 
 def retrieve_chunks(query_embedding, topic=None, top_k=2):
-    """
-    Lightweight retriever:
-    - NO embeddings
-    - topic-based filtering
-    """
-
-    if topic:
-        filtered = [item for item in data if item["topic"] == topic]
-    else:
-        filtered = data
-
-    if not filtered:
-        filtered = data
-
-    # just return first few chunks
-    return [
-        {
-            "text": item["text"],
-            "topic": item["topic"],
-            "score": 1.0
-        }
-        for item in filtered[:top_k]
-    ]
+    sources = TOPIC_SOURCES.get(topic, (topic,)) if topic else None
+    candidates = [item for item in data if sources is None or item["topic"] in sources]
+    query = query_embedding if isinstance(query_embedding, str) else ""
+    terms = set(re.findall(r"[a-z]{3,}", f"{topic or ''} {query}".lower()))
+    ranked = sorted(candidates, key=lambda item: sum(
+        len(re.findall(r"\b" + re.escape(term) + r"\b", item["text"].lower()))
+        for term in terms
+    ), reverse=True)
+    return [{"text": item["text"], "topic": item["topic"], "score": 1.0}
+            for item in ranked[:max(0, top_k)]]

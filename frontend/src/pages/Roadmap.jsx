@@ -3,40 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Logo from "../components/Logo";
 import { TOPICS } from "../data/topics";
-import { getProgress as getGlobalProgress } from "../utils/progress";
-
-export { TOPICS };
-
-// Dynamically map the single source of truth progress to Roadmap's legacy flat format
-export const getProgress = () => {
-  const globalProgress = getGlobalProgress();
-  const mappedProgress = {};
-  
-  TOPICS.forEach((topic, index) => {
-    const isCompleted = 
-      (globalProgress.quizScores && globalProgress.quizScores[topic.id]) || 
-      (globalProgress.challengesSolved && globalProgress.challengesSolved[topic.id]);
-      
-    if (isCompleted) {
-      mappedProgress[topic.id] = 'completed';
-    } else if (index === 0) {
-      mappedProgress[topic.id] = 'unlocked';
-    } else {
-      const prevTopicId = TOPICS[index - 1].id;
-      const isPrevCompleted = 
-        globalProgress.topicsCompleted?.includes(prevTopicId) || 
-        globalProgress.quizScores?.[prevTopicId] || 
-        globalProgress.challengesSolved?.[prevTopicId];
-      
-      mappedProgress[topic.id] = isPrevCompleted ? 'unlocked' : 'locked';
-    }
-  });
-  
-  return mappedProgress;
-};
-
-// Ignore manual legacy saves, rely on QuizTab and ChallengeTab's internal global saves
-export const saveProgress = () => {};
+import { getRoadmapProgress } from "../utils/progress";
 
 // Animation Variants
 const containerVariants = {
@@ -49,20 +16,19 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, scale: 0.8, y: 20 },
-  show: { 
-    opacity: 1, 
-    scale: 1, 
-    y: 0, 
-    transition: { type: "spring", stiffness: 300, damping: 24 } 
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 300, damping: 24 }
   }
 };
 
 export default function Roadmap() {
   const navigate = useNavigate();
-  const [progress, setProgress] = useState(null);
+  const [progress, setProgress] = useState(() => getRoadmapProgress(TOPICS));
 
   useEffect(() => {
-    setProgress(getProgress());
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
@@ -80,19 +46,19 @@ export default function Roadmap() {
   const handleResetProgress = () => {
     if (window.confirm("Are you sure you want to reset your progress?")) {
       localStorage.removeItem("docs_made_easy_progress");
-      window.location.reload();
+      setProgress(getRoadmapProgress(TOPICS));
     }
   };
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col items-center py-16 px-4 md:px-6 relative overflow-x-hidden selection:bg-blue-500/30">
-      
+
       <div className="absolute top-6 left-6 md:top-8 md:left-12 z-50">
         <Logo />
       </div>
 
       {/* Header & Animated Progress Bar */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -101,14 +67,14 @@ export default function Roadmap() {
         <h1 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight text-slate-900">
           Your Journey
         </h1>
-        
+
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-md backdrop-blur-sm">
           <div className="flex justify-between items-end mb-4">
             <span className="text-slate-600 font-medium tracking-wide">Course Progress</span>
             <span className="text-3xl font-bold text-blue-700">{progressPercentage}%</span>
           </div>
           <div className="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden">
-            <motion.div 
+            <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${progressPercentage}%` }}
               transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
@@ -123,9 +89,9 @@ export default function Roadmap() {
 
       {/* Roadmap Layout */}
       <div className="relative w-full max-w-lg flex flex-col items-center pb-32">
-        
+
         {/* Vertical Growing Line */}
-        <motion.div 
+        <motion.div
           initial={{ height: 0 }}
           animate={{ height: "100%" }}
           transition={{ duration: 2.5, ease: "easeInOut" }}
@@ -133,7 +99,7 @@ export default function Roadmap() {
         />
 
         {/* Nodes */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="show"
@@ -146,13 +112,16 @@ export default function Roadmap() {
             const isLocked = status === 'locked';
 
             return (
-              <motion.div 
+              <motion.div
                 key={topic.id}
                 variants={itemVariants}
                 className="relative flex flex-col items-center group w-full"
               >
                 {/* Node Circle */}
-                <motion.div
+                <motion.button
+                  type="button"
+                  aria-label={`${topic.title}: ${status}`}
+                  disabled={isLocked}
                   whileHover={!isLocked ? { scale: 1.15 } : {}}
                   whileTap={!isLocked ? { scale: 0.95 } : {}}
                   onClick={() => handleNodeClick(topic.id, status)}
@@ -183,7 +152,7 @@ export default function Roadmap() {
                       </svg>
                     )}
                   </div>
-                </motion.div>
+                </motion.button>
 
                 {/* Node Title */}
                 <div className={`mt-4 md:mt-5 text-center transition-colors duration-300 bg-white/90 backdrop-blur-md px-5 py-1.5 rounded-full border border-slate-200 shadow-sm
