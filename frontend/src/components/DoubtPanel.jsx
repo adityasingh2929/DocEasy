@@ -1,12 +1,19 @@
 import { useState, useEffect, useRef } from "react";
-import { BASE_URL } from "../config/api";
+import { postJSON } from "../config/api";
 
-const API_URL = `${BASE_URL}/doubt`;
 
 export default function DoubtPanel({ isOpen, onClose, contextData, messages, onAddMessage }) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const bottomRef = useRef(null);
+  const requestRef = useRef(null);
+  useEffect(() => () => requestRef.current?.abort(), []);
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = event => { if (event.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen, onClose]);
 
   // Auto scroll when messages update or panel opens
   useEffect(() => {
@@ -16,18 +23,18 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
   }, [messages, isOpen]);
 
   const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+    if (!input.trim() || isLoading || requestRef.current) return;
+    const controller = new AbortController();
+    requestRef.current = controller;
+    const tabId = contextData.activeTab;
 
     const userMsg = { role: "user", text: input };
-    onAddMessage(userMsg);
+    onAddMessage(userMsg, tabId);
     setInput("");
     setIsLoading(true);
 
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const data = await postJSON("/doubt", {
           topic: contextData.topic,
           question: input,
           mode: contextData.activeTab,
@@ -36,20 +43,15 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
           correctAnswer: contextData.correctAnswer ?? null,
           explanation: contextData.explanation ?? null,
           code: contextData.code ?? null,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      onAddMessage({ role: "ai", text: data.answer });
+      }, controller.signal);
+      if (!controller.signal.aborted) onAddMessage({ role: "ai", text: data.answer }, tabId);
     } catch (err) {
+      if (controller.signal.aborted) return;
       console.error("[DoubtPanel] API error:", err);
-      onAddMessage({ role: "ai", text: "Something went wrong. Try again." });
+      onAddMessage({ role: "ai", text: "The tutor is temporarily unavailable. Please try again." }, tabId);
     } finally {
-      setIsLoading(false);
+      if (!controller.signal.aborted) setIsLoading(false);
+      requestRef.current = null;
     }
   };
 
@@ -65,7 +67,11 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
 
       {/* Panel */}
       <div
-        className={`fixed top-0 right-0 h-full w-[320px] bg-white z-50 flex flex-col shadow-2xl border-l border-slate-200 transform transition-transform duration-300 ease-in-out
+        role="dialog"
+        aria-modal={isOpen || undefined}
+        aria-label="Ask your doubt"
+        inert={!isOpen}
+        className={`fixed top-0 right-0 h-full w-[min(100vw,360px)] bg-white z-50 flex flex-col shadow-2xl border-l border-slate-200 transform transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "translate-x-full"}
         `}
       >
@@ -73,6 +79,7 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
         <div className="p-4 border-b border-slate-200 text-slate-900 font-semibold flex justify-between items-center bg-white/90">
           <span className="tracking-wide">Ask your doubt</span>
           <button
+            aria-label="Close tutor"
             onClick={onClose}
             className="text-slate-500 hover:text-slate-900 transition-colors p-1 rounded-md hover:bg-slate-100"
           >
@@ -100,7 +107,7 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
               className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`px-4 py-2.5 rounded-xl max-w-[85%] text-sm leading-relaxed shadow-sm ${
+                className={`px-4 py-2.5 rounded-xl max-w-[85%] whitespace-pre-wrap break-words text-sm leading-relaxed shadow-sm ${
                   msg.role === "user"
                     ? "bg-[#1E3A8A] text-white rounded-br-sm"
                     : "bg-white text-slate-700 rounded-bl-sm border border-slate-200"
@@ -129,7 +136,8 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
         {/* Input */}
         <div className="p-4 border-t border-slate-200 flex gap-2 bg-white">
           <input
-            className="flex-1 p-2.5 rounded-lg bg-slate-50 text-slate-900 text-sm outline-none border border-slate-300 focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A] transition-all placeholder:text-slate-400 disabled:opacity-50"
+            aria-label="Your question"
+            className="min-w-0 flex-1 p-2.5 rounded-lg bg-slate-50 text-slate-900 text-sm outline-none border border-slate-300 focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A] transition-all placeholder:text-slate-400 disabled:opacity-50"
             placeholder="Type your question..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -138,6 +146,7 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
           />
 
           <button
+            aria-label="Send question"
             onClick={handleSend}
             disabled={!input.trim() || isLoading}
             className="bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed px-4 py-2.5 rounded-lg text-white transition-colors flex items-center justify-center shadow-sm"

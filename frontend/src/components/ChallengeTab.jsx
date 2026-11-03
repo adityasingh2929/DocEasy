@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProgress, saveProgress } from "../utils/progress";
 import { motion } from "framer-motion";
-import { BASE_URL } from "../config/api";
+import { postJSON } from "../config/api";
 
-export default function ChallengeTab({ onChallengeSuccess, onChange }) {
+export default function ChallengeTab({ onChallengeSuccess, onContext }) {
   const { topic } = useParams();
 
   const [question, setQuestion] = useState("");
@@ -20,64 +20,45 @@ export default function ChallengeTab({ onChallengeSuccess, onChange }) {
   const [isCorrect, setIsCorrect] = useState(false);
   const [isContinuing, setIsContinuing] = useState(false);
 
-  // 🔥 Fix race condition
-  const requestIdRef = useRef(0);
-
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
-    // Reset state on topic change
-    setUserInput("");
-    setShowResult(false);
+    const controller = new AbortController();
+    let active = true;
+    (async () => {
+      await Promise.resolve();
+      if (!active) return;
+    setLoading(true);
+    setError(false);
+    setUserInput(""); setShowResult(false);
     setIsCorrect(false);
     setIsContinuing(false);
-    setError(false);
-    setLoading(true);
-
-    const currentRequestId = Date.now();
-    requestIdRef.current = currentRequestId;
-
-    const fetchChallenge = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/challenge`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ topic })
-        });
-
-        if (!response.ok) throw new Error("Failed to fetch");
-
-        const data = await response.json();
-
-        // 🚫 Ignore outdated responses
-        if (requestIdRef.current !== currentRequestId) return;
-
+        const data = await postJSON("/challenge", { topic }, controller.signal);
+        if (!active) return;
+        if (![data.question, data.code, data.correctAnswer, data.explanation].every(value => typeof value === "string" && value.trim())) throw new Error("Invalid challenge");
         setQuestion(data.question);
         setCode(data.code);
         setCorrectAnswer(data.correctAnswer);
         setExplanation(data.explanation);
-      } catch (err) {
-        setError(true);
+        onContext?.({ currentQuestion: data.question, code: data.code, correctAnswer: data.correctAnswer, explanation: data.explanation });
+      } catch {
+        if (active) setError(true);
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
-    };
+    })();
+    return () => { active = false; controller.abort(); };
+    // Context is published only when a new question arrives.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topic, attempt]);
 
-    fetchChallenge();
-  }, [topic]);
-
-  // Sync to parent (for chatbot context)
-  useEffect(() => {
-    if (onChange) onChange(userInput);
-  }, [userInput, onChange]);
-
-  const normalize = (text) => text.trim().toLowerCase();
+  const normalize = text => text.trim().replace(/\r\n/g, "\n").split("\n").map(line => line.trim()).join("\n");
 
   const handleSubmit = () => {
-    if (!userInput.trim()) return;
+    if (!userInput.trim() || showResult) return;
 
     const isMatch = normalize(userInput) === normalize(correctAnswer);
 
-    console.log("User:", normalize(userInput));
-    console.log("Correct:", normalize(correctAnswer));
 
     setIsCorrect(isMatch);
     setShowResult(true);
@@ -92,7 +73,7 @@ export default function ChallengeTab({ onChallengeSuccess, onChange }) {
   const handleContinue = () => {
     if (isContinuing) return;
     setIsContinuing(true);
-    onChallengeSuccess();
+    if (isCorrect) onChallengeSuccess();
   };
 
   if (loading) {
@@ -109,9 +90,10 @@ export default function ChallengeTab({ onChallengeSuccess, onChange }) {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-full">
-        <p className="text-xl text-red-400 mb-4">
-          Failed to load challenge
+        <p role="alert" className="text-xl text-red-400 mb-4">
+          Could not load challenge. The server may be waking up. Please try again.
         </p>
+        <button onClick={() => setAttempt(value => value + 1)} className="px-6 py-3 bg-blue-900 text-white rounded-xl">Try again</button>
       </div>
     );
   }
@@ -127,8 +109,9 @@ export default function ChallengeTab({ onChallengeSuccess, onChange }) {
       </div>
 
       <div className="mb-10">
-        <input
-          type="text"
+        <textarea
+          rows={3}
+          aria-label="Predicted console output"
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
           placeholder="Your answer..."
@@ -183,13 +166,13 @@ export default function ChallengeTab({ onChallengeSuccess, onChange }) {
             <motion.button
               whileHover={!isContinuing ? { scale: 1.05 } : {}}
               whileTap={!isContinuing ? { scale: 0.95 } : {}}
-              onClick={handleContinue}
+              onClick={isCorrect ? handleContinue : () => { setShowResult(false); setUserInput(""); }}
               disabled={isContinuing}
               className="px-8 py-3.5 bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 disabled:bg-slate-200 disabled:text-slate-400 text-white font-bold rounded-xl shadow-md transition-colors flex items-center gap-2 group"
             >
               {isContinuing ? "Loading..." : (
                 <>
-                  Continue
+                  {isCorrect ? "Continue" : "Try again"}
                   <span className="text-xl group-hover:translate-x-1 transition-transform">
                     →
                   </span>

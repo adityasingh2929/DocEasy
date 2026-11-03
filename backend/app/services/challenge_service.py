@@ -4,18 +4,13 @@ from app.rag.embedder import embed_query
 from app.rag.retriever import retrieve_chunks
 from app.schemas.challenge_schema import ChallengeResponse
 from app.llm.groq_api import call_groq
+from fastapi import HTTPException
 
 ALLOWED_TOPICS = [
     "variables", "data-types", "functions", "scope", "closures",
     "hoisting", "this", "arrays-objects", "event-loop", "async"
 ]
 
-CHALLENGE_FALLBACK = ChallengeResponse(
-    question="What does the following JavaScript code output?",
-    code='console.log(typeof null);',
-    correctAnswer='object',
-    explanation='typeof null returns "object" due to a legacy bug in JavaScript.',
-)
 
 def build_challenge_prompt(context_chunks: list, topic: str) -> str:
     context_text = "\n".join([f"{i+1}. {c['text']}" for i, c in enumerate(context_chunks)])
@@ -112,11 +107,6 @@ def call_llm_with_retry(prompt: str, retry_builder) -> dict:
         raw_retry = call_llm(retry_prompt)
         return extract_json(raw_retry)
 
-def normalize_answer(ans: str) -> str:
-    if not isinstance(ans, str):
-        return str(ans)
-    return ans.strip().lower().replace('"', '').replace("'", "")
-
 def generate_challenge(topic: str) -> ChallengeResponse:
     if topic not in ALLOWED_TOPICS:
         topic = "variables"
@@ -125,21 +115,21 @@ def generate_challenge(topic: str) -> ChallengeResponse:
     chunks = retrieve_chunks(query_embedding, topic=topic)
 
     if not chunks:
-        return CHALLENGE_FALLBACK
+        raise HTTPException(status_code=503, detail="No documentation found for this topic.")
 
     prompt = build_challenge_prompt(chunks, topic)
 
     try:
         data = call_llm_with_retry(prompt, build_challenge_retry_prompt)
-    except:
-        return CHALLENGE_FALLBACK
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail="Challenge generation is temporarily unavailable. Please try again.") from exc
 
     try:
         return ChallengeResponse(
             question=data["question"],
             code=data["code"],
-            correctAnswer=normalize_answer(data["correctAnswer"]),
+            correctAnswer=str(data["correctAnswer"]).strip(),
             explanation=data["explanation"].strip(),
         )
-    except:
-        return CHALLENGE_FALLBACK
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail="The generated challenge was invalid. Please try again.") from exc

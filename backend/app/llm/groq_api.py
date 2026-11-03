@@ -5,12 +5,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize the Groq client
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+client = None
 
-# Use Llama 3.1 8B, it's insanely fast and great for coding
-MODEL = "llama-3.1-8b-instant"
+# Override the provider model without changing application code.
+MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
 
 def call_groq(prompt: str) -> str:
+    global client
+    if client is None:
+        client = Groq(api_key=os.getenv("GROQ_API_KEY"), timeout=30.0, max_retries=1)
     response = client.chat.completions.create(
         messages=[
             {
@@ -20,8 +23,8 @@ def call_groq(prompt: str) -> str:
         ],
         model=MODEL,
     )
-    
+
     if response.choices and response.choices[0].message.content:
         return response.choices[0].message.content
-        
+
     raise RuntimeError("Empty response from Groq")
