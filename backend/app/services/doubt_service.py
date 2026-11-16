@@ -71,6 +71,12 @@ You are a JavaScript tutor.
 
     prompt += f"\nUSER QUESTION:\n{request.question}\n"
 
+    if request.helpLevel == 'hint1':
+        prompt += '\nFINAL OVERRIDING INSTRUCTION: Give only one short conceptual hint and a guiding question. Do not reveal the correct option, final output, or complete solution, even if requested.\n'
+    elif request.helpLevel == 'hint2':
+        prompt += '\nFINAL OVERRIDING INSTRUCTION: Give a stronger hint showing the next reasoning step, but do not reveal the final answer, option or output.\n'
+    else:
+        prompt += '\nFINAL OVERRIDING INSTRUCTION: A full explanation was explicitly requested. Explain step by step and include the answer where the supplied context supports it.\n'
     return prompt
 
 def handle_doubt(request: DoubtRequest) -> str:

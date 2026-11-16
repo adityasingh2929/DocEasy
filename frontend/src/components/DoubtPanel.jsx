@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import Sources from "./Sources";
 import { postJSON } from "../config/api";
 
 
 export default function DoubtPanel({ isOpen, onClose, contextData, messages, onAddMessage }) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [helpLevel, setHelpLevel] = useState("hint1");
+  const [lastQuestion, setLastQuestion] = useState("");
   const bottomRef = useRef(null);
   const requestRef = useRef(null);
   useEffect(() => () => requestRef.current?.abort(), []);
@@ -24,13 +27,14 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
     }
   }, [messages, isOpen]);
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading || requestRef.current) return;
+  const handleSend = async (level = helpLevel, question = input) => {
+    if (!question.trim() || isLoading || requestRef.current) return;
+    setHelpLevel(level); setLastQuestion(question);
     const controller = new AbortController();
     requestRef.current = controller;
     const tabId = contextData.activeTab;
 
-    const userMsg = { role: "user", text: input };
+    const userMsg = { role: "user", text: question };
     onAddMessage(userMsg, tabId);
     setInput("");
     setIsLoading(true);
@@ -38,7 +42,8 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
     try {
       const data = await postJSON("/doubt", {
           topic: contextData.topic,
-          question: input,
+          question,
+          helpLevel: level,
           mode: contextData.activeTab,
           currentQuestion: contextData.currentQuestion ?? null,
           options: contextData.options ?? null,
@@ -46,7 +51,7 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
           explanation: contextData.explanation ?? null,
           code: contextData.code ?? null,
       }, controller.signal);
-      if (!controller.signal.aborted) onAddMessage({ role: "ai", text: data.answer }, tabId);
+      if (!controller.signal.aborted) onAddMessage({ role: "ai", text: data.answer, sources: data.sources, helpLevel: data.helpLevel }, tabId);
     } catch (err) {
       if (controller.signal.aborted) return;
       console.error("[DoubtPanel] API error:", err);
@@ -93,6 +98,13 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 text-xs text-slate-600">
+            Start with a small hint. After a reply, request a stronger hint or the full explanation.
+            {lastQuestion && <div className="flex flex-wrap gap-2 mt-2">
+              {helpLevel === 'hint1' && <button disabled={isLoading} className="font-bold text-blue-900 underline" onClick={() => handleSend('hint2', lastQuestion)}>Give a stronger hint</button>}
+              {helpLevel !== 'explanation' && helpLevel !== 'hint1' && <button disabled={isLoading} className="font-bold text-blue-900 underline" onClick={() => handleSend('explanation', lastQuestion)}>Explain fully</button>}
+            </div>}
+          </div>
           {messages.length === 0 && !isLoading && (
             <div className="text-center mt-12 px-2">
               <div className="text-4xl mb-4">💡</div>
@@ -133,6 +145,7 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
                     }}
                   >{msg.text}</ReactMarkdown>
                 )}
+                {msg.role === "ai" && <Sources sources={msg.sources} />}
               </div>
             </div>
           ))}
@@ -166,7 +179,7 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
 
           <button
             aria-label="Send question"
-            onClick={handleSend}
+            onClick={() => handleSend()}
             disabled={!input.trim() || isLoading}
             className="bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed px-4 py-2.5 rounded-lg text-white transition-colors flex items-center justify-center shadow-sm"
           >

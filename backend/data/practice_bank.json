@@ -1,0 +1,1760 @@
+{
+  "schemaVersion": 1,
+  "topics": {
+    "variables": {
+      "sources": [
+        {
+          "title": "Variable declarations",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+          "kind": "curated reference"
+        },
+        {
+          "title": "Constant bindings",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const",
+          "kind": "curated reference"
+        },
+        {
+          "title": "var declarations",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "variables-q1",
+          "topic": "variables",
+          "question": "Which declaration allows reassignment and is block-scoped?",
+          "options": [
+            "let",
+            "const",
+            "var",
+            "static"
+          ],
+          "correctAnswer": "let",
+          "explanation": "let creates a block-scoped binding that can be reassigned.",
+          "hints": [
+            "Think about scope and reassignment separately.",
+            "The declaration is block-scoped but does not require a permanent binding."
+          ],
+          "sources": [
+            {
+              "title": "Variable declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Constant bindings",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const",
+              "kind": "curated reference"
+            },
+            {
+              "title": "var declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "variables-q2",
+          "topic": "variables",
+          "question": "What happens when you reassign a const binding?",
+          "options": [
+            "The value changes",
+            "A new variable is created",
+            "It becomes undefined",
+            "A TypeError is thrown"
+          ],
+          "correctAnswer": "A TypeError is thrown",
+          "explanation": "A const binding cannot be reassigned; the attempted assignment throws TypeError.",
+          "hints": [
+            "A const binding keeps its original reference.",
+            "Changing an object's property differs from assigning a new binding."
+          ],
+          "sources": [
+            {
+              "title": "Variable declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Constant bindings",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const",
+              "kind": "curated reference"
+            },
+            {
+              "title": "var declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "variables-q3",
+          "topic": "variables",
+          "question": "What is printed? var score; console.log(score);",
+          "options": [
+            "0",
+            "ReferenceError",
+            "undefined",
+            "null"
+          ],
+          "correctAnswer": "undefined",
+          "explanation": "A declared var without an initializer has the value undefined.",
+          "hints": [
+            "The binding has been declared.",
+            "A missing initializer does not assign null or zero."
+          ],
+          "sources": [
+            {
+              "title": "Variable declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Constant bindings",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const",
+              "kind": "curated reference"
+            },
+            {
+              "title": "var declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "variables-q4",
+          "topic": "variables",
+          "question": "Which declaration is function-scoped rather than block-scoped?",
+          "options": [
+            "import",
+            "var",
+            "let",
+            "const"
+          ],
+          "correctAnswer": "var",
+          "explanation": "var uses function scope; let and const use block scope.",
+          "hints": [
+            "Consider a declaration inside an if block.",
+            "This is the older of the three variable declarations."
+          ],
+          "sources": [
+            {
+              "title": "Variable declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Constant bindings",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const",
+              "kind": "curated reference"
+            },
+            {
+              "title": "var declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "variables-q5",
+          "topic": "variables",
+          "question": "Can an object stored in const have a property changed?",
+          "options": [
+            "Yes, unless the object is separately frozen",
+            "No, const freezes every property",
+            "Only if it is redeclared",
+            "Only outside a function"
+          ],
+          "correctAnswer": "Yes, unless the object is separately frozen",
+          "explanation": "const prevents rebinding; it does not freeze the object's properties.",
+          "hints": [
+            "Separate the binding from the object it references.",
+            "Mutating a property does not replace the binding."
+          ],
+          "sources": [
+            {
+              "title": "Variable declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Constant bindings",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const",
+              "kind": "curated reference"
+            },
+            {
+              "title": "var declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "variables-c1",
+          "topic": "variables",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "let value = 1;\n{ let value = 2; console.log(value); }\nconsole.log(value);",
+          "correctAnswer": "2\n1",
+          "explanation": "The inner let creates a different block-scoped binding. The outer binding remains 1.",
+          "hints": [
+            "Look at the braces around the inner declaration.",
+            "There are two separate bindings with the same name."
+          ],
+          "sources": [
+            {
+              "title": "Variable declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Constant bindings",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const",
+              "kind": "curated reference"
+            },
+            {
+              "title": "var declarations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "data-types": {
+      "sources": [
+        {
+          "title": "JavaScript data types",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "data-types-q1",
+          "topic": "data-types",
+          "question": "Which is a primitive JavaScript value?",
+          "options": [
+            "42",
+            "{}",
+            "[]",
+            "function () {}"
+          ],
+          "correctAnswer": "42",
+          "explanation": "Numbers are primitive values; objects, arrays and functions are objects.",
+          "hints": [
+            "Primitive values are not objects.",
+            "Look for a number rather than an object expression."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript data types",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "data-types-q2",
+          "topic": "data-types",
+          "question": "What does typeof null return?",
+          "options": [
+            "null",
+            "undefined",
+            "number",
+            "object"
+          ],
+          "correctAnswer": "object",
+          "explanation": "typeof null returns object because of a historical language quirk.",
+          "hints": [
+            "This result is a historical exception.",
+            "The result does not mean null is a normal object."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript data types",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "data-types-q3",
+          "topic": "data-types",
+          "question": "Which value represents an intentionally empty reference?",
+          "options": [
+            "NaN",
+            "true",
+            "null",
+            "undefined"
+          ],
+          "correctAnswer": "null",
+          "explanation": "null is commonly used to represent an intentional absence of an object value.",
+          "hints": [
+            "Distinguish deliberate emptiness from an unassigned value.",
+            "An unassigned declared variable generally has undefined instead."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript data types",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "data-types-q4",
+          "topic": "data-types",
+          "question": "Which expression reliably identifies an array?",
+          "options": [
+            "typeof value === 'list'",
+            "Array.isArray(value)",
+            "typeof value === 'array'",
+            "value === []"
+          ],
+          "correctAnswer": "Array.isArray(value)",
+          "explanation": "Array.isArray detects arrays, while typeof an array returns object.",
+          "hints": [
+            "Arrays are objects in JavaScript.",
+            "Use the dedicated Array utility."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript data types",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "data-types-q5",
+          "topic": "data-types",
+          "question": "What is the result of typeof true?",
+          "options": [
+            "boolean",
+            "string",
+            "number",
+            "object"
+          ],
+          "correctAnswer": "boolean",
+          "explanation": "true and false are Boolean primitive values.",
+          "hints": [
+            "Think about the true/false type.",
+            "typeof returns a lowercase type name."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript data types",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "data-types-c1",
+          "topic": "data-types",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "console.log(typeof 7);\nconsole.log(typeof \"7\");",
+          "correctAnswer": "number\nstring",
+          "explanation": "7 is a number, whereas the quoted value is a string.",
+          "hints": [
+            "The two inputs look similar but have different types.",
+            "typeof reports the type of the value, not its visual appearance."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript data types",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "functions": {
+      "sources": [
+        {
+          "title": "Functions guide",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "functions-q1",
+          "topic": "functions",
+          "question": "What does a function return when it reaches the end without return?",
+          "options": [
+            "undefined",
+            "null",
+            "0",
+            "An empty string"
+          ],
+          "correctAnswer": "undefined",
+          "explanation": "A function without an explicit returned value returns undefined.",
+          "hints": [
+            "An implicit return is still a value.",
+            "It matches the usual absence-of-value marker."
+          ],
+          "sources": [
+            {
+              "title": "Functions guide",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "functions-q2",
+          "topic": "functions",
+          "question": "Which expression calls add with two arguments?",
+          "options": [
+            "add[2, 3]",
+            "new add[2, 3]",
+            "add = (2, 3)",
+            "add(2, 3)"
+          ],
+          "correctAnswer": "add(2, 3)",
+          "explanation": "Parentheses after the function expression invoke it.",
+          "hints": [
+            "Invocation differs from assignment and property access.",
+            "Arguments are placed inside parentheses."
+          ],
+          "sources": [
+            {
+              "title": "Functions guide",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "functions-q3",
+          "topic": "functions",
+          "question": "What is a parameter?",
+          "options": [
+            "The function's source file",
+            "A variable that must be global",
+            "A named input in a function definition",
+            "A value passed only after return"
+          ],
+          "correctAnswer": "A named input in a function definition",
+          "explanation": "Parameters are the names in a function definition; arguments are values passed during a call.",
+          "hints": [
+            "Compare the definition with a call.",
+            "In function add(a,b), a and b are parameters."
+          ],
+          "sources": [
+            {
+              "title": "Functions guide",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "functions-q4",
+          "topic": "functions",
+          "question": "What does return do?",
+          "options": [
+            "Repeats the previous statement",
+            "Ends the current function call and supplies a value",
+            "Ends every function in the program",
+            "Prints a value automatically"
+          ],
+          "correctAnswer": "Ends the current function call and supplies a value",
+          "explanation": "return stops the current call and optionally provides its result.",
+          "hints": [
+            "Printing and returning are different operations.",
+            "Code after an executed return in that function is not reached."
+          ],
+          "sources": [
+            {
+              "title": "Functions guide",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "functions-q5",
+          "topic": "functions",
+          "question": "Which arrow function implicitly returns double x?",
+          "options": [
+            "x => x * 2",
+            "x => { x * 2; }",
+            "x => { break x * 2; }",
+            "x => return x * 2"
+          ],
+          "correctAnswer": "x => x * 2",
+          "explanation": "An expression-bodied arrow function implicitly returns the expression's value.",
+          "hints": [
+            "Compare an expression body with a block body.",
+            "A block body needs an explicit return."
+          ],
+          "sources": [
+            {
+              "title": "Functions guide",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "functions-c1",
+          "topic": "functions",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "function twice(n) { return n * 2; }\nconsole.log(twice(3) + 1);",
+          "correctAnswer": "7",
+          "explanation": "The call returns 6, then the outer addition adds 1.",
+          "hints": [
+            "Evaluate the function call before the outer addition.",
+            "The function returns twice its argument."
+          ],
+          "sources": [
+            {
+              "title": "Functions guide",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "scope": {
+      "sources": [
+        {
+          "title": "Closures and lexical scope",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+          "kind": "curated reference"
+        },
+        {
+          "title": "let and block scope",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "scope-q1",
+          "topic": "scope",
+          "question": "Where is a let binding declared inside an if block accessible?",
+          "options": [
+            "Inside that block and nested scopes",
+            "Everywhere in every script",
+            "Only in the browser console",
+            "Outside the block only"
+          ],
+          "correctAnswer": "Inside that block and nested scopes",
+          "explanation": "let and const are block-scoped; nested scopes can access their surrounding bindings.",
+          "hints": [
+            "Look at the enclosing braces.",
+            "Nested scopes can read outward, but outer scopes cannot read inward."
+          ],
+          "sources": [
+            {
+              "title": "Closures and lexical scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            },
+            {
+              "title": "let and block scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "scope-q2",
+          "topic": "scope",
+          "question": "Can a function read a binding in its enclosing lexical scope?",
+          "options": [
+            "Only if declared with var",
+            "Only after copying it into this",
+            "Never",
+            "Yes"
+          ],
+          "correctAnswer": "Yes",
+          "explanation": "Functions can resolve identifiers through their enclosing lexical environments.",
+          "hints": [
+            "Lexical scope follows where a function is defined.",
+            "Identifier lookup can continue into surrounding scopes."
+          ],
+          "sources": [
+            {
+              "title": "Closures and lexical scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            },
+            {
+              "title": "let and block scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "scope-q3",
+          "topic": "scope",
+          "question": "What is shadowing?",
+          "options": [
+            "Converting a number to a string",
+            "Making all variables global",
+            "An inner binding having the same name as an outer binding",
+            "Deleting a variable permanently"
+          ],
+          "correctAnswer": "An inner binding having the same name as an outer binding",
+          "explanation": "An inner declaration can hide the same-named outer binding within that inner scope.",
+          "hints": [
+            "Think about two scopes using the same name.",
+            "Inside the inner scope, the nearest matching binding is used."
+          ],
+          "sources": [
+            {
+              "title": "Closures and lexical scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            },
+            {
+              "title": "let and block scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "scope-q4",
+          "topic": "scope",
+          "question": "Which declaration is block-scoped?",
+          "options": [
+            "An undeclared assignment in a non-strict script",
+            "const",
+            "var",
+            "A property assigned to globalThis"
+          ],
+          "correctAnswer": "const",
+          "explanation": "const is block-scoped, unlike function-scoped var.",
+          "hints": [
+            "Block scope is associated with braces.",
+            "The binding also disallows reassignment."
+          ],
+          "sources": [
+            {
+              "title": "Closures and lexical scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            },
+            {
+              "title": "let and block scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "scope-q5",
+          "topic": "scope",
+          "question": "What happens when a completely undeclared identifier is read?",
+          "options": [
+            "ReferenceError",
+            "It is automatically null",
+            "It is automatically 0",
+            "It becomes a string"
+          ],
+          "correctAnswer": "ReferenceError",
+          "explanation": "Reading an identifier that cannot be resolved throws ReferenceError.",
+          "hints": [
+            "Reading differs from assigning an undeclared name in legacy non-strict code.",
+            "No declaration means no binding can be found."
+          ],
+          "sources": [
+            {
+              "title": "Closures and lexical scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            },
+            {
+              "title": "let and block scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "scope-c1",
+          "topic": "scope",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "let label = \"outer\";\nfunction read() { let label = \"inner\"; return label; }\nconsole.log(read());\nconsole.log(label);",
+          "correctAnswer": "inner\nouter",
+          "explanation": "The function's local binding shadows the outer one only within the function.",
+          "hints": [
+            "Resolve the name separately inside and outside the function.",
+            "The local declaration does not reassign the outer binding."
+          ],
+          "sources": [
+            {
+              "title": "Closures and lexical scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            },
+            {
+              "title": "let and block scope",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "closures": {
+      "sources": [
+        {
+          "title": "Closures",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "closures-q1",
+          "topic": "closures",
+          "question": "What does a closure retain access to?",
+          "options": [
+            "Its surrounding lexical bindings",
+            "Every variable from every function",
+            "Only variables stored in this",
+            "Only primitive literals"
+          ],
+          "correctAnswer": "Its surrounding lexical bindings",
+          "explanation": "A closure combines a function with its surrounding lexical environment.",
+          "hints": [
+            "Think about the environment where the function was created.",
+            "It can access captured bindings even after the outer call finishes."
+          ],
+          "sources": [
+            {
+              "title": "Closures",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "closures-q2",
+          "topic": "closures",
+          "question": "When an outer function returns an inner function, can the inner function use outer local variables later?",
+          "options": [
+            "No, they always disappear immediately",
+            "Only if they are global",
+            "Only before the inner function is returned",
+            "Yes, through a closure"
+          ],
+          "correctAnswer": "Yes, through a closure",
+          "explanation": "Captured lexical bindings can remain accessible through a returned function.",
+          "hints": [
+            "Returning does not necessarily make captured bindings unreachable.",
+            "The returned function keeps the relevant environment reachable."
+          ],
+          "sources": [
+            {
+              "title": "Closures",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "closures-q3",
+          "topic": "closures",
+          "question": "Two counters created by two separate calls to a factory normally have which state?",
+          "options": [
+            "No state of any kind",
+            "The browser's global counter",
+            "Independent captured state",
+            "One mandatory shared counter"
+          ],
+          "correctAnswer": "Independent captured state",
+          "explanation": "Each factory call creates its own lexical environment.",
+          "hints": [
+            "Consider two separate outer function calls.",
+            "Their captured count bindings are distinct."
+          ],
+          "sources": [
+            {
+              "title": "Closures",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "closures-q4",
+          "topic": "closures",
+          "question": "A closure captures a binding. If that binding changes, what does a later call usually observe?",
+          "options": [
+            "A copy of the function name",
+            "The current value of the binding",
+            "Always the first value forever",
+            "Always undefined"
+          ],
+          "correctAnswer": "The current value of the binding",
+          "explanation": "Closures generally retain access to bindings, not frozen snapshots of their values.",
+          "hints": [
+            "A binding can hold different values over time.",
+            "A later read uses the binding's then-current value."
+          ],
+          "sources": [
+            {
+              "title": "Closures",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "closures-q5",
+          "topic": "closures",
+          "question": "Which is a common use of closures?",
+          "options": [
+            "Keeping private state in a function factory",
+            "Automatically encrypting every variable",
+            "Preventing all memory allocation",
+            "Replacing the event loop"
+          ],
+          "correctAnswer": "Keeping private state in a function factory",
+          "explanation": "Function factories can expose methods that share private captured state.",
+          "hints": [
+            "The outer local variable need not be directly exposed.",
+            "A returned function can read and update that hidden local binding."
+          ],
+          "sources": [
+            {
+              "title": "Closures",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "closures-c1",
+          "topic": "closures",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "function makeCounter() { let n = 0; return () => ++n; }\nconst count = makeCounter();\nconsole.log(count());\nconsole.log(count());",
+          "correctAnswer": "1\n2",
+          "explanation": "Both calls share the captured n binding, so the second call increments its updated value.",
+          "hints": [
+            "The returned function keeps access to n.",
+            "makeCounter is called once, so both count calls use the same environment."
+          ],
+          "sources": [
+            {
+              "title": "Closures",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "hoisting": {
+      "sources": [
+        {
+          "title": "Hoisting",
+          "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "hoisting-q1",
+          "topic": "hoisting",
+          "question": "What is printed? console.log(n); var n = 5;",
+          "options": [
+            "undefined",
+            "5",
+            "null",
+            "ReferenceError"
+          ],
+          "correctAnswer": "undefined",
+          "explanation": "The var declaration is available before the initializer executes, with initial value undefined.",
+          "hints": [
+            "Declaration and initialization are separate steps.",
+            "The assignment to 5 has not happened at the log."
+          ],
+          "sources": [
+            {
+              "title": "Hoisting",
+              "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "hoisting-q2",
+          "topic": "hoisting",
+          "question": "What happens when a let binding is accessed before its declaration executes?",
+          "options": [
+            "It prints undefined",
+            "It prints null",
+            "It creates a second binding",
+            "ReferenceError due to the temporal dead zone"
+          ],
+          "correctAnswer": "ReferenceError due to the temporal dead zone",
+          "explanation": "The let binding exists but is uninitialized in the temporal dead zone.",
+          "hints": [
+            "let does not behave exactly like var.",
+            "An uninitialized lexical binding cannot be read."
+          ],
+          "sources": [
+            {
+              "title": "Hoisting",
+              "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "hoisting-q3",
+          "topic": "hoisting",
+          "question": "Can an ordinary function declaration be called earlier in the same scope?",
+          "options": [
+            "Only after converting it to an arrow",
+            "Only if its name is uppercase",
+            "Yes",
+            "Never"
+          ],
+          "correctAnswer": "Yes",
+          "explanation": "Ordinary function declarations are initialized before normal execution of that scope.",
+          "hints": [
+            "Distinguish a declaration from a function expression assignment.",
+            "A declared function is available before its textual position."
+          ],
+          "sources": [
+            {
+              "title": "Hoisting",
+              "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "hoisting-q4",
+          "topic": "hoisting",
+          "question": "Are var initializers evaluated before execution reaches them?",
+          "options": [
+            "Only initializers in loops",
+            "No, only the declaration is available earlier",
+            "Yes, all values are computed first",
+            "Only numeric initializers"
+          ],
+          "correctAnswer": "No, only the declaration is available earlier",
+          "explanation": "The initializer runs when execution reaches the assignment.",
+          "hints": [
+            "Hoisting does not move every computation to the beginning.",
+            "Earlier availability of a name does not imply an earlier assigned value."
+          ],
+          "sources": [
+            {
+              "title": "Hoisting",
+              "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "hoisting-q5",
+          "topic": "hoisting",
+          "question": "What is hoisting best understood as?",
+          "options": [
+            "A description of declaration availability, not literal source-code movement",
+            "The engine editing the source file",
+            "Variables being moved into the heap only",
+            "A loop optimization"
+          ],
+          "correctAnswer": "A description of declaration availability, not literal source-code movement",
+          "explanation": "Hoisting describes observable declaration and initialization behavior; the engine does not rewrite the source file that way.",
+          "hints": [
+            "The common 'move to the top' explanation is a mental model.",
+            "Source text stays unchanged."
+          ],
+          "sources": [
+            {
+              "title": "Hoisting",
+              "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "hoisting-c1",
+          "topic": "hoisting",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "function show() { console.log(n); var n = 5; console.log(n); }\nshow();",
+          "correctAnswer": "undefined\n5",
+          "explanation": "The local var binding starts as undefined. Its initializer runs before the second log.",
+          "hints": [
+            "The var declaration is available before its assignment.",
+            "Trace the initializer's position between the two logs."
+          ],
+          "sources": [
+            {
+              "title": "Hoisting",
+              "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "this": {
+      "sources": [
+        {
+          "title": "this reference",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "this-q1",
+          "topic": "this",
+          "question": "For obj.show(), what is this inside a normal show method?",
+          "options": [
+            "obj",
+            "Always globalThis",
+            "The function's first argument",
+            "Always undefined"
+          ],
+          "correctAnswer": "obj",
+          "explanation": "For a normal method call, the receiver before the dot supplies this.",
+          "hints": [
+            "Look at the receiver of the call.",
+            "The object on the left of the dot matters."
+          ],
+          "sources": [
+            {
+              "title": "this reference",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "this-q2",
+          "topic": "this",
+          "question": "Do arrow functions create their own this binding?",
+          "options": [
+            "Yes, always the global object",
+            "Yes, always a new empty object",
+            "Only when returning an object",
+            "No, they use the surrounding this"
+          ],
+          "correctAnswer": "No, they use the surrounding this",
+          "explanation": "Arrow functions use lexical this from the surrounding environment.",
+          "hints": [
+            "Arrow and normal functions differ here.",
+            "The surrounding environment supplies this."
+          ],
+          "sources": [
+            {
+              "title": "this reference",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "this-q3",
+          "topic": "this",
+          "question": "Which method creates a new function with a fixed this value?",
+          "options": [
+            "filter",
+            "slice",
+            "bind",
+            "map"
+          ],
+          "correctAnswer": "bind",
+          "explanation": "Function.prototype.bind returns a bound function.",
+          "hints": [
+            "One function utility binds a receiver.",
+            "The original function need not run immediately."
+          ],
+          "sources": [
+            {
+              "title": "this reference",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "this-q4",
+          "topic": "this",
+          "question": "Inside a normal function called without a receiver in strict mode, what is this?",
+          "options": [
+            "An empty array",
+            "undefined",
+            "globalThis",
+            "The function's source text"
+          ],
+          "correctAnswer": "undefined",
+          "explanation": "In strict mode, an unbound ordinary function call receives undefined as this.",
+          "hints": [
+            "The strict-mode condition is essential.",
+            "There is no object before a dot supplying a receiver."
+          ],
+          "sources": [
+            {
+              "title": "this reference",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "this-q5",
+          "topic": "this",
+          "question": "Which call invokes fn with obj as this and two separate arguments?",
+          "options": [
+            "fn.call(obj, 1, 2)",
+            "fn.apply(obj, 1, 2)",
+            "fn.bind(obj, [1, 2]) executes immediately",
+            "fn.map(obj, 1, 2)"
+          ],
+          "correctAnswer": "fn.call(obj, 1, 2)",
+          "explanation": "call invokes a function with an explicit this value and individually listed arguments.",
+          "hints": [
+            "call and apply differ in how arguments are supplied.",
+            "apply expects its argument collection as an array-like value."
+          ],
+          "sources": [
+            {
+              "title": "this reference",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "this-c1",
+          "topic": "this",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "const user = { name: \"Adi\", show() { return this.name; } };\nconsole.log(user.show());",
+          "correctAnswer": "Adi",
+          "explanation": "The normal method is called with user as its receiver, so this.name reads user.name.",
+          "hints": [
+            "Identify the object before the dot in the call.",
+            "This is a normal method call, not a detached function call."
+          ],
+          "sources": [
+            {
+              "title": "this reference",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "arrays-objects": {
+      "sources": [
+        {
+          "title": "Indexed collections",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+          "kind": "curated reference"
+        },
+        {
+          "title": "Working with objects",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "arrays-objects-q1",
+          "topic": "arrays-objects",
+          "question": "What is the index of the first element in a JavaScript array?",
+          "options": [
+            "0",
+            "1",
+            "-1",
+            "The array length"
+          ],
+          "correctAnswer": "0",
+          "explanation": "JavaScript arrays use zero-based indexing.",
+          "hints": [
+            "The first index precedes 1.",
+            "The last usual index is length minus one."
+          ],
+          "sources": [
+            {
+              "title": "Indexed collections",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Working with objects",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "arrays-objects-q2",
+          "topic": "arrays-objects",
+          "question": "Which method returns a new array of transformed elements?",
+          "options": [
+            "forEach always",
+            "push",
+            "pop",
+            "map"
+          ],
+          "correctAnswer": "map",
+          "explanation": "map returns a new array containing the callback results.",
+          "hints": [
+            "Transformation differs from adding or removing an element.",
+            "Each original element contributes a mapped result."
+          ],
+          "sources": [
+            {
+              "title": "Indexed collections",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Working with objects",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "arrays-objects-q3",
+          "topic": "arrays-objects",
+          "question": "Which expression reads the name property of person?",
+          "options": [
+            "name.person",
+            "person->name",
+            "person.name",
+            "person(name)"
+          ],
+          "correctAnswer": "person.name",
+          "explanation": "Dot notation accesses a named object property.",
+          "hints": [
+            "This is property access rather than a function call.",
+            "Place the object before the dot."
+          ],
+          "sources": [
+            {
+              "title": "Indexed collections",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Working with objects",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "arrays-objects-q4",
+          "topic": "arrays-objects",
+          "question": "Does assigning an array to another variable copy its elements into a new array?",
+          "options": [
+            "It automatically freezes the array",
+            "No, both bindings refer to the same array",
+            "Yes, it always deep-copies",
+            "Only its numbers are copied"
+          ],
+          "correctAnswer": "No, both bindings refer to the same array",
+          "explanation": "An ordinary assignment copies the reference, not the referenced array.",
+          "hints": [
+            "Objects and arrays have reference semantics.",
+            "Mutating through either reference affects the same array."
+          ],
+          "sources": [
+            {
+              "title": "Indexed collections",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Working with objects",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "arrays-objects-q5",
+          "topic": "arrays-objects",
+          "question": "Which method keeps only elements that satisfy a condition?",
+          "options": [
+            "filter",
+            "map",
+            "join",
+            "reverse"
+          ],
+          "correctAnswer": "filter",
+          "explanation": "filter returns a new array of elements whose callback test is truthy.",
+          "hints": [
+            "The result is a selected subset.",
+            "The callback is used as a test rather than a transformation."
+          ],
+          "sources": [
+            {
+              "title": "Indexed collections",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Working with objects",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "arrays-objects-c1",
+          "topic": "arrays-objects",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "const values = [1, 2];\nconst alias = values;\nalias.push(3);\nconsole.log(values.length);",
+          "correctAnswer": "3",
+          "explanation": "Both bindings refer to the same array. Pushing through alias changes that array's length.",
+          "hints": [
+            "Assignment does not create a new array here.",
+            "values and alias point to the same object."
+          ],
+          "sources": [
+            {
+              "title": "Indexed collections",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Working with objects",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "event-loop": {
+      "sources": [
+        {
+          "title": "JavaScript execution model",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "event-loop-q1",
+          "topic": "event-loop",
+          "question": "When can a setTimeout callback run relative to currently executing synchronous code?",
+          "options": [
+            "After that synchronous execution finishes",
+            "In the middle of any statement",
+            "Always before the next synchronous statement",
+            "Only before the script starts"
+          ],
+          "correctAnswer": "After that synchronous execution finishes",
+          "explanation": "A timer callback waits for the current JavaScript execution to finish.",
+          "hints": [
+            "JavaScript jobs run to completion.",
+            "A zero delay does not interrupt the current job."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript execution model",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "event-loop-q2",
+          "topic": "event-loop",
+          "question": "Which normally runs first after the current job: an already-queued Promise reaction or a timer task?",
+          "options": [
+            "The timer task",
+            "They must run simultaneously",
+            "Neither can ever run",
+            "The Promise microtask"
+          ],
+          "correctAnswer": "The Promise microtask",
+          "explanation": "Queued microtasks are drained before the next ordinary task is processed.",
+          "hints": [
+            "Promise reactions use a different queue from timers.",
+            "Microtasks are processed at a microtask checkpoint."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript execution model",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "event-loop-q3",
+          "topic": "event-loop",
+          "question": "Does setTimeout(fn, 0) guarantee execution immediately?",
+          "options": [
+            "Yes, on a separate JavaScript stack immediately",
+            "Only if fn is an arrow function",
+            "No",
+            "Yes, before all other code"
+          ],
+          "correctAnswer": "No",
+          "explanation": "The delay is a scheduling threshold, not a guarantee of immediate execution.",
+          "hints": [
+            "Think about the current call stack and queued work.",
+            "Even zero-delay callbacks must wait their turn."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript execution model",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "event-loop-q4",
+          "topic": "event-loop",
+          "question": "What can a long synchronous loop do to a browser page?",
+          "options": [
+            "Guarantee smoother rendering",
+            "Delay user interaction and queued callbacks",
+            "Make timers run inside each iteration",
+            "Automatically move itself to a worker"
+          ],
+          "correctAnswer": "Delay user interaction and queued callbacks",
+          "explanation": "Long tasks can keep the main JavaScript thread occupied and delay other work.",
+          "hints": [
+            "Other work must wait while the job is running.",
+            "The event loop does not automatically parallelize the loop."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript execution model",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "event-loop-q5",
+          "topic": "event-loop",
+          "question": "What holds currently executing nested function calls?",
+          "options": [
+            "The call stack",
+            "The CSS stylesheet",
+            "localStorage",
+            "The Promise result list"
+          ],
+          "correctAnswer": "The call stack",
+          "explanation": "The call stack tracks active execution contexts.",
+          "hints": [
+            "Think about a function calling another function.",
+            "Calls are pushed and later popped as they complete."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript execution model",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "event-loop-c1",
+          "topic": "event-loop",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "console.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nconsole.log(\"C\");",
+          "correctAnswer": "A\nC\nB",
+          "explanation": "The synchronous logs run first; the timer callback runs after the current job finishes.",
+          "hints": [
+            "A zero-delay timer still queues work.",
+            "Read the two synchronous logs before considering the callback."
+          ],
+          "sources": [
+            {
+              "title": "JavaScript execution model",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "async": {
+      "sources": [
+        {
+          "title": "Using promises",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+          "kind": "curated reference"
+        },
+        {
+          "title": "Async functions",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "async-q1",
+          "topic": "async",
+          "question": "What does an async function return?",
+          "options": [
+            "A Promise",
+            "Always a plain string",
+            "Always undefined",
+            "A timer handle"
+          ],
+          "correctAnswer": "A Promise",
+          "explanation": "An async function always returns a Promise, including when it returns an ordinary value.",
+          "hints": [
+            "async changes the function's return contract.",
+            "An ordinary returned value becomes a fulfilled Promise result."
+          ],
+          "sources": [
+            {
+              "title": "Using promises",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Async functions",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "async-q2",
+          "topic": "async",
+          "question": "What does await pause?",
+          "options": [
+            "Every thread in the browser",
+            "All network traffic",
+            "The JavaScript language permanently",
+            "The surrounding async function's execution"
+          ],
+          "correctAnswer": "The surrounding async function's execution",
+          "explanation": "await suspends the surrounding async function while other scheduled work can proceed.",
+          "hints": [
+            "It is not a global blocking operation.",
+            "The async function resumes when the awaited operation settles."
+          ],
+          "sources": [
+            {
+              "title": "Using promises",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Async functions",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "async-q3",
+          "topic": "async",
+          "question": "Which Promise method waits for every input to settle, whether fulfilled or rejected?",
+          "options": [
+            "Promise.any",
+            "Promise.resolve",
+            "Promise.allSettled",
+            "Promise.race"
+          ],
+          "correctAnswer": "Promise.allSettled",
+          "explanation": "allSettled collects every outcome instead of failing fast.",
+          "hints": [
+            "The method name describes completion rather than success only.",
+            "Each input contributes an outcome record."
+          ],
+          "sources": [
+            {
+              "title": "Using promises",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Async functions",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "async-q4",
+          "topic": "async",
+          "question": "How can a rejected awaited Promise be handled inside an async function?",
+          "options": [
+            "By redeclaring Promise",
+            "With try/catch around await",
+            "Only with a global variable",
+            "By returning true before await"
+          ],
+          "correctAnswer": "With try/catch around await",
+          "explanation": "A rejection at an await expression behaves like a thrown error that can be caught.",
+          "hints": [
+            "Error handling resembles synchronous exception handling.",
+            "Place await inside a try block."
+          ],
+          "sources": [
+            {
+              "title": "Using promises",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Async functions",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "async-q5",
+          "topic": "async",
+          "question": "Which are the three states of a Promise?",
+          "options": [
+            "pending, fulfilled, rejected",
+            "start, stop, reset",
+            "open, closed, deleted",
+            "true, false, null"
+          ],
+          "correctAnswer": "pending, fulfilled, rejected",
+          "explanation": "A Promise begins pending and settles as either fulfilled or rejected.",
+          "hints": [
+            "Settlement has two possible outcomes.",
+            "Pending is the state before either outcome."
+          ],
+          "sources": [
+            {
+              "title": "Using promises",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Async functions",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "async-c1",
+          "topic": "async",
+          "question": "What will be logged to the console? Enter one output line per console.log.",
+          "code": "async function work() { console.log(\"A\"); await Promise.resolve(); console.log(\"B\"); }\nwork();\nconsole.log(\"C\");",
+          "correctAnswer": "A\nC\nB",
+          "explanation": "The function runs until await, yields, then resumes after the synchronous C log.",
+          "hints": [
+            "await yields control to the caller.",
+            "The continuation runs as a microtask after the current synchronous work."
+          ],
+          "sources": [
+            {
+              "title": "Using promises",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+              "kind": "curated reference"
+            },
+            {
+              "title": "Async functions",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    }
+  }
+}

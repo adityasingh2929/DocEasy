@@ -28,5 +28,14 @@ def retrieve_chunks(query_embedding, topic=None, top_k=2):
         len(re.findall(r"\b" + re.escape(term) + r"\b", item["text"].lower()))
         for term in terms
     ), reverse=True)
-    return [{"text": item["text"], "topic": item["topic"], "score": 1.0}
+    return [{"text": item["text"], "topic": item["topic"], "score": 1.0, "chunkId": item.get("chunk_id")}
             for item in ranked[:max(0, top_k)]]
+
+
+def sources_for_chunks(chunks, topic):
+    from app.services.practice_service import references
+    sources = references(topic)
+    # Existing corpus preserves topic/chunk IDs, not original source URLs.
+    # Label mapped documentation links honestly, rather than claiming passage citations.
+    return [{**source, 'kind': 'mapped topic reference', 'chunkId': chunks[0].get('chunkId') if chunks else None}
+            for source in sources]

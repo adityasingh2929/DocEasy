@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ConceptTab from "../components/ConceptTab";
 import QuizTab from "../components/QuizTab";
 import ChallengeTab from "../components/ChallengeTab";
 import DoubtPanel from "../components/DoubtPanel";
+import LearningNav from "../components/LearningNav";
+import { hasPassedAssessment } from "../utils/learning";
 import Logo from "../components/Logo";
 import { TOPICS } from "../data/topics";
 import { getProgress, saveProgress } from "../utils/progress";
@@ -19,7 +21,7 @@ export default function Lesson() {
 
   const [activeTab, setActiveTab] = useState('concept');
   const [conceptCompleted, setConceptCompleted] = useState(() => Boolean(getProgress().conceptsRead[topic]));
-  const [quizCompleted, setQuizCompleted] = useState(() => Boolean(getProgress().quizScores[topic]));
+  const [quizCompleted, setQuizCompleted] = useState(() => hasPassedAssessment(topic));
 
   // Lifted state for context awareness in DoubtPanel
   const [questionContext, setQuestionContext] = useState({});
@@ -32,6 +34,8 @@ export default function Lesson() {
     challenge: []
   });
 
+  const handleQuizContext = useCallback(data => setQuestionContext(prev => ({ ...prev, quiz: data })), []);
+  const handleChallengeContext = useCallback(data => setQuestionContext(prev => ({ ...prev, challenge: data })), []);
   const tabs = [
     { id: 'concept', label: 'Concept', locked: false },
     { id: 'quiz', label: 'Quiz', locked: !conceptCompleted },
@@ -40,6 +44,7 @@ export default function Lesson() {
 
   const handleTabClick = (tabId, locked) => {
     if (!locked) {
+      setQuestionContext(prev => ({ ...prev, [tabId]: {} }));
       setActiveTab(tabId);
     }
   };
@@ -78,6 +83,7 @@ export default function Lesson() {
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 p-6 md:p-10 flex flex-col items-center relative overflow-x-hidden selection:bg-blue-500/30">
       <div className="w-full max-w-5xl mt-2 md:mt-4 flex flex-col items-center">
 
+        <div className="w-full"><LearningNav /></div>
         {/* Header Section */}
         <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
           <div className="flex flex-col">
@@ -166,14 +172,14 @@ export default function Lesson() {
                     setQuizCompleted(true);
                     setActiveTab('challenge');
                   }}
-                  onContext={data => setQuestionContext(prev => ({ ...prev, quiz: data }))}
+                  onContext={handleQuizContext}
                 />
               )}
 
               {activeTab === 'challenge' && (
                 <ChallengeTab
                   onChallengeSuccess={handleChallengeSuccess}
-                  onContext={data => setQuestionContext(prev => ({ ...prev, challenge: data }))}
+                  onContext={handleChallengeContext}
                 />
               )}
             </motion.div>

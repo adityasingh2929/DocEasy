@@ -1,4 +1,6 @@
 import { useParams } from "react-router-dom";
+import bank from "../data/practice-bank.json";
+import Sources from "./Sources";
 import concepts from "../data/concepts.json";
 import { motion } from "framer-motion";
 
@@ -48,6 +50,7 @@ export default function ConceptTab({ isCompleted, onComplete }) {
         )}
       </div>
 
+      <Sources sources={bank.topics[topic]?.sources} />
       <div className="mt-auto pt-4">
         <motion.button
           whileHover={!isCompleted ? { scale: 1.05 } : {}}

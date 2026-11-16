@@ -1,7 +1,7 @@
 import json
 import re
 from app.rag.embedder import embed_query
-from app.rag.retriever import retrieve_chunks
+from app.rag.retriever import retrieve_chunks, sources_for_chunks
 from app.schemas.quiz_schema import QuizResponse
 from app.llm.groq_api import call_groq
 from pydantic import ValidationError
@@ -111,6 +111,7 @@ def generate_quiz(topic: str) -> QuizResponse:
     # 4. Parse and return
     try:
         response = QuizResponse(
+            sources=sources_for_chunks(chunks, topic),
             question=data["question"],
             options=data["options"],
             correctAnswer=data["correctAnswer"],

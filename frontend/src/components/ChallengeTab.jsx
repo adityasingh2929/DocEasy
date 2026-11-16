@@ -1,187 +1,64 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getProgress, saveProgress } from "../utils/progress";
-import { motion } from "framer-motion";
-import { postJSON } from "../config/api";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getJSON, postJSON } from '../config/api';
+import bank from '../data/practice-bank.json';
+import { recordChallenge, normalizeOutput } from '../utils/learning';
+import Hints from './Hints';
+import Sources from './Sources';
 
 export default function ChallengeTab({ onChallengeSuccess, onContext }) {
   const { topic } = useParams();
-
-  const [question, setQuestion] = useState("");
-  const [code, setCode] = useState("");
-  const [correctAnswer, setCorrectAnswer] = useState("");
-  const [explanation, setExplanation] = useState("");
-
-  const [userInput, setUserInput] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  const [showResult, setShowResult] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [isContinuing, setIsContinuing] = useState(false);
-
+  const [mode, setMode] = useState('reviewed');
   const [attempt, setAttempt] = useState(0);
+  const [exercise, setExercise] = useState(null);
+  const [answer, setAnswer] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [result, setResult] = useState(null);
+  const [assisted, setAssisted] = useState(false);
   useEffect(() => {
-    const controller = new AbortController();
-    let active = true;
+    const controller = new AbortController(); let active = true;
     (async () => {
-      await Promise.resolve();
-      if (!active) return;
-    setLoading(true);
-    setError(false);
-    setUserInput(""); setShowResult(false);
-    setIsCorrect(false);
-    setIsContinuing(false);
+      await Promise.resolve(); if (!active) return;
+      setLoading(true); setError(''); setNotice(''); setResult(null); setAnswer(''); setAssisted(false); setExercise(null);
       try {
-        const data = await postJSON("/challenge", { topic }, controller.signal);
+        let data;
+        if (mode === 'ai') data = await postJSON('/challenge', { topic }, controller.signal);
+        else {
+          try { data = await getJSON(`/practice/${topic}/challenge`, controller.signal); }
+          catch (failure) {
+            if (controller.signal.aborted) throw failure;
+            data = bank.topics[topic].challenges[0];
+            if (active) setNotice('Using the bundled reviewed challenge. The local backend is unavailable.');
+          }
+        }
         if (!active) return;
-        if (![data.question, data.code, data.correctAnswer, data.explanation].every(value => typeof value === "string" && value.trim())) throw new Error("Invalid challenge");
-        setQuestion(data.question);
-        setCode(data.code);
-        setCorrectAnswer(data.correctAnswer);
-        setExplanation(data.explanation);
-        onContext?.({ currentQuestion: data.question, code: data.code, correctAnswer: data.correctAnswer, explanation: data.explanation });
-      } catch {
-        if (active) setError(true);
-      } finally {
-        if (active) setLoading(false);
-      }
+        if (![data.question, data.code, data.correctAnswer, data.explanation].every(value => typeof value === 'string' && value.trim())) throw new Error('Invalid exercise');
+        setExercise({ ...data, id: data.id || crypto.randomUUID() });
+      } catch { if (active) setError('Could not generate AI practice. Switch to the reviewed challenge or try again.'); }
+      finally { if (active) setLoading(false); }
     })();
     return () => { active = false; controller.abort(); };
-    // Context is published only when a new question arrives.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topic, attempt]);
-
-  const normalize = text => text.trim().replace(/\r\n/g, "\n").split("\n").map(line => line.trim()).join("\n");
-
-  const handleSubmit = () => {
-    if (!userInput.trim() || showResult) return;
-
-    const isMatch = normalize(userInput) === normalize(correctAnswer);
-
-
-    setIsCorrect(isMatch);
-    setShowResult(true);
-
-    if (isMatch) {
-      const progress = getProgress();
-      progress.challengesSolved[topic] = true;
-      saveProgress(progress);
-    }
+  }, [topic, mode, attempt]);
+  useEffect(() => { onContext?.(exercise ? { currentQuestion: exercise.question, code: exercise.code, correctAnswer: result !== null ? exercise.correctAnswer : null, explanation: result !== null ? exercise.explanation : null } : {}); }, [exercise, result, onContext]);
+  const submit = () => {
+    if (!answer.trim() || result !== null) return;
+    const correct = normalizeOutput(answer) === normalizeOutput(exercise.correctAnswer);
+    setResult(correct); recordChallenge(topic, exercise, answer, correct, assisted);
   };
-
-  const handleContinue = () => {
-    if (isContinuing) return;
-    setIsContinuing(true);
-    if (isCorrect) onChallengeSuccess();
-  };
-
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full space-y-4">
-        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-xl text-slate-500 animate-pulse">
-          Generating challenge...
-        </p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full">
-        <p role="alert" className="text-xl text-red-400 mb-4">
-          Could not load challenge. The server may be waking up. Please try again.
-        </p>
-        <button onClick={() => setAttempt(value => value + 1)} className="px-6 py-3 bg-blue-900 text-white rounded-xl">Try again</button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex flex-col h-full">
-      <h2 className="text-2xl font-bold mb-6 text-slate-900">Coding Challenge</h2>
-
-      <p className="text-slate-600 mb-8 text-lg">{question}</p>
-
-      <div className="bg-slate-900 rounded-xl p-6 mb-8 border border-slate-800 font-mono text-[15px] shadow-sm whitespace-pre overflow-x-auto text-blue-300 leading-relaxed">
-        {code}
-      </div>
-
-      <div className="mb-10">
-        <textarea
-          rows={3}
-          aria-label="Predicted console output"
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          placeholder="Your answer..."
-          disabled={showResult}
-          className="w-full bg-white border border-slate-300 focus:border-[#1E3A8A] focus:ring-2 focus:ring-[#1E3A8A]/20 rounded-xl px-5 py-4 text-slate-900 outline-none transition-all font-mono text-lg placeholder:text-slate-400 shadow-sm"
-        />
-      </div>
-
-      <div className="mt-auto">
-        {!showResult ? (
-          <motion.button
-            whileHover={userInput.trim() ? { scale: 1.05 } : {}}
-            whileTap={userInput.trim() ? { scale: 0.95 } : {}}
-            onClick={handleSubmit}
-            disabled={!userInput.trim()}
-            className="px-8 py-3.5 bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-md transition-colors"
-          >
-            Submit Answer
-          </motion.button>
-        ) : (
-          <div className="space-y-6">
-            <div
-              className={`p-6 rounded-xl border shadow-sm ${
-                isCorrect
-                  ? "bg-green-50 border-green-200"
-                  : "bg-red-50 border-red-200"
-              }`}
-            >
-              <h3
-                className={`font-bold text-xl mb-3 ${
-                  isCorrect ? "text-green-700" : "text-red-700"
-                }`}
-              >
-                {isCorrect ? "Great job! ✅" : "Not quite right ❌"}
-              </h3>
-
-              <p className="text-slate-600 text-lg leading-relaxed mb-4">
-                Correct answer:
-                <span className="font-mono text-slate-900 bg-slate-200 px-2 py-1 rounded ml-2">
-                  {correctAnswer}
-                </span>
-              </p>
-
-              {explanation && (
-                <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
-                  <h4 className="text-sm text-slate-500 uppercase tracking-wider mb-2 font-bold">Explanation</h4>
-                  <p className="text-slate-700 text-sm leading-relaxed">{explanation}</p>
-                </div>
-              )}
-            </div>
-
-            <motion.button
-              whileHover={!isContinuing ? { scale: 1.05 } : {}}
-              whileTap={!isContinuing ? { scale: 0.95 } : {}}
-              onClick={isCorrect ? handleContinue : () => { setShowResult(false); setUserInput(""); }}
-              disabled={isContinuing}
-              className="px-8 py-3.5 bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 disabled:bg-slate-200 disabled:text-slate-400 text-white font-bold rounded-xl shadow-md transition-colors flex items-center gap-2 group"
-            >
-              {isContinuing ? "Loading..." : (
-                <>
-                  {isCorrect ? "Continue" : "Try again"}
-                  <span className="text-xl group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
-                </>
-              )}
-            </motion.button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  return <section>
+    <div className="flex flex-wrap gap-3 mb-6">{['reviewed', 'ai'].map(value => <button key={value} onClick={() => setMode(value)} aria-pressed={mode === value} className={`border rounded-lg px-4 py-2 text-sm font-semibold ${mode === value ? 'bg-blue-900 text-white' : 'bg-white'}`}>{value === 'reviewed' ? 'Reviewed challenge' : 'Optional AI challenge'}</button>)}</div>
+    <h2 className="text-2xl font-bold mb-4">Coding challenge</h2>
+    {notice && <p className="bg-amber-50 p-3 rounded-lg text-sm mb-4">{notice}</p>}
+    {loading && <p role="status" className="text-slate-500 py-8">{mode === 'ai' ? 'Generating AI practice...' : 'Loading reviewed practice...'}</p>}
+    {error && <div role="alert"><p className="text-red-700 mb-4">{error}</p><button onClick={() => setAttempt(value => value + 1)} className="underline text-blue-900">Try again</button></div>}
+    {!loading && exercise && <div><p className="text-slate-600 mb-4">{exercise.question}</p><pre className="bg-slate-900 text-blue-100 rounded-xl p-5 overflow-x-auto text-sm mb-5">{exercise.code}</pre>
+      <label htmlFor="challenge-output" className="text-sm font-semibold">Predicted console output</label><textarea id="challenge-output" rows={4} disabled={result !== null} value={answer} onChange={event => setAnswer(event.target.value)} placeholder="One output line per console.log" className="w-full border rounded-xl p-4 mt-2 font-mono" />
+      <Hints key={exercise.id} hints={exercise.hints || ['Trace the code one statement at a time.', 'Track the current bindings, function calls, and any queued asynchronous work.']} explanation={exercise.explanation} attempted={result !== null} onReveal={() => setAssisted(true)} />
+      {result === null ? <button disabled={!answer.trim()} onClick={submit} className="bg-blue-900 text-white rounded-xl px-6 py-3 disabled:bg-slate-300">Submit answer</button> : <div className={`border rounded-xl p-5 ${result ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'}`}><h3 role="status" className="text-xl font-bold">{result ? 'Correct - challenge solved' : 'Not quite - try again'}</h3><p className="text-sm mt-3">Correct output:</p><pre className="font-mono whitespace-pre-wrap my-3">{exercise.correctAnswer}</pre><p className="text-sm">{exercise.explanation}</p><button onClick={result ? onChallengeSuccess : () => { setResult(null); setAnswer(''); }} className="bg-blue-900 text-white px-5 py-3 rounded-lg mt-4">{result ? 'Complete lesson' : 'Try again'}</button></div>}
+      <Sources sources={exercise.sources} />
+      {mode === 'ai' && <p className="text-xs text-slate-500 mt-3">AI-generated content can be inaccurate. Check the documentation references.</p>}
+    </div>}
+  </section>;
 }

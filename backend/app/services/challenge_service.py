@@ -1,7 +1,7 @@
 import json
 import re
 from app.rag.embedder import embed_query
-from app.rag.retriever import retrieve_chunks
+from app.rag.retriever import retrieve_chunks, sources_for_chunks
 from app.schemas.challenge_schema import ChallengeResponse
 from app.llm.groq_api import call_groq
 from fastapi import HTTPException
@@ -132,6 +132,7 @@ def generate_challenge(topic: str) -> ChallengeResponse:
 
     try:
         return ChallengeResponse(
+            sources=sources_for_chunks(chunks, topic),
             question=data["question"],
             code=data["code"],
             correctAnswer=str(data["correctAnswer"]).strip(),

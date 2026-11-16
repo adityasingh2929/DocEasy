@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import Splash from "./pages/Splash";
 import Home from "./pages/Home";
 import Roadmap from "./pages/Roadmap";
+import Dashboard from "./pages/Dashboard";
+import Notebook from "./pages/Notebook";
 import Lesson from "./pages/Lesson";
 
 const PageWrapper = ({ children }) => {
@@ -25,6 +27,8 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Splash />} />
+        <Route path="/dashboard" element={<PageWrapper><Dashboard /></PageWrapper>} />
+        <Route path="/notebook" element={<PageWrapper><Notebook /></PageWrapper>} />
         <Route path="/home" element={<PageWrapper><Home /></PageWrapper>} />
         <Route path="/roadmap/javascript" element={<PageWrapper><Roadmap /></PageWrapper>} />
         <Route path="/lesson/:topic" element={<PageWrapper><Lesson key={location.pathname} /></PageWrapper>} />

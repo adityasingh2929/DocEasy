@@ -1,3 +1,4 @@
+import LearningNav from "../components/LearningNav";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -6,6 +7,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col font-sans overflow-x-hidden selection:bg-blue-500/30">
+      <div className="relative z-20 p-6"><LearningNav /></div>
       
       {/* Navbar space / Logo could go here if needed, but App uses global routing without shared nav */}
       <div className="h-20 flex items-center px-8 w-full max-w-7xl mx-auto pt-6">

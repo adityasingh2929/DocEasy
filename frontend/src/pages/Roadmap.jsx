@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import LearningNav from "../components/LearningNav";
 import Logo from "../components/Logo";
 import { TOPICS } from "../data/topics";
-import { getRoadmapProgress } from "../utils/progress";
+import { resetProgress } from "../utils/progress";
+
+const freshRoadmap = () => Object.fromEntries(
+  TOPICS.map((topic, index) => [topic.id, index === 0 ? 'unlocked' : 'locked'])
+);
 
 // Animation Variants
 const containerVariants = {
@@ -26,9 +31,11 @@ const itemVariants = {
 
 export default function Roadmap() {
   const navigate = useNavigate();
-  const [progress, setProgress] = useState(() => getRoadmapProgress(TOPICS));
+  const [progress, setProgress] = useState(freshRoadmap);
 
   useEffect(() => {
+    // Faculty demo: every roadmap entry begins a fresh learning session.
+    resetProgress();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
@@ -45,8 +52,8 @@ export default function Roadmap() {
 
   const handleResetProgress = () => {
     if (window.confirm("Are you sure you want to reset your progress?")) {
-      localStorage.removeItem("docs_made_easy_progress");
-      setProgress(getRoadmapProgress(TOPICS));
+      resetProgress();
+      setProgress(freshRoadmap());
     }
   };
 
@@ -57,6 +64,7 @@ export default function Roadmap() {
         <Logo />
       </div>
 
+      <div className="w-full max-w-5xl mt-12 mb-6 z-10"><LearningNav /></div>
       {/* Header & Animated Progress Bar */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
