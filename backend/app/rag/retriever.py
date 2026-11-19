@@ -22,6 +22,12 @@ TOPIC_SOURCES = {
 def retrieve_chunks(query_embedding, topic=None, top_k=2):
     sources = TOPIC_SOURCES.get(topic, (topic,)) if topic else None
     candidates = [item for item in data if sources is None or item["topic"] in sources]
+    if not candidates and topic:
+        concepts = json.loads((Path(__file__).resolve().parents[2] / 'data' / 'concepts.json').read_text(encoding='utf-8'))
+        concept = next((item for item in concepts if item['id'] == topic), None)
+        if concept:
+            text = '\n'.join([concept['explanation'], *concept.get('points', []), concept.get('example', ''), *[section['text'] for section in concept.get('sections', [])]])
+            candidates = [{'text': text, 'topic': topic, 'chunk_id': 'lesson:' + topic}]
     query = query_embedding if isinstance(query_embedding, str) else ""
     terms = set(re.findall(r"[a-z]{3,}", f"{topic or ''} {query}".lower()))
     ranked = sorted(candidates, key=lambda item: sum(

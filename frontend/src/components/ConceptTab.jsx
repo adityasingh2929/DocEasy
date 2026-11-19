@@ -33,7 +33,7 @@ export default function ConceptTab({ isCompleted, onComplete }) {
         {concept.points && concept.points.length > 0 && (
           <ul className="list-disc list-inside space-y-2 mb-8 text-slate-600 text-[16px]">
             {concept.points.map((point, idx) => (
-              <li key={idx} className="leading-relaxed pl-2 marker:text-[#1E3A8A]">
+              <li key={idx} className="leading-relaxed pl-2 marker:text-[#294736]">
                 {point}
               </li>
             ))}
@@ -48,6 +48,10 @@ export default function ConceptTab({ isCompleted, onComplete }) {
             </pre>
           </div>
         )}
+        {concept.sections?.map(section => <section key={section.title} className="mt-6">
+          <h3 className="text-lg font-bold text-slate-900 mb-2">{section.title}</h3>
+          <p className="text-slate-600 leading-relaxed whitespace-pre-line">{section.text}</p>
+        </section>)}
       </div>
 
       <Sources sources={bank.topics[topic]?.sources} />
@@ -59,7 +63,7 @@ export default function ConceptTab({ isCompleted, onComplete }) {
           className={`px-8 py-3.5 rounded-xl font-bold transition-all duration-300
             ${isCompleted
               ? 'bg-green-50 text-green-700 border border-green-200 cursor-default shadow-sm'
-              : 'bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-md hover:shadow-lg'}
+              : 'bg-[#294736] hover:bg-[#294736]/90 text-white shadow-md hover:shadow-lg'}
           `}
         >
           {isCompleted ? '✓ Marked as Complete' : 'Mark as Complete'}

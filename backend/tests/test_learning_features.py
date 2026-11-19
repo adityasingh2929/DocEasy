@@ -86,7 +86,7 @@ class LearningFeatureTests(unittest.TestCase):
             result = self.client.get(f'/practice/{topic}/challenge').json()
             self.assertEqual(result['origin'], 'reviewed')
             self.assertEqual(len(result['hints']), 2)
-            self.assertTrue(all(source['url'].startswith('https://developer.mozilla.org/') for source in result['sources']))
+            self.assertTrue(all(source['url'].startswith('https://docs.python.org/' if topic.startswith('python-') else 'https://developer.mozilla.org/') for source in result['sources']))
 
     @patch('app.services.doubt_service.call_groq', return_value='Think about the scope.')
     def test_tutor_hint_levels_and_server_selected_provenance(self, provider):

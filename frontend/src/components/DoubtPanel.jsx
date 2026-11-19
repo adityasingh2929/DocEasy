@@ -123,7 +123,7 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
               <div
                 className={`px-4 py-2.5 rounded-xl max-w-[85%] whitespace-pre-wrap break-words text-sm leading-relaxed shadow-sm ${
                   msg.role === "user"
-                    ? "bg-[#1E3A8A] text-white rounded-br-sm"
+                    ? "bg-[#294736] text-white rounded-br-sm"
                     : "bg-white text-slate-700 rounded-bl-sm border border-slate-200"
                 }`}
               >
@@ -169,7 +169,7 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
         <div className="p-4 border-t border-slate-200 flex gap-2 bg-white">
           <input
             aria-label="Your question"
-            className="min-w-0 flex-1 p-2.5 rounded-lg bg-slate-50 text-slate-900 text-sm outline-none border border-slate-300 focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A] transition-all placeholder:text-slate-400 disabled:opacity-50"
+            className="min-w-0 flex-1 p-2.5 rounded-lg bg-slate-50 text-slate-900 text-sm outline-none border border-slate-300 focus:border-[#294736] focus:ring-1 focus:ring-[#294736] transition-all placeholder:text-slate-400 disabled:opacity-50"
             placeholder="Type your question..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -181,7 +181,7 @@ export default function DoubtPanel({ isOpen, onClose, contextData, messages, onA
             aria-label="Send question"
             onClick={() => handleSend()}
             disabled={!input.trim() || isLoading}
-            className="bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed px-4 py-2.5 rounded-lg text-white transition-colors flex items-center justify-center shadow-sm"
+            className="bg-[#294736] hover:bg-[#294736]/90 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed px-4 py-2.5 rounded-lg text-white transition-colors flex items-center justify-center shadow-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

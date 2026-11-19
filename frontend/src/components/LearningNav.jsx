@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import { account, signOut } from '../utils/account';
 export default function LearningNav() {
-  return <nav aria-label="Learning navigation" className="flex flex-wrap gap-2 mb-8 text-sm font-semibold">
-    {[[ '/home', 'Home' ],[ '/dashboard', 'Dashboard' ],[ '/roadmap/javascript', 'Roadmap' ],[ '/notebook', 'Mistake notebook' ]].map(([url, label]) =>
-      <NavLink key={url} to={url} className={({isActive}) => `rounded-lg px-4 py-2 border ${isActive ? 'bg-blue-900 border-blue-900 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-blue-800'}`}>{label}</NavLink>)}
-  </nav>;
+  const [error,setError] = useState('');
+  const [busy,setBusy] = useState(false);
+  async function logout() { setBusy(true); try { await signOut(); } catch(err) {setError(err.message);setBusy(false);} }
+  return <><nav aria-label="Learning navigation" className="learning-nav"><NavLink className="nav-brand" to="/home">DocEasy</NavLink><div className="nav-links">{[['/dashboard','Overview'],['/roadmap/javascript','JavaScript'],['/roadmap/python','Python'],['/documents','Documents'],['/notebook','Mistakes']].map(([url,label])=><NavLink key={url} to={url} className={({isActive})=>isActive?'active':''}>{label}</NavLink>)}</div><div className="nav-account"><span>{account()?.user?.name}</span><button disabled={busy} onClick={logout}>{busy?'Signing out…':'Sign out'}</button></div></nav>{error&&<p role="alert" className="form-error">{error}</p>}</>;
 }

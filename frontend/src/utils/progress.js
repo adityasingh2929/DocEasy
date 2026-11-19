@@ -1,9 +1,13 @@
 const PROGRESS_KEY = 'docs_made_easy_progress';
+const storageKey = () => {
+  const id = typeof sessionStorage !== 'undefined' && sessionStorage.getItem('doceasy-user-id');
+  return id ? `${PROGRESS_KEY}:${id}` : PROGRESS_KEY;
+};
 const emptyProgress = () => ({ topicsCompleted: [], conceptsRead: {}, quizScores: {}, challengesSolved: {}, assessments: [], assessmentDrafts: {}, mistakes: [], challengeAttempts: [], hintsUsed: 0 });
 export const getProgress = () => {
   const progress = emptyProgress();
   try {
-    const saved = JSON.parse(localStorage.getItem(PROGRESS_KEY) || 'null');
+    const saved = JSON.parse(localStorage.getItem(storageKey()) || 'null');
     if (!saved || typeof saved !== 'object') return progress;
     for (const key of ['conceptsRead', 'quizScores', 'challengesSolved', 'assessmentDrafts']) {
       if (saved[key] && typeof saved[key] === 'object' && !Array.isArray(saved[key])) progress[key] = saved[key];
@@ -17,7 +21,8 @@ export const getProgress = () => {
 };
 export const saveProgress = progress => {
   try {
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    localStorage.setItem(storageKey(), JSON.stringify(progress));
+    if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('doceasy-user-id')) localStorage.setItem(`${storageKey()}:pending`, '1');
     if (typeof window !== 'undefined') window.dispatchEvent(new Event('doceasy-progress'));
     return true;
   } catch (error) { console.error('Could not save progress:', error); return false; }

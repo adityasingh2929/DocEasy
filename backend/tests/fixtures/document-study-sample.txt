@@ -1,0 +1,15 @@
+JavaScript closures
+
+A closure is a function together with access to its surrounding lexical environment. A returned function can continue to read and update bindings created by an outer function after that outer function has returned.
+
+Independent counters
+
+Calling a counter factory twice creates two separate lexical environments. Each returned counter updates its own count binding. Calling the first counter does not change the second counter's count. A closure retains access to the binding, rather than a frozen copy of its initial value.
+
+Array transformations
+
+The map method creates a new array containing the return value of its callback for each visited element. The filter method creates a new array containing elements whose predicate returns a truthy value. The reduce method combines elements using an accumulator; an initial value defines the starting accumulator and permits reducing an empty array.
+
+Practice example
+
+Starting with [1, 2, 3, 4], filtering for even values produces [2, 4]. Mapping those values to three times their value produces [6, 12]. Reducing that array with addition and an initial value of zero produces 18.

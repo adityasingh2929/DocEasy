@@ -8,16 +8,18 @@ import DoubtPanel from "../components/DoubtPanel";
 import LearningNav from "../components/LearningNav";
 import { hasPassedAssessment } from "../utils/learning";
 import Logo from "../components/Logo";
-import { TOPICS } from "../data/topics";
+import { TRACKS } from "../data/topics";
 import { getProgress, saveProgress } from "../utils/progress";
 
 export default function Lesson() {
   const { topic } = useParams();
   const navigate = useNavigate();
 
-  const topicName = topic
-    ? topic.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-    : 'Topic';
+
+  const track = TRACKS.find(item => item.topics.some(entry => entry.id === topic));
+  const lesson = track?.topics.find(entry => entry.id === topic);
+  const topicName = lesson?.title;
+  const roadmap = '/roadmap/' + (track?.id || 'javascript');
 
   const [activeTab, setActiveTab] = useState('concept');
   const [conceptCompleted, setConceptCompleted] = useState(() => Boolean(getProgress().conceptsRead[topic]));
@@ -55,7 +57,7 @@ export default function Lesson() {
     progress.challengesSolved[topic] = true;
     progress.topicsCompleted = [...new Set([...progress.topicsCompleted, topic])];
     saveProgress(progress);
-    navigate('/roadmap/javascript');
+    navigate(roadmap);
   };
 
   const doubtContextData = {
@@ -77,10 +79,10 @@ export default function Lesson() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [topic]);
 
-  if (!TOPICS.some(item => item.id === topic)) return <div className="p-10">Lesson not found. <Link to="/roadmap/javascript">Back to roadmap</Link></div>;
+  if (!lesson) return <div className="p-10">Lesson not found. <Link to={roadmap}>Back to roadmap</Link></div>;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 p-6 md:p-10 flex flex-col items-center relative overflow-x-hidden selection:bg-blue-500/30">
+    <div className="min-h-screen bg-[#f7f8f4] text-slate-900 p-6 md:p-10 flex flex-col items-center relative overflow-x-hidden selection:bg-blue-500/30">
       <div className="w-full max-w-5xl mt-2 md:mt-4 flex flex-col items-center">
 
         <div className="w-full"><LearningNav /></div>
@@ -89,7 +91,7 @@ export default function Lesson() {
           <div className="flex flex-col">
             {/* Breadcrumbs */}
             <div className="text-slate-500 font-medium tracking-wide mb-4 flex items-center text-sm md:text-sm">
-              <Link to="/roadmap/javascript" className="hover:text-slate-900 transition-colors bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+              <Link to={roadmap} className="hover:text-slate-900 transition-colors bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
                 Roadmap
               </Link>
               <span className="mx-3 text-slate-400">{'>'}</span>
@@ -123,7 +125,7 @@ export default function Lesson() {
                 {isActive && (
                   <motion.div
                     layoutId="lessonTabIndicator"
-                    className="absolute inset-0 bg-[#1E3A8A] rounded-xl shadow-md"
+                    className="absolute inset-0 bg-[#294736] rounded-xl shadow-md"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -149,7 +151,7 @@ export default function Lesson() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -15, scale: 0.98 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="bg-white border border-slate-200 rounded-[2rem] p-6 md:p-12 min-h-[500px] shadow-lg relative w-full"
+              className="bg-white border border-slate-200 rounded-xl p-6 md:p-12 min-h-[500px] shadow-lg relative w-full"
             >
               {activeTab === 'concept' && (
                 <ConceptTab
@@ -167,6 +169,7 @@ export default function Lesson() {
 
               {activeTab === 'quiz' && (
                 <QuizTab
+                  allowAI={!lesson.reviewedOnly}
                   key={`${topic}-quiz`}
                   onComplete={() => {
                     setQuizCompleted(true);
@@ -178,6 +181,7 @@ export default function Lesson() {
 
               {activeTab === 'challenge' && (
                 <ChallengeTab
+                  allowAI={!lesson.reviewedOnly}
                   onChallengeSuccess={handleChallengeSuccess}
                   onContext={handleChallengeContext}
                 />
@@ -187,7 +191,7 @@ export default function Lesson() {
         </div>
       </div>
 
-      {/* Floating Ask Doubt Button */}
+      <>
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -196,7 +200,7 @@ export default function Lesson() {
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
         aria-label="Ask Tutor"
         onClick={() => setIsDoubtPanelOpen(true)}
-        className="fixed bottom-8 right-8 bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white p-5 rounded-full shadow-lg border border-[#1E3A8A]/30 transition-colors z-40 group flex items-center justify-center cursor-pointer"
+        className="fixed bottom-8 right-8 bg-[#294736] hover:bg-[#294736]/90 text-white p-5 rounded-full shadow-lg border border-[#294736]/30 transition-colors z-40 group flex items-center justify-center cursor-pointer"
       >
         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
@@ -217,6 +221,7 @@ export default function Lesson() {
         messages={chatHistory[activeTab]}
         onAddMessage={handleAddMessage}
       />
+      </>
     </div>
   );
 }

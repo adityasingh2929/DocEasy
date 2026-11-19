@@ -1,8 +1,12 @@
 from fastapi import APIRouter
 from app.api.routes import doubt, quiz, challenge
 from app.api.routes import practice
+from app.api.routes import documents
+from app.api.routes import auth
 
 api_router = APIRouter()
+api_router.include_router(auth.router)
+api_router.include_router(documents.router, tags=['Document learning'])
 
 api_router.include_router(doubt.router, tags=["Doubt"])
 api_router.include_router(quiz.router, tags=["Quiz"])

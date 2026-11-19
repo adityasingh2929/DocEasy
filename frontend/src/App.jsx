@@ -1,47 +1,29 @@
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import Splash from "./pages/Splash";
-import Home from "./pages/Home";
-import Roadmap from "./pages/Roadmap";
-import Dashboard from "./pages/Dashboard";
-import Notebook from "./pages/Notebook";
-import Lesson from "./pages/Lesson";
-
-const PageWrapper = ({ children }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className="w-full min-h-screen bg-[#F8FAFC]"
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-const AnimatedRoutes = () => {
-  const location = useLocation();
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Splash />} />
-        <Route path="/dashboard" element={<PageWrapper><Dashboard /></PageWrapper>} />
-        <Route path="/notebook" element={<PageWrapper><Notebook /></PageWrapper>} />
-        <Route path="/home" element={<PageWrapper><Home /></PageWrapper>} />
-        <Route path="/roadmap/javascript" element={<PageWrapper><Roadmap /></PageWrapper>} />
-        <Route path="/lesson/:topic" element={<PageWrapper><Lesson key={location.pathname} /></PageWrapper>} />
-        <Route path="*" element={<Navigate to="/home" replace />} />
-      </Routes>
-    </AnimatePresence>
-  );
-};
-
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
+import AccountGate from './components/AccountGate';
+import ProgressSync from './components/ProgressSync';
+import Home from './pages/Home';
+import Login from './pages/Login';
+const Roadmap = lazy(() => import('./pages/Roadmap'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Notebook = lazy(() => import('./pages/Notebook'));
+const Lesson = lazy(() => import('./pages/Lesson'));
+const Documents = lazy(() => import('./pages/Documents'));
+const workspace = page => <AccountGate>{page}</AccountGate>;
+function TopicLesson() {
+  const { topic } = useParams();
+  return <Lesson key={topic} />;
+}
 export default function App() {
-  return (
-    <BrowserRouter>
-      <AnimatedRoutes />
-    </BrowserRouter>
-  );
+  return <BrowserRouter><ProgressSync /><Suspense fallback={<main className="workspace-page" role="status">Opening your workspace…</main>}><Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/home" element={<Home />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/dashboard" element={workspace(<Dashboard />)} />
+    <Route path="/roadmap/:language" element={workspace(<Roadmap />)} />
+    <Route path="/lesson/:topic" element={workspace(<TopicLesson />)} />
+    <Route path="/notebook" element={workspace(<Notebook />)} />
+    <Route path="/documents" element={workspace(<Documents />)} />
+    <Route path="*" element={<Navigate to="/home" replace />} />
+  </Routes></Suspense></BrowserRouter>;
 }

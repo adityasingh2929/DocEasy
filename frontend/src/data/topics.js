@@ -1,4 +1,4 @@
-export const TOPICS = [
+const JAVASCRIPT = [
   { id: "variables", title: "Variables (var, let, const)" },
   { id: "data-types", title: "Data Types" },
   { id: "functions", title: "Functions" },
@@ -8,5 +8,29 @@ export const TOPICS = [
   { id: "this", title: "this Keyword" },
   { id: "arrays-objects", title: "Arrays & Objects" },
   { id: "event-loop", title: "Event Loop" },
-  { id: "async", title: "Promises & Async/Await" }
+  { id: "async", title: "Promises & Async/Await" },
+  { id: "js-errors", title: "Exceptions and Error Handling", reviewedOnly: true },
+  {id: "operators", title: "Operators, Equality and Coercion", reviewedOnly: true},
+  {id: "control-flow", title: "Conditions and Loops", reviewedOnly: true},
+  {id: "array-methods", title: "Array Transformations", reviewedOnly: true},
+  {id: "modern-syntax", title: "Destructuring, Spread and Optional Chaining", reviewedOnly: true},
+  {id: "classes", title: "Objects, Prototypes and Classes", reviewedOnly: true},
+  {id: "modules", title: "Modules and Application Structure", reviewedOnly: true},
 ];
+export const TRACKS = [
+  { id: 'javascript', title: 'JavaScript', topics: JAVASCRIPT },
+  { id: 'python', title: 'Python', topics: [
+    { id: 'python-basics', title: 'Python Values and Names', reviewedOnly: true },
+    { id: 'python-control', title: 'Python Conditions and Loops', reviewedOnly: true },
+    { id: 'python-strings', title: 'Strings and Formatting', reviewedOnly: true },
+    { id: 'python-collections', title: 'Lists, Tuples and Sets', reviewedOnly: true },
+    { id: 'python-dictionaries', title: 'Dictionaries and Data Modelling', reviewedOnly: true },
+    { id: 'python-functions', title: 'Functions and Scope', reviewedOnly: true },
+    { id: 'python-comprehensions', title: 'Comprehensions and Iteration', reviewedOnly: true },
+    { id: 'python-errors', title: 'Exceptions and Validation', reviewedOnly: true },
+    { id: 'python-files', title: 'Files and JSON', reviewedOnly: true },
+    { id: 'python-modules', title: 'Modules and Program Structure', reviewedOnly: true },
+    { id: 'python-classes', title: 'Classes and Objects', reviewedOnly: true },
+  ] },
+];
+export const TOPICS = TRACKS.flatMap(track => track.topics);

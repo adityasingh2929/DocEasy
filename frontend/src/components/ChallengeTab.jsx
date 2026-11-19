@@ -6,7 +6,7 @@ import { recordChallenge, normalizeOutput } from '../utils/learning';
 import Hints from './Hints';
 import Sources from './Sources';
 
-export default function ChallengeTab({ onChallengeSuccess, onContext }) {
+export default function ChallengeTab({ onChallengeSuccess, onContext, allowAI }) {
   const { topic } = useParams();
   const [mode, setMode] = useState('reviewed');
   const [attempt, setAttempt] = useState(0);
@@ -30,7 +30,7 @@ export default function ChallengeTab({ onChallengeSuccess, onContext }) {
           catch (failure) {
             if (controller.signal.aborted) throw failure;
             data = bank.topics[topic].challenges[0];
-            if (active) setNotice('Using the bundled reviewed challenge. The local backend is unavailable.');
+            if (active) setNotice('Using the bundled reviewed challenge. The backend is unavailable.');
           }
         }
         if (!active) return;
@@ -48,13 +48,13 @@ export default function ChallengeTab({ onChallengeSuccess, onContext }) {
     setResult(correct); recordChallenge(topic, exercise, answer, correct, assisted);
   };
   return <section>
-    <div className="flex flex-wrap gap-3 mb-6">{['reviewed', 'ai'].map(value => <button key={value} onClick={() => setMode(value)} aria-pressed={mode === value} className={`border rounded-lg px-4 py-2 text-sm font-semibold ${mode === value ? 'bg-blue-900 text-white' : 'bg-white'}`}>{value === 'reviewed' ? 'Reviewed challenge' : 'Optional AI challenge'}</button>)}</div>
+    <div className="flex flex-wrap gap-3 mb-6">{(allowAI ? ['reviewed', 'ai'] : ['reviewed']).map(value => <button key={value} onClick={() => setMode(value)} aria-pressed={mode === value} className={`border rounded-lg px-4 py-2 text-sm font-semibold ${mode === value ? 'bg-blue-900 text-white' : 'bg-white'}`}>{value === 'reviewed' ? 'Reviewed challenge' : 'Optional AI challenge'}</button>)}</div>
     <h2 className="text-2xl font-bold mb-4">Coding challenge</h2>
     {notice && <p className="bg-amber-50 p-3 rounded-lg text-sm mb-4">{notice}</p>}
     {loading && <p role="status" className="text-slate-500 py-8">{mode === 'ai' ? 'Generating AI practice...' : 'Loading reviewed practice...'}</p>}
     {error && <div role="alert"><p className="text-red-700 mb-4">{error}</p><button onClick={() => setAttempt(value => value + 1)} className="underline text-blue-900">Try again</button></div>}
     {!loading && exercise && <div><p className="text-slate-600 mb-4">{exercise.question}</p><pre className="bg-slate-900 text-blue-100 rounded-xl p-5 overflow-x-auto text-sm mb-5">{exercise.code}</pre>
-      <label htmlFor="challenge-output" className="text-sm font-semibold">Predicted console output</label><textarea id="challenge-output" rows={4} disabled={result !== null} value={answer} onChange={event => setAnswer(event.target.value)} placeholder="One output line per console.log" className="w-full border rounded-xl p-4 mt-2 font-mono" />
+      <label htmlFor="challenge-output" className="text-sm font-semibold">Predicted console output</label><textarea id="challenge-output" rows={4} disabled={result !== null} value={answer} onChange={event => setAnswer(event.target.value)} placeholder="Enter each output line" className="w-full border rounded-xl p-4 mt-2 font-mono" />
       <Hints key={exercise.id} hints={exercise.hints || ['Trace the code one statement at a time.', 'Track the current bindings, function calls, and any queued asynchronous work.']} explanation={exercise.explanation} attempted={result !== null} onReveal={() => setAssisted(true)} />
       {result === null ? <button disabled={!answer.trim()} onClick={submit} className="bg-blue-900 text-white rounded-xl px-6 py-3 disabled:bg-slate-300">Submit answer</button> : <div className={`border rounded-xl p-5 ${result ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'}`}><h3 role="status" className="text-xl font-bold">{result ? 'Correct - challenge solved' : 'Not quite - try again'}</h3><p className="text-sm mt-3">Correct output:</p><pre className="font-mono whitespace-pre-wrap my-3">{exercise.correctAnswer}</pre><p className="text-sm">{exercise.explanation}</p><button onClick={result ? onChallengeSuccess : () => { setResult(null); setAnswer(''); }} className="bg-blue-900 text-white px-5 py-3 rounded-lg mt-4">{result ? 'Complete lesson' : 'Try again'}</button></div>}
       <Sources sources={exercise.sources} />

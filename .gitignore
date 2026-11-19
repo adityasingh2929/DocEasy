@@ -12,3 +12,11 @@ __pycache__/
 
 # Vite
 frontend/dist/
+
+# Local verification logs and dependency cache
+backend/document-*.log
+frontend/document-*.log
+backend/.uv-cache/
+*.sqlite3
+*.sqlite3-*
+backend/prototype-*.log

@@ -11,7 +11,7 @@ export default function Dashboard() {
     <LearningNav />
     <p className="text-blue-800 text-sm font-bold uppercase tracking-widest">Your learning space</p>
     <h1 className="text-4xl font-bold mt-3 mb-3">A little progress, every session.</h1>
-    <p className="text-slate-600 mb-8">Your progress is saved in this browser. Reviewed practice works without an AI key.</p>
+    <p className="text-slate-600 mb-8">Your learning history is saved to your account. Pick up a lesson or revisit a mistake below.</p>
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
       {[[`${stats.completed}/${TOPICS.length}`, 'Topics completed'],[stats.accuracy === null ? '—' : `${stats.accuracy}%`, 'Assessment accuracy'],[stats.challenges, 'Challenges solved'],[stats.mistakes, 'Mistakes to revise']].map(([value, label]) => <div key={label} className="bg-white p-5 border border-slate-200 rounded-2xl"><p className="text-3xl font-bold text-blue-900">{value}</p><p className="text-sm text-slate-500 mt-2">{label}</p></div>)}
     </div>

@@ -60,6 +60,7 @@ test('every reviewed coding challenge produces its stated output', async () => {
       assert.ok(question.options.includes(question.correctAnswer));
     }
     for (const exercise of group.challenges) {
+      if (exercise.language === 'python') continue; // Executed by backend PythonCurriculumTests.
       const lines=[]; const timers=[];
       vm.runInNewContext(exercise.code,{console:{log:(...values)=>lines.push(values.map(String).join(' '))},setTimeout:fn=>timers.push(fn)},{timeout:200});
       await new Promise(resolve=>setImmediate(resolve));

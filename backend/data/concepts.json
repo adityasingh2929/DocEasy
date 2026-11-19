@@ -8,7 +8,17 @@
       "let is block-scoped and can be reassigned",
       "const is block-scoped and cannot be reassigned"
     ],
-    "example": "let age = 20;\nage = 25;\n\nconst name = \"Aditya\";\n// name = \"John\"; ❌ Error"
+    "example": "let age = 20;\nage = 25;\n\nconst name = \"Aditya\";\n// name = \"John\"; ❌ Error",
+    "sections": [
+      {
+        "title": "Bindings versus values",
+        "text": "const prevents reassignment of a binding, not mutation of an object. const items = []; items.push(1) is allowed, but items = [] is not. Prefer const when the binding will not change and let when it will."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
   },
   {
     "id": "data-types",
@@ -19,7 +29,17 @@
       "Non-primitive types include objects, arrays, and functions",
       "typeof is used to check the data type"
     ],
-    "example": "let x = 10;           // number\nlet y = \"hello\";    // string\nlet z = true;       // boolean\n\ntypeof x; // \"number\""
+    "example": "let x = 10;           // number\nlet y = \"hello\";    // string\nlet z = true;       // boolean\n\ntypeof x; // \"number\"",
+    "sections": [
+      {
+        "title": "Identity and conversion",
+        "text": "Primitives are compared by value. Objects are compared by reference, so two separately created arrays are not strictly equal. typeof null is historically \"object\"; use value === null to check for null and Array.isArray(value) for arrays."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
   },
   {
     "id": "functions",
@@ -30,7 +50,17 @@
       "Arrow functions provide a shorter syntax",
       "Functions help improve code reusability"
     ],
-    "example": "function add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(2, 3)); // 5"
+    "example": "function add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(2, 3)); // 5",
+    "sections": [
+      {
+        "title": "Parameters and return values",
+        "text": "Parameters are local bindings. A function with no return statement returns undefined. Default parameters apply when an argument is missing or undefined. An arrow function with a block body requires an explicit return."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
   },
   {
     "id": "scope",
@@ -41,7 +71,17 @@
       "Function scope: accessible inside functions",
       "Block scope: created with let and const"
     ],
-    "example": "let x = 10;\n\nfunction test() {\n  let y = 20;\n  console.log(x); // accessible\n}\n\nconsole.log(y); // ❌ Error"
+    "example": "let x = 10;\n\nfunction test() {\n  let y = 20;\n  console.log(x); // accessible\n}\n\nconsole.log(y); // ❌ Error",
+    "sections": [
+      {
+        "title": "Lexical lookup and shadowing",
+        "text": "A name is resolved in its nearest enclosing lexical scope. An inner declaration can shadow an outer binding without changing it. Block-scoped let and const bindings cannot be accessed before initialization, even if an outer binding has the same name."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
   },
   {
     "id": "closures",
@@ -52,7 +92,17 @@
       "Used for data privacy and encapsulation",
       "Common in callbacks and event handlers"
     ],
-    "example": "function outer() {\n  let count = 0;\n\n  return function inner() {\n    count++;\n    return count;\n  };\n}\n\nconst fn = outer();\nfn(); // 1\nfn(); // 2"
+    "example": "function outer() {\n  let count = 0;\n\n  return function inner() {\n    count++;\n    return count;\n  };\n}\n\nconst fn = outer();\nfn(); // 1\nfn(); // 2",
+    "sections": [
+      {
+        "title": "State that survives a call",
+        "text": "A closure retains access to bindings from the scope where the function was created. Each call to a factory can create independent state. The closure observes the current value of its captured binding, not a frozen snapshot."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
   },
   {
     "id": "hoisting",
@@ -63,7 +113,17 @@
       "let and const are hoisted but not initialized",
       "Function declarations are fully hoisted"
     ],
-    "example": "console.log(a); // undefined\nvar a = 5;\n\n// console.log(b); ❌ ReferenceError\nlet b = 10;"
+    "example": "console.log(a); // undefined\nvar a = 5;\n\n// console.log(b); ❌ ReferenceError\nlet b = 10;",
+    "sections": [
+      {
+        "title": "Declaration is not initialization",
+        "text": "Function declarations can usually be called before their declaration in the same scope. var is initialized to undefined before its assignment runs. let, const and class bindings remain uninitialized in the temporal dead zone; reading them there throws ReferenceError."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
   },
   {
     "id": "this",
@@ -74,7 +134,17 @@
       "Inside objects, this refers to the object",
       "Arrow functions do not have their own this"
     ],
-    "example": "const obj = {\n  name: \"JS\",\n  show() {\n    console.log(this.name);\n  }\n};\n\nobj.show(); // JS"
+    "example": "const obj = {\n  name: \"JS\",\n  show() {\n    console.log(this.name);\n  }\n};\n\nobj.show(); // JS",
+    "sections": [
+      {
+        "title": "Call site matters",
+        "text": "For an ordinary function, this depends on how it is called. obj.method() supplies obj; detaching the method loses that receiver. bind creates a function with a fixed receiver. Arrow functions capture this lexically and do not create their own receiver."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
   },
   {
     "id": "arrays-objects",
@@ -85,7 +155,17 @@
       "Objects use key-based access",
       "Array methods include map, filter, reduce"
     ],
-    "example": "const arr = [1, 2, 3];\narr.map(x => x * 2);\n\nconst obj = { name: \"Adi\" };\nconsole.log(obj.name);"
+    "example": "const arr = [1, 2, 3];\narr.map(x => x * 2);\n\nconst obj = { name: \"Adi\" };\nconsole.log(obj.name);",
+    "sections": [
+      {
+        "title": "Mutation and copying",
+        "text": "Arrays and objects store references. Assigning one to another variable does not clone it. Spread copies the outer container but retains nested references. Use map and filter for clear transformations, and remember that sort and reverse mutate the original array."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
   },
   {
     "id": "event-loop",
@@ -96,7 +176,17 @@
       "Async tasks go to the callback queue",
       "Event loop processes tasks after call stack is empty"
     ],
-    "example": "console.log(\"Start\");\n\nsetTimeout(() => {\n  console.log(\"Async\");\n}, 0);\n\nconsole.log(\"End\");\n\n// Output:\n// Start → End → Async"
+    "example": "console.log(\"Start\");\n\nsetTimeout(() => {\n  console.log(\"Async\");\n}, 0);\n\nconsole.log(\"End\");\n\n// Output:\n// Start → End → Async",
+    "sections": [
+      {
+        "title": "Tasks and microtasks",
+        "text": "Synchronous code runs to completion. Promise reactions and await continuations run as microtasks after the current stack, before the next timer task. A zero-delay timer is scheduled, not immediate; long synchronous work still blocks the UI."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
   },
   {
     "id": "async",
@@ -107,6 +197,401 @@
       "then() handles resolved values",
       "async/await makes async code easier to read"
     ],
-    "example": "async function fetchData() {\n  return \"Done\";\n}\n\nfetchData().then(console.log);"
+    "example": "async function fetchData() {\n  return \"Done\";\n}\n\nfetchData().then(console.log);",
+    "sections": [
+      {
+        "title": "Propagation and concurrency",
+        "text": "An async function always returns a promise. await unwraps fulfillment or throws on rejection; use try/catch for failures. Promise.all waits for a group of operations and rejects if any rejects. Starting independent operations before awaiting them permits concurrency."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
+  },
+  {
+    "id": "operators",
+    "title": "Operators, Equality and Coercion",
+    "explanation": "Operators combine values into expressions. Start by identifying each operand type, then apply the operator. Prefer strict equality when you do not intend a type conversion.",
+    "points": [
+      "Arithmetic includes +, -, *, /, %, and **. The + operator also concatenates strings.",
+      "=== compares without coercion; == applies conversion rules. Two separate objects are not equal by reference.",
+      "&& and || return operand values, not necessarily booleans. They short-circuit evaluation.",
+      "?? supplies a default only for null or undefined, preserving 0, false and an empty string."
+    ],
+    "example": "console.log(\"5\" + 2);\nconsole.log(\"5\" === 5);\nconsole.log(0 ?? 10);",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Read the statements in order and predict each console.log before running it. Expected output:\n52\nfalse\n0"
+      },
+      {
+        "title": "Practice independently",
+        "text": "Change one input in the example, predict the new result, and explain which rule caused the difference. Then complete the reviewed assessment and output challenge."
+      }
+    ]
+  },
+  {
+    "id": "control-flow",
+    "title": "Conditions and Loops",
+    "explanation": "Control flow decides which statements execute and how often. Use conditions for choices and loops for repetition. Trace the loop state before each iteration to avoid off-by-one errors.",
+    "points": [
+      "if/else selects a branch using truthiness. Empty arrays and objects are truthy.",
+      "A for loop has initialization, a condition and an update. A while loop checks its condition before each pass.",
+      "for...of visits iterable values; for...in visits enumerable string property keys, including inherited keys.",
+      "break exits the nearest loop; continue skips to its next iteration. Prefer explicit bounds for predictable termination."
+    ],
+    "example": "let total = 0;\nfor (const n of [1, 2, 3, 4]) {\n  if (n === 2) continue;\n  total += n;\n}\nconsole.log(total);",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Read the statements in order and predict each console.log before running it. Expected output:\n8"
+      },
+      {
+        "title": "Practice independently",
+        "text": "Change one input in the example, predict the new result, and explain which rule caused the difference. Then complete the reviewed assessment and output challenge."
+      }
+    ]
+  },
+  {
+    "id": "array-methods",
+    "title": "Array Transformations",
+    "explanation": "Array methods let you describe transformations without managing an index manually. Choose a method by the shape of the result: map produces one output per input, filter selects items, and reduce combines them.",
+    "points": [
+      "map returns a new array; its callback must return each transformed value.",
+      "filter keeps elements whose predicate returns a truthy result. find returns the first matching element or undefined.",
+      "reduce carries an accumulator. Supply an initial value so empty inputs are handled deliberately.",
+      "These methods do not themselves mutate the source array, but callbacks can mutate referenced objects. sort and reverse mutate their array."
+    ],
+    "example": "const values = [1, 2, 3, 4];\nconst result = values.filter(n => n % 2 === 0).map(n => n * 3);\nconsole.log(result.join(\",\"));\nconsole.log(result.reduce((sum, n) => sum + n, 0));",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Read the statements in order and predict each console.log before running it. Expected output:\n6,12\n18"
+      },
+      {
+        "title": "Practice independently",
+        "text": "Change one input in the example, predict the new result, and explain which rule caused the difference. Then complete the reviewed assessment and output challenge."
+      }
+    ]
+  },
+  {
+    "id": "modern-syntax",
+    "title": "Destructuring, Spread and Optional Chaining",
+    "explanation": "Modern syntax makes data extraction and copying concise. Destructuring binds selected fields, spread expands values, and optional chaining safely stops at a nullish value. Concision should not hide which references are shared.",
+    "points": [
+      "Object destructuring selects property names; array destructuring selects positions. Defaults apply to undefined, not null.",
+      "Rest gathers remaining entries. Spread expands iterable values or copies enumerable own object properties.",
+      "Object and array spread create shallow copies; nested objects remain shared references.",
+      "user?.profile?.name returns undefined if a checked value is nullish. Combine it with ?? for a deliberate default."
+    ],
+    "example": "const original = { name: \"Ada\", score: 0 };\nconst { name, score = 10 } = original;\nconst copy = { ...original, name: \"Lin\" };\nconsole.log(name, score);\nconsole.log(copy.name);",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Read the statements in order and predict each console.log before running it. Expected output:\nAda 0\nLin"
+      },
+      {
+        "title": "Practice independently",
+        "text": "Change one input in the example, predict the new result, and explain which rule caused the difference. Then complete the reviewed assessment and output challenge."
+      }
+    ]
+  },
+  {
+    "id": "classes",
+    "title": "Objects, Prototypes and Classes",
+    "explanation": "JavaScript objects can delegate property lookup through a prototype chain. Class syntax organizes constructors and methods around that model. Instances have their own state while sharing methods through the class prototype.",
+    "points": [
+      "constructor initializes instance state when called through new. Instance methods use this to access that state.",
+      "Class methods are shared through the prototype rather than copied as own properties into every instance.",
+      "extends creates an inheritance relationship. A derived constructor must call super before accessing this.",
+      "Static methods belong to the class itself. Private fields such as #count can only be accessed inside their declaring class."
+    ],
+    "example": "class Counter {\n  constructor(start) { this.value = start; }\n  increment() { this.value += 1; }\n}\nconst a = new Counter(2);\nconst b = new Counter(8);\na.increment();\nconsole.log(a.value, b.value);",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Read the statements in order and predict each console.log before running it. Expected output:\n3 8"
+      },
+      {
+        "title": "Practice independently",
+        "text": "Change one input in the example, predict the new result, and explain which rule caused the difference. Then complete the reviewed assessment and output challenge."
+      }
+    ]
+  },
+  {
+    "id": "modules",
+    "title": "Modules and Application Structure",
+    "explanation": "Modules divide applications into explicit dependencies. Export the values another file needs and import them by name or as a default. Keep each module focused so that its responsibilities and side effects are easy to understand.",
+    "points": [
+      "Named exports are imported using their exported name, optionally renamed with as. A module has at most one default export.",
+      "Browser module scripts use type=\"module\". Relative browser import paths need resolvable URLs; bundlers can provide extra resolution rules.",
+      "Modules run in strict mode and have their own scope. Top-level this is undefined in an ES module.",
+      "import() returns a promise and supports on-demand loading. Avoid circular dependencies that read bindings before initialization."
+    ],
+    "example": "// A module can expose helpers for another file.\n// export { double }; would export this function in an ES module.\nfunction double(n) { return n * 2; }\nconst values = [2, 4].map(double);\nconsole.log(values.join(\",\"));",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Read the statements in order and predict each console.log before running it. Expected output:\n4,8"
+      },
+      {
+        "title": "Practice independently",
+        "text": "Change one input in the example, predict the new result, and explain which rule caused the difference. Then complete the reviewed assessment and output challenge."
+      }
+    ]
+  },
+  {
+    "id": "js-errors",
+    "title": "Exceptions and Error Handling",
+    "explanation": "Exceptions interrupt normal execution. Use throw to report a failure and try/catch to recover where you can make a useful decision. Keep failure messages clear and avoid silently ignoring errors.",
+    "points": [
+      "throw can signal a failure; prefer an Error object with a descriptive message.",
+      "catch receives a thrown exception from the try block or functions called within it.",
+      "finally performs cleanup whether the operation succeeds or fails.",
+      "A rejected promise must be awaited inside try/catch, or handled with a rejection handler."
+    ],
+    "example": "try {\n  throw new Error(\"Invalid input\");\n} catch (error) {\n  console.log(error.message);\n} finally {\n  console.log(\"Done\");\n}",
+    "sections": [
+      {
+        "title": "Recover deliberately",
+        "text": "Catch errors at a boundary where you can recover or give useful feedback. Preserve enough context for debugging without exposing secrets. finally runs after try/catch even when returning; avoid returning from finally because it can replace a result or exception."
+      },
+      {
+        "title": "Check your understanding",
+        "text": "Predict the example output before running it. Change one declaration or input, explain the result using the rules above, then use the assessment to identify anything you need to revise."
+      }
+    ]
+  },
+  {
+    "id": "python-basics",
+    "title": "Python Values and Names",
+    "explanation": "Python names refer to objects. Assignment binds a name to a value; it does not declare a permanently fixed type. Use clear names and convert input deliberately.",
+    "points": [
+      "Numbers include int and float; strings hold text.",
+      "True, False and None are case-sensitive Python literals.",
+      "The / operator divides; // performs floor division."
+    ],
+    "example": "name = \"Ada\"\nscore = 7\nscore += 2\nprint(name, score)\nprint(7 // 2)\nprint(type(score).__name__)",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\nAda 9\n3\nint"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-control",
+    "title": "Python Conditions and Loops",
+    "explanation": "Control flow chooses which operations run. Python uses indentation to group a block. A for loop visits iterable values, while a while loop repeats as long as a condition is true.",
+    "points": [
+      "Use if, elif and else for mutually exclusive choices.",
+      "range(start, stop) excludes the stop value.",
+      "break ends a loop; continue skips to the next iteration."
+    ],
+    "example": "total = 0\nfor n in range(1, 5):\n    if n == 2:\n        continue\n    total += n\nprint(total)\nprint(\"done\")",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\n8\ndone"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-strings",
+    "title": "Strings and Formatting",
+    "explanation": "Strings are immutable sequences of Unicode characters. Indexing selects one character and slicing creates a new string. String methods return new values rather than changing the original.",
+    "points": [
+      "Indexing starts at zero; negative indexes count from the end.",
+      "A slice includes its start and excludes its stop.",
+      "Use f-strings to insert expressions into readable text."
+    ],
+    "example": "name = \"Python\"\nprint(name[0], name[-1])\nprint(name[1:4])\nprint(f\"{name.upper()} has {len(name)} letters\")",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\nP n\nyth\nPYTHON has 6 letters"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-collections",
+    "title": "Lists, Tuples and Sets",
+    "explanation": "Choose a collection by the operations you need. Lists keep order and allow changes, tuples describe fixed sequences, and sets store distinct hashable values without a positional index.",
+    "points": [
+      "append changes a list and returns None.",
+      "A shallow copy gives a new outer list but shares nested objects.",
+      "Use a set for membership and uniqueness; do not depend on its iteration order."
+    ],
+    "example": "scores = [3, 1, 3]\nscores.append(5)\nprint(len(scores))\nprint(sorted(set(scores)))\nfirst, second = (10, 20)\nprint(first + second)",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\n4\n[1, 3, 5]\n30"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-dictionaries",
+    "title": "Dictionaries and Data Modelling",
+    "explanation": "A dictionary maps unique hashable keys to values. Use descriptive keys to represent records and use get when missing data is an expected case.",
+    "points": [
+      "Square-bracket lookup raises KeyError for a missing key.",
+      "get(key, default) returns the default when the key is absent.",
+      "items() yields key-value pairs; membership tests keys."
+    ],
+    "example": "student = {\"name\": \"Mira\", \"score\": 4}\nstudent[\"score\"] += 1\nprint(student[\"name\"], student[\"score\"])\nprint(student.get(\"level\", \"beginner\"))\nprint(\"name\" in student)",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\nMira 5\nbeginner\nTrue"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-functions",
+    "title": "Functions and Scope",
+    "explanation": "Functions name a reusable operation. Parameters receive arguments; return sends a value to the caller. Variables assigned inside a function are usually local to that function.",
+    "points": [
+      "A function without an explicit return returns None.",
+      "Defaults are evaluated when the function is defined; avoid mutable defaults for per-call state.",
+      "Keyword arguments make calls easier to read."
+    ],
+    "example": "def total(price, quantity=2):\n    return price * quantity\n\nprint(total(5))\nprint(total(quantity=3, price=4))\nprint(total(2, 1))",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\n10\n12\n2"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-comprehensions",
+    "title": "Comprehensions and Iteration",
+    "explanation": "A comprehension describes a new collection using an expression, an iteration, and an optional filter. Keep it short enough that the transformation is clear.",
+    "points": [
+      "Read the for clause and filter before evaluating the expression.",
+      "range excludes its stop value.",
+      "enumerate supplies an index and a value; zip pairs items until the shortest input ends."
+    ],
+    "example": "values = [1, 2, 3, 4]\nsquares = [x * x for x in values if x % 2 == 0]\nprint(squares)\nfor index, name in enumerate([\"Ada\", \"Lin\"], start=1):\n    print(index, name)",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\n[4, 16]\n1 Ada\n2 Lin"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-errors",
+    "title": "Exceptions and Validation",
+    "explanation": "Exceptions report operations that could not complete. Catch the specific failure you expect, provide a useful response, and let unexpected failures remain visible.",
+    "points": [
+      "ValueError often means a valid type has an inappropriate value.",
+      "Use try and except around the operation that may fail.",
+      "finally runs when control leaves the try statement, including after a handled error."
+    ],
+    "example": "try:\n    number = int(\"four\")\nexcept ValueError:\n    print(\"Enter digits\")\nfinally:\n    print(\"Checked\")",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\nEnter digits\nChecked"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-files",
+    "title": "Files and JSON",
+    "explanation": "Files store information beyond a single process. Open text files with an explicit encoding and a context manager. JSON represents simple interoperable data such as objects, arrays, strings and numbers.",
+    "points": [
+      "with closes a file when its block exits.",
+      "Use r to read, w to replace contents, and a to append.",
+      "json.dumps produces a JSON string; json.loads parses one."
+    ],
+    "example": "import json\ntext = '{\"course\": \"Python\", \"scores\": [4, 5]}'\nrecord = json.loads(text)\nprint(record[\"course\"])\nprint(sum(record[\"scores\"]))\nprint(json.dumps({\"passed\": True}))",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\nPython\n9\n{\"passed\": true}"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-modules",
+    "title": "Modules and Program Structure",
+    "explanation": "A module is a Python file that groups related definitions. Import it to reuse those definitions and keep executable entry-point behavior separate from reusable code.",
+    "points": [
+      "import module keeps names grouped under the module name.",
+      "from module import name imports one name into the current namespace.",
+      "The __name__ guard distinguishes direct execution from import."
+    ],
+    "example": "import math\nfrom pathlib import PurePosixPath\nprint(math.isqrt(20))\nprint(PurePosixPath(\"notes/lesson.txt\").suffix)\nprint(__name__ == \"__main__\")",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\n4\n.txt\nTrue"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
+  },
+  {
+    "id": "python-classes",
+    "title": "Classes and Objects",
+    "explanation": "A class defines a kind of object with state and behavior. Each instance can keep its own attributes, while methods provide operations on that state.",
+    "points": [
+      "self refers to the instance on which a method is called.",
+      "__init__ initializes a newly created instance.",
+      "Keep per-instance mutable data on self rather than a shared class attribute."
+    ],
+    "example": "class Counter:\n    def __init__(self):\n        self.value = 0\n    def increment(self):\n        self.value += 1\n\na = Counter()\nb = Counter()\na.increment()\na.increment()\nprint(a.value, b.value)",
+    "sections": [
+      {
+        "title": "Trace the example",
+        "text": "Expected output:\n2 0"
+      },
+      {
+        "title": "Try a variation",
+        "text": "Change one input or operation in the example. Predict the new result before running it, and explain which rule accounts for the difference."
+      }
+    ]
   }
 ]

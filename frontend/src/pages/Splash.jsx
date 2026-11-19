@@ -14,7 +14,7 @@ export default function Splash() {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-[#f7f8f4] flex flex-col items-center justify-center relative overflow-hidden">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}

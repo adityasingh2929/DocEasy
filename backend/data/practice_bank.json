@@ -1755,6 +1755,2861 @@
           "origin": "reviewed"
         }
       ]
+    },
+    "operators": {
+      "sources": [
+        {
+          "title": "Operators, Equality and Coercion",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "operators-q1",
+          "topic": "operators",
+          "question": "What is the value of \"5\" + 2?",
+          "options": [
+            "\"52\"",
+            "7",
+            "\"7\"",
+            "NaN"
+          ],
+          "correctAnswer": "\"52\"",
+          "explanation": "A string operand makes + concatenate.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Operators, Equality and Coercion",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "operators-q2",
+          "topic": "operators",
+          "question": "Which comparison is true?",
+          "options": [
+            "5 === 5",
+            "\"5\" === 5",
+            "null === undefined",
+            "{} === {}"
+          ],
+          "correctAnswer": "5 === 5",
+          "explanation": "Strict equality preserves type and compares object identity.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Operators, Equality and Coercion",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "operators-q3",
+          "topic": "operators",
+          "question": "What does 0 || 10 evaluate to?",
+          "options": [
+            "10",
+            "0",
+            "true",
+            "false"
+          ],
+          "correctAnswer": "10",
+          "explanation": "Zero is falsy, so || returns its right operand.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Operators, Equality and Coercion",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "operators-q4",
+          "topic": "operators",
+          "question": "What does 0 ?? 10 evaluate to?",
+          "options": [
+            "0",
+            "10",
+            "null",
+            "undefined"
+          ],
+          "correctAnswer": "0",
+          "explanation": "Zero is not nullish.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Operators, Equality and Coercion",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "operators-q5",
+          "topic": "operators",
+          "question": "What is 17 % 5?",
+          "options": [
+            "2",
+            "3",
+            "5",
+            "12"
+          ],
+          "correctAnswer": "2",
+          "explanation": "The remainder after dividing 17 by 5 is 2.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Operators, Equality and Coercion",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "operators-c1",
+          "topic": "operators",
+          "question": "Predict the console output. Enter one line per console.log.",
+          "code": "console.log(\"5\" + 2);\nconsole.log(\"5\" === 5);\nconsole.log(0 ?? 10);",
+          "correctAnswer": "52\nfalse\n0",
+          "explanation": "Trace the values statement by statement. Arithmetic includes +, -, *, /, %, and **. The + operator also concatenates strings.",
+          "hints": [
+            "Track each assignment and operation in order.",
+            "Write down the value immediately before each console.log."
+          ],
+          "sources": [
+            {
+              "title": "Operators, Equality and Coercion",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "control-flow": {
+      "sources": [
+        {
+          "title": "Conditions and Loops",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "control-flow-q1",
+          "topic": "control-flow",
+          "question": "Which loop yields array values?",
+          "options": [
+            "for...of",
+            "for...in",
+            "if",
+            "switch"
+          ],
+          "correctAnswer": "for...of",
+          "explanation": "for...of consumes values from an iterable.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Conditions and Loops",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "control-flow-q2",
+          "topic": "control-flow",
+          "question": "What does break do inside a loop?",
+          "options": [
+            "Exits the nearest loop",
+            "Restarts the loop",
+            "Skips only one statement",
+            "Returns from every function"
+          ],
+          "correctAnswer": "Exits the nearest loop",
+          "explanation": "An unlabelled break ends the nearest enclosing loop or switch.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Conditions and Loops",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "control-flow-q3",
+          "topic": "control-flow",
+          "question": "How many iterations does for(let i=0; i<3; i++) run?",
+          "options": [
+            "3",
+            "2",
+            "4",
+            "0"
+          ],
+          "correctAnswer": "3",
+          "explanation": "The values of i are 0, 1 and 2.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Conditions and Loops",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "control-flow-q4",
+          "topic": "control-flow",
+          "question": "Which value is truthy?",
+          "options": [
+            "[]",
+            "0",
+            "\"\"",
+            "null"
+          ],
+          "correctAnswer": "[]",
+          "explanation": "Objects, including empty arrays, are truthy.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Conditions and Loops",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "control-flow-q5",
+          "topic": "control-flow",
+          "question": "What does continue do?",
+          "options": [
+            "Starts the next loop iteration",
+            "Ends the program",
+            "Always returns a value",
+            "Repeats the same iteration"
+          ],
+          "correctAnswer": "Starts the next loop iteration",
+          "explanation": "It skips the rest of the current loop body.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Conditions and Loops",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "control-flow-c1",
+          "topic": "control-flow",
+          "question": "Predict the console output. Enter one line per console.log.",
+          "code": "let total = 0;\nfor (const n of [1, 2, 3, 4]) {\n  if (n === 2) continue;\n  total += n;\n}\nconsole.log(total);",
+          "correctAnswer": "8",
+          "explanation": "Trace the values statement by statement. if/else selects a branch using truthiness. Empty arrays and objects are truthy.",
+          "hints": [
+            "Track each assignment and operation in order.",
+            "Write down the value immediately before each console.log."
+          ],
+          "sources": [
+            {
+              "title": "Conditions and Loops",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "array-methods": {
+      "sources": [
+        {
+          "title": "Array Transformations",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "array-methods-q1",
+          "topic": "array-methods",
+          "question": "Which method transforms every element into a new array?",
+          "options": [
+            "map",
+            "find",
+            "some",
+            "push"
+          ],
+          "correctAnswer": "map",
+          "explanation": "map collects callback results.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Array Transformations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "array-methods-q2",
+          "topic": "array-methods",
+          "question": "What does [1,2,3].filter(n => n > 1).join(\",\") return?",
+          "options": [
+            "\"2,3\"",
+            "\"1,2,3\"",
+            "\"true,true\"",
+            "\"3\""
+          ],
+          "correctAnswer": "\"2,3\"",
+          "explanation": "Only 2 and 3 pass the predicate.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Array Transformations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "array-methods-q3",
+          "topic": "array-methods",
+          "question": "What does find return when no item matches?",
+          "options": [
+            "undefined",
+            "[]",
+            "false",
+            "-1"
+          ],
+          "correctAnswer": "undefined",
+          "explanation": "find returns an element or undefined.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Array Transformations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "array-methods-q4",
+          "topic": "array-methods",
+          "question": "Why pass 0 to numbers.reduce((a,b)=>a+b, 0)?",
+          "options": [
+            "It supplies an initial accumulator",
+            "It sets the array length",
+            "It skips the first item",
+            "It sorts the result"
+          ],
+          "correctAnswer": "It supplies an initial accumulator",
+          "explanation": "The initial value also lets an empty array reduce to 0.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Array Transformations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "array-methods-q5",
+          "topic": "array-methods",
+          "question": "Which method mutates the original array?",
+          "options": [
+            "sort",
+            "map",
+            "filter",
+            "slice"
+          ],
+          "correctAnswer": "sort",
+          "explanation": "sort operates in place; copy first if the original order matters.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Array Transformations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "array-methods-c1",
+          "topic": "array-methods",
+          "question": "Predict the console output. Enter one line per console.log.",
+          "code": "const values = [1, 2, 3, 4];\nconst result = values.filter(n => n % 2 === 0).map(n => n * 3);\nconsole.log(result.join(\",\"));\nconsole.log(result.reduce((sum, n) => sum + n, 0));",
+          "correctAnswer": "6,12\n18",
+          "explanation": "Trace the values statement by statement. map returns a new array; its callback must return each transformed value.",
+          "hints": [
+            "Track each assignment and operation in order.",
+            "Write down the value immediately before each console.log."
+          ],
+          "sources": [
+            {
+              "title": "Array Transformations",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "modern-syntax": {
+      "sources": [
+        {
+          "title": "Destructuring, Spread and Optional Chaining",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "modern-syntax-q1",
+          "topic": "modern-syntax",
+          "question": "When does a destructuring default apply?",
+          "options": [
+            "When the value is undefined",
+            "Whenever the value is falsy",
+            "Only for null",
+            "For every number"
+          ],
+          "correctAnswer": "When the value is undefined",
+          "explanation": "Default initializers apply only to undefined.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Destructuring, Spread and Optional Chaining",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "modern-syntax-q2",
+          "topic": "modern-syntax",
+          "question": "What kind of copy is {...object}?",
+          "options": [
+            "Shallow copy",
+            "Recursive deep copy",
+            "Encrypted copy",
+            "Reference to the same outer object"
+          ],
+          "correctAnswer": "Shallow copy",
+          "explanation": "Nested object references remain shared.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Destructuring, Spread and Optional Chaining",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "modern-syntax-q3",
+          "topic": "modern-syntax",
+          "question": "What does user?.name return when user is null?",
+          "options": [
+            "undefined",
+            "null",
+            "\"name\"",
+            "ReferenceError"
+          ],
+          "correctAnswer": "undefined",
+          "explanation": "Optional chaining short-circuits on nullish values.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Destructuring, Spread and Optional Chaining",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "modern-syntax-q4",
+          "topic": "modern-syntax",
+          "question": "What does const [first, ...rest] = [1,2,3] store in rest?",
+          "options": [
+            "[2,3]",
+            "[1,2,3]",
+            "3",
+            "[1]"
+          ],
+          "correctAnswer": "[2,3]",
+          "explanation": "Rest gathers entries after the first binding.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Destructuring, Spread and Optional Chaining",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "modern-syntax-q5",
+          "topic": "modern-syntax",
+          "question": "Which expression preserves an existing false value?",
+          "options": [
+            "value ?? true",
+            "value || true",
+            "Boolean(value) || true",
+            "value ? value : true"
+          ],
+          "correctAnswer": "value ?? true",
+          "explanation": "Nullish coalescing does not replace false.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Destructuring, Spread and Optional Chaining",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "modern-syntax-c1",
+          "topic": "modern-syntax",
+          "question": "Predict the console output. Enter one line per console.log.",
+          "code": "const original = { name: \"Ada\", score: 0 };\nconst { name, score = 10 } = original;\nconst copy = { ...original, name: \"Lin\" };\nconsole.log(name, score);\nconsole.log(copy.name);",
+          "correctAnswer": "Ada 0\nLin",
+          "explanation": "Trace the values statement by statement. Object destructuring selects property names; array destructuring selects positions. Defaults apply to undefined, not null.",
+          "hints": [
+            "Track each assignment and operation in order.",
+            "Write down the value immediately before each console.log."
+          ],
+          "sources": [
+            {
+              "title": "Destructuring, Spread and Optional Chaining",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "classes": {
+      "sources": [
+        {
+          "title": "Objects, Prototypes and Classes",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "classes-q1",
+          "topic": "classes",
+          "question": "What invokes a class constructor to create an instance?",
+          "options": [
+            "new Counter()",
+            "Counter.new",
+            "class Counter()",
+            "constructor Counter"
+          ],
+          "correctAnswer": "new Counter()",
+          "explanation": "new allocates an instance and runs its constructor.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Objects, Prototypes and Classes",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "classes-q2",
+          "topic": "classes",
+          "question": "Where are ordinary class instance methods stored?",
+          "options": [
+            "On the class prototype",
+            "Only on globalThis",
+            "As JSON strings",
+            "In localStorage"
+          ],
+          "correctAnswer": "On the class prototype",
+          "explanation": "Instances share methods through their prototype.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Objects, Prototypes and Classes",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "classes-q3",
+          "topic": "classes",
+          "question": "What must a derived constructor call before using this?",
+          "options": [
+            "super()",
+            "parent.new()",
+            "this()",
+            "extends()"
+          ],
+          "correctAnswer": "super()",
+          "explanation": "super initializes the derived instance through its base constructor.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Objects, Prototypes and Classes",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "classes-q4",
+          "topic": "classes",
+          "question": "How is a static method called?",
+          "options": [
+            "On the class itself",
+            "Only on an instance",
+            "Only inside a loop",
+            "Through JSON.parse"
+          ],
+          "correctAnswer": "On the class itself",
+          "explanation": "Static members belong to the constructor object.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Objects, Prototypes and Classes",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "classes-q5",
+          "topic": "classes",
+          "question": "What does #count declare inside a class?",
+          "options": [
+            "A private field",
+            "A global variable",
+            "A comment",
+            "An exported property"
+          ],
+          "correctAnswer": "A private field",
+          "explanation": "Private field access is restricted to the declaring class.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Objects, Prototypes and Classes",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "classes-c1",
+          "topic": "classes",
+          "question": "Predict the console output. Enter one line per console.log.",
+          "code": "class Counter {\n  constructor(start) { this.value = start; }\n  increment() { this.value += 1; }\n}\nconst a = new Counter(2);\nconst b = new Counter(8);\na.increment();\nconsole.log(a.value, b.value);",
+          "correctAnswer": "3 8",
+          "explanation": "Trace the values statement by statement. constructor initializes instance state when called through new. Instance methods use this to access that state.",
+          "hints": [
+            "Track each assignment and operation in order.",
+            "Write down the value immediately before each console.log."
+          ],
+          "sources": [
+            {
+              "title": "Objects, Prototypes and Classes",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "modules": {
+      "sources": [
+        {
+          "title": "Modules and Application Structure",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "modules-q1",
+          "topic": "modules",
+          "question": "How do you import a named export named sum?",
+          "options": [
+            "import { sum } from \"./math.js\"",
+            "import sum from named",
+            "require {sum}",
+            "include \"sum\""
+          ],
+          "correctAnswer": "import { sum } from \"./math.js\"",
+          "explanation": "Named imports use braces and the exported name.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Modules and Application Structure",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "modules-q2",
+          "topic": "modules",
+          "question": "How many default exports can a module declare?",
+          "options": [
+            "One",
+            "Zero only",
+            "Unlimited",
+            "Two"
+          ],
+          "correctAnswer": "One",
+          "explanation": "Each module may have at most one default export.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Modules and Application Structure",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "modules-q3",
+          "topic": "modules",
+          "question": "What does dynamic import() return?",
+          "options": [
+            "A promise",
+            "A DOM element",
+            "A plain source string",
+            "Always undefined"
+          ],
+          "correctAnswer": "A promise",
+          "explanation": "It resolves to a module namespace object.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Modules and Application Structure",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "modules-q4",
+          "topic": "modules",
+          "question": "What is top-level this in an ES module?",
+          "options": [
+            "undefined",
+            "window in every environment",
+            "The module filename",
+            "The exported default"
+          ],
+          "correctAnswer": "undefined",
+          "explanation": "ES modules have their own scope and strict semantics.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Modules and Application Structure",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "modules-q5",
+          "topic": "modules",
+          "question": "Which HTML script type enables ES modules?",
+          "options": [
+            "module",
+            "javascript-module",
+            "import",
+            "esm-only"
+          ],
+          "correctAnswer": "module",
+          "explanation": "Use a script element with type=\"module\".",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Modules and Application Structure",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "modules-c1",
+          "topic": "modules",
+          "question": "Predict the console output. Enter one line per console.log.",
+          "code": "// A module can expose helpers for another file.\n// export { double }; would export this function in an ES module.\nfunction double(n) { return n * 2; }\nconst values = [2, 4].map(double);\nconsole.log(values.join(\",\"));",
+          "correctAnswer": "4,8",
+          "explanation": "Trace the values statement by statement. Named exports are imported using their exported name, optionally renamed with as. A module has at most one default export.",
+          "hints": [
+            "Track each assignment and operation in order.",
+            "Write down the value immediately before each console.log."
+          ],
+          "sources": [
+            {
+              "title": "Modules and Application Structure",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "js-errors": {
+      "sources": [
+        {
+          "title": "Exceptions and Error Handling",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "js-errors-q1",
+          "topic": "js-errors",
+          "question": "Which keyword raises an exception?",
+          "options": [
+            "throw",
+            "catch",
+            "finally",
+            "return"
+          ],
+          "correctAnswer": "throw",
+          "explanation": "throw transfers control to an exception handler.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Exceptions and Error Handling",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "js-errors-q2",
+          "topic": "js-errors",
+          "question": "What does catch receive?",
+          "options": [
+            "The thrown value",
+            "Always undefined",
+            "Only a number",
+            "The entire call stack as an array"
+          ],
+          "correctAnswer": "The thrown value",
+          "explanation": "The catch binding receives the value thrown.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Exceptions and Error Handling",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "js-errors-q3",
+          "topic": "js-errors",
+          "question": "When does finally normally run?",
+          "options": [
+            "After try/catch whether successful or failing",
+            "Only on success",
+            "Only on a syntax error",
+            "Before try"
+          ],
+          "correctAnswer": "After try/catch whether successful or failing",
+          "explanation": "finally is intended for cleanup on either path.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Exceptions and Error Handling",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "js-errors-q4",
+          "topic": "js-errors",
+          "question": "How can try/catch handle a promise rejection?",
+          "options": [
+            "Await the promise inside try",
+            "Ignore the promise",
+            "Use typeof on the promise",
+            "Put an unrelated timer in try"
+          ],
+          "correctAnswer": "Await the promise inside try",
+          "explanation": "await converts a rejection into an exception at that point.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Exceptions and Error Handling",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "js-errors-q5",
+          "topic": "js-errors",
+          "question": "Which property commonly holds an Error description?",
+          "options": [
+            "message",
+            "valueOf",
+            "length",
+            "answer"
+          ],
+          "correctAnswer": "message",
+          "explanation": "Error.message contains its human-readable description.",
+          "hints": [
+            "Identify the operation and the types involved.",
+            "Compare each option against the rules in this lesson; eliminate options that describe a different operation."
+          ],
+          "sources": [
+            {
+              "title": "Exceptions and Error Handling",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "js-errors-c1",
+          "topic": "js-errors",
+          "question": "Predict the console output. Enter one line per console.log.",
+          "code": "try {\n  throw new Error(\"Invalid input\");\n} catch (error) {\n  console.log(error.message);\n} finally {\n  console.log(\"Done\");\n}",
+          "correctAnswer": "Invalid input\nDone",
+          "explanation": "Trace the values statement by statement. throw can signal a failure; prefer an Error object with a descriptive message.",
+          "hints": [
+            "Track each assignment and operation in order.",
+            "Write down the value immediately before each console.log."
+          ],
+          "sources": [
+            {
+              "title": "Exceptions and Error Handling",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-basics": {
+      "sources": [
+        {
+          "title": "Python tutorial: Python Values and Names",
+          "url": "https://docs.python.org/3/tutorial/introduction.html",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-basics-q1",
+          "topic": "python-basics",
+          "question": "Which assignment stores an integer?",
+          "options": [
+            "score = 7",
+            "score = \"7\"",
+            "score = [7]",
+            "score = None"
+          ],
+          "correctAnswer": "score = 7",
+          "explanation": "The unquoted literal 7 is an integer.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The unquoted literal 7 is an integer."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Values and Names",
+              "url": "https://docs.python.org/3/tutorial/introduction.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-basics-q2",
+          "topic": "python-basics",
+          "question": "What is 7 // 2?",
+          "options": [
+            "3",
+            "3.5",
+            "4",
+            "2"
+          ],
+          "correctAnswer": "3",
+          "explanation": "Floor division returns the floor of the quotient.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Floor division returns the floor of the quotient."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Values and Names",
+              "url": "https://docs.python.org/3/tutorial/introduction.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-basics-q3",
+          "topic": "python-basics",
+          "question": "Which is a Python boolean literal?",
+          "options": [
+            "True",
+            "true",
+            "TRUE",
+            "yes"
+          ],
+          "correctAnswer": "True",
+          "explanation": "Python uses True and False with initial capitals.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Python uses True and False with initial capitals."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Values and Names",
+              "url": "https://docs.python.org/3/tutorial/introduction.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-basics-q4",
+          "topic": "python-basics",
+          "question": "What does int(\"12\") produce?",
+          "options": [
+            "12",
+            "\"12\"",
+            "None",
+            "TypeError"
+          ],
+          "correctAnswer": "12",
+          "explanation": "int converts a valid integer string into an integer.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "int converts a valid integer string into an integer."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Values and Names",
+              "url": "https://docs.python.org/3/tutorial/introduction.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-basics-q5",
+          "topic": "python-basics",
+          "question": "What does x = 3 followed by x += 2 store in x?",
+          "options": [
+            "5",
+            "3",
+            "2",
+            "32"
+          ],
+          "correctAnswer": "5",
+          "explanation": "Augmented assignment adds two to the existing integer.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Augmented assignment adds two to the existing integer."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Values and Names",
+              "url": "https://docs.python.org/3/tutorial/introduction.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-basics-c1",
+          "topic": "python-basics",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "name = \"Ada\"\nscore = 7\nscore += 2\nprint(name, score)\nprint(7 // 2)\nprint(type(score).__name__)",
+          "correctAnswer": "Ada 9\n3\nint",
+          "explanation": "Trace each statement in order. Numbers include int and float; strings hold text.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Values and Names",
+              "url": "https://docs.python.org/3/tutorial/introduction.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-control": {
+      "sources": [
+        {
+          "title": "Python tutorial: Python Conditions and Loops",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-control-q1",
+          "topic": "python-control",
+          "question": "How many values does range(4) produce?",
+          "options": [
+            "4",
+            "3",
+            "5",
+            "0"
+          ],
+          "correctAnswer": "4",
+          "explanation": "It yields 0, 1, 2 and 3.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "It yields 0, 1, 2 and 3."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Conditions and Loops",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-control-q2",
+          "topic": "python-control",
+          "question": "Which keyword skips the rest of a loop iteration?",
+          "options": [
+            "continue",
+            "break",
+            "returnall",
+            "skip"
+          ],
+          "correctAnswer": "continue",
+          "explanation": "continue moves to the next iteration.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "continue moves to the next iteration."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Conditions and Loops",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-control-q3",
+          "topic": "python-control",
+          "question": "How does Python delimit most statement blocks?",
+          "options": [
+            "Indentation",
+            "Curly braces",
+            "Semicolons",
+            "Parentheses"
+          ],
+          "correctAnswer": "Indentation",
+          "explanation": "Consistent indentation groups statements into suites.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Consistent indentation groups statements into suites."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Conditions and Loops",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-control-q4",
+          "topic": "python-control",
+          "question": "Which keyword adds another condition after if?",
+          "options": [
+            "elif",
+            "elseif",
+            "else if",
+            "when"
+          ],
+          "correctAnswer": "elif",
+          "explanation": "elif introduces an additional conditional branch.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "elif introduces an additional conditional branch."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Conditions and Loops",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-control-q5",
+          "topic": "python-control",
+          "question": "What does break do?",
+          "options": [
+            "Exits the nearest loop",
+            "Exits every program",
+            "Repeats the current step",
+            "Skips one expression"
+          ],
+          "correctAnswer": "Exits the nearest loop",
+          "explanation": "break exits its containing loop.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "break exits its containing loop."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Conditions and Loops",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-control-c1",
+          "topic": "python-control",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "total = 0\nfor n in range(1, 5):\n    if n == 2:\n        continue\n    total += n\nprint(total)\nprint(\"done\")",
+          "correctAnswer": "8\ndone",
+          "explanation": "Trace each statement in order. Use if, elif and else for mutually exclusive choices.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Python Conditions and Loops",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-strings": {
+      "sources": [
+        {
+          "title": "Python tutorial: Strings and Formatting",
+          "url": "https://docs.python.org/3/tutorial/introduction.html#strings",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-strings-q1",
+          "topic": "python-strings",
+          "question": "What does \"Python\"[1:4] produce?",
+          "options": [
+            "yth",
+            "Pyt",
+            "ytho",
+            "thon"
+          ],
+          "correctAnswer": "yth",
+          "explanation": "The stop index is excluded, so positions 1, 2 and 3 are selected.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The stop index is excluded, so positions 1, 2 and 3 are selected."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Strings and Formatting",
+              "url": "https://docs.python.org/3/tutorial/introduction.html#strings",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-strings-q2",
+          "topic": "python-strings",
+          "question": "Which expression produces \"Hello Ada\"?",
+          "options": [
+            "f\"Hello {name}\"",
+            "\"Hello {name}\"",
+            "\"Hello\" - name",
+            "name.format(\"Hello\")"
+          ],
+          "correctAnswer": "f\"Hello {name}\"",
+          "explanation": "An f-string evaluates expressions inside braces when name is Ada.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "An f-string evaluates expressions inside braces when name is Ada."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Strings and Formatting",
+              "url": "https://docs.python.org/3/tutorial/introduction.html#strings",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-strings-q3",
+          "topic": "python-strings",
+          "question": "What does \"abc\".upper() return?",
+          "options": [
+            "ABC",
+            "abc",
+            "Abc",
+            "None"
+          ],
+          "correctAnswer": "ABC",
+          "explanation": "upper returns a new uppercase string.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "upper returns a new uppercase string."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Strings and Formatting",
+              "url": "https://docs.python.org/3/tutorial/introduction.html#strings",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-strings-q4",
+          "topic": "python-strings",
+          "question": "What happens when you assign text[0] = \"X\" for a string?",
+          "options": [
+            "TypeError",
+            "The first character changes",
+            "A new list is created",
+            "Nothing"
+          ],
+          "correctAnswer": "TypeError",
+          "explanation": "Strings cannot be modified through item assignment.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Strings cannot be modified through item assignment."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Strings and Formatting",
+              "url": "https://docs.python.org/3/tutorial/introduction.html#strings",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-strings-q5",
+          "topic": "python-strings",
+          "question": "What is len(\"Python\")?",
+          "options": [
+            "6",
+            "5",
+            "7",
+            "0"
+          ],
+          "correctAnswer": "6",
+          "explanation": "len counts the six characters in this string.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "len counts the six characters in this string."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Strings and Formatting",
+              "url": "https://docs.python.org/3/tutorial/introduction.html#strings",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-strings-c1",
+          "topic": "python-strings",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "name = \"Python\"\nprint(name[0], name[-1])\nprint(name[1:4])\nprint(f\"{name.upper()} has {len(name)} letters\")",
+          "correctAnswer": "P n\nyth\nPYTHON has 6 letters",
+          "explanation": "Trace each statement in order. Indexing starts at zero; negative indexes count from the end.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Strings and Formatting",
+              "url": "https://docs.python.org/3/tutorial/introduction.html#strings",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-collections": {
+      "sources": [
+        {
+          "title": "Python tutorial: Lists, Tuples and Sets",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-collections-q1",
+          "topic": "python-collections",
+          "question": "Which collection removes duplicate hashable values?",
+          "options": [
+            "set",
+            "list",
+            "tuple",
+            "str"
+          ],
+          "correctAnswer": "set",
+          "explanation": "A set contains distinct hashable elements.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "A set contains distinct hashable elements."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Lists, Tuples and Sets",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-collections-q2",
+          "topic": "python-collections",
+          "question": "What does items.append(4) return?",
+          "options": [
+            "None",
+            "4",
+            "The new list",
+            "True"
+          ],
+          "correctAnswer": "None",
+          "explanation": "append mutates the list and returns None.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "append mutates the list and returns None."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Lists, Tuples and Sets",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-collections-q3",
+          "topic": "python-collections",
+          "question": "Which creates a one-element tuple?",
+          "options": [
+            "(4,)",
+            "(4)",
+            "[4]",
+            "{4}"
+          ],
+          "correctAnswer": "(4,)",
+          "explanation": "The comma makes it a tuple.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The comma makes it a tuple."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Lists, Tuples and Sets",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-collections-q4",
+          "topic": "python-collections",
+          "question": "What does [10, 20, 30][-1] return?",
+          "options": [
+            "30",
+            "10",
+            "20",
+            "IndexError"
+          ],
+          "correctAnswer": "30",
+          "explanation": "A negative index counts from the end.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "A negative index counts from the end."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Lists, Tuples and Sets",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-collections-q5",
+          "topic": "python-collections",
+          "question": "Which expression makes a shallow copy of items?",
+          "options": [
+            "items.copy()",
+            "items",
+            "items = items",
+            "copy = None"
+          ],
+          "correctAnswer": "items.copy()",
+          "explanation": "copy creates a new outer list.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "copy creates a new outer list."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Lists, Tuples and Sets",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-collections-c1",
+          "topic": "python-collections",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "scores = [3, 1, 3]\nscores.append(5)\nprint(len(scores))\nprint(sorted(set(scores)))\nfirst, second = (10, 20)\nprint(first + second)",
+          "correctAnswer": "4\n[1, 3, 5]\n30",
+          "explanation": "Trace each statement in order. append changes a list and returns None.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Lists, Tuples and Sets",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-dictionaries": {
+      "sources": [
+        {
+          "title": "Python tutorial: Dictionaries and Data Modelling",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-dictionaries-q1",
+          "topic": "python-dictionaries",
+          "question": "What does \"name\" in student test for a dictionary?",
+          "options": [
+            "Whether name is a key",
+            "Whether name is a value",
+            "Whether name is an attribute",
+            "Whether the dictionary is sorted"
+          ],
+          "correctAnswer": "Whether name is a key",
+          "explanation": "Dictionary membership tests keys.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Dictionary membership tests keys."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Dictionaries and Data Modelling",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-dictionaries-q2",
+          "topic": "python-dictionaries",
+          "question": "What happens when d[\"missing\"] accesses an absent key?",
+          "options": [
+            "KeyError",
+            "None",
+            "False",
+            "An empty string"
+          ],
+          "correctAnswer": "KeyError",
+          "explanation": "Square-bracket lookup requires the key to exist.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Square-bracket lookup requires the key to exist."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Dictionaries and Data Modelling",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-dictionaries-q3",
+          "topic": "python-dictionaries",
+          "question": "What is {}.get(\"count\", 0)?",
+          "options": [
+            "0",
+            "None",
+            "KeyError",
+            "False"
+          ],
+          "correctAnswer": "0",
+          "explanation": "The second argument supplies a default for missing keys.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The second argument supplies a default for missing keys."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Dictionaries and Data Modelling",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-dictionaries-q4",
+          "topic": "python-dictionaries",
+          "question": "Which method yields key-value pairs?",
+          "options": [
+            "items()",
+            "keys()",
+            "values()",
+            "pairs()"
+          ],
+          "correctAnswer": "items()",
+          "explanation": "items provides pairs suitable for unpacking in a loop.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "items provides pairs suitable for unpacking in a loop."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Dictionaries and Data Modelling",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-dictionaries-q5",
+          "topic": "python-dictionaries",
+          "question": "Which value can be a dictionary key?",
+          "options": [
+            "A string",
+            "A list",
+            "A dictionary",
+            "A set"
+          ],
+          "correctAnswer": "A string",
+          "explanation": "Strings are immutable and hashable.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Strings are immutable and hashable."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Dictionaries and Data Modelling",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-dictionaries-c1",
+          "topic": "python-dictionaries",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "student = {\"name\": \"Mira\", \"score\": 4}\nstudent[\"score\"] += 1\nprint(student[\"name\"], student[\"score\"])\nprint(student.get(\"level\", \"beginner\"))\nprint(\"name\" in student)",
+          "correctAnswer": "Mira 5\nbeginner\nTrue",
+          "explanation": "Trace each statement in order. Square-bracket lookup raises KeyError for a missing key.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Dictionaries and Data Modelling",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-functions": {
+      "sources": [
+        {
+          "title": "Python tutorial: Functions and Scope",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-functions-q1",
+          "topic": "python-functions",
+          "question": "What does a function return without an explicit return?",
+          "options": [
+            "None",
+            "0",
+            "False",
+            "An empty string"
+          ],
+          "correctAnswer": "None",
+          "explanation": "Reaching the end of a function returns None.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Reaching the end of a function returns None."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Functions and Scope",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-functions-q2",
+          "topic": "python-functions",
+          "question": "When are default argument values evaluated?",
+          "options": [
+            "When the function is defined",
+            "On every call",
+            "When Python exits",
+            "After the first return"
+          ],
+          "correctAnswer": "When the function is defined",
+          "explanation": "Default objects are created at definition time.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Default objects are created at definition time."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Functions and Scope",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-functions-q3",
+          "topic": "python-functions",
+          "question": "Which keyword sends a result to the caller?",
+          "options": [
+            "return",
+            "print",
+            "yieldfrom",
+            "result"
+          ],
+          "correctAnswer": "return",
+          "explanation": "return ends the call and supplies its value.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "return ends the call and supplies its value."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Functions and Scope",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-functions-q4",
+          "topic": "python-functions",
+          "question": "For def double(x): return x * 2, what is double(4)?",
+          "options": [
+            "8",
+            "4",
+            "2",
+            "None"
+          ],
+          "correctAnswer": "8",
+          "explanation": "The return expression multiplies the input by two.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The return expression multiplies the input by two."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Functions and Scope",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-functions-q5",
+          "topic": "python-functions",
+          "question": "Where is a variable assigned inside a function normally stored?",
+          "options": [
+            "In the function local scope",
+            "In every module",
+            "Only in the caller",
+            "In the builtins module"
+          ],
+          "correctAnswer": "In the function local scope",
+          "explanation": "Assignments normally create local names unless declared global or nonlocal.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Assignments normally create local names unless declared global or nonlocal."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Functions and Scope",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-functions-c1",
+          "topic": "python-functions",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "def total(price, quantity=2):\n    return price * quantity\n\nprint(total(5))\nprint(total(quantity=3, price=4))\nprint(total(2, 1))",
+          "correctAnswer": "10\n12\n2",
+          "explanation": "Trace each statement in order. A function without an explicit return returns None.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Functions and Scope",
+              "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-comprehensions": {
+      "sources": [
+        {
+          "title": "Python tutorial: Comprehensions and Iteration",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-comprehensions-q1",
+          "topic": "python-comprehensions",
+          "question": "What is [x * 2 for x in range(3)]?",
+          "options": [
+            "[0, 2, 4]",
+            "[2, 4, 6]",
+            "[0, 1, 2]",
+            "[0, 2, 4, 6]"
+          ],
+          "correctAnswer": "[0, 2, 4]",
+          "explanation": "range(3) yields zero, one and two.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "range(3) yields zero, one and two."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Comprehensions and Iteration",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-comprehensions-q2",
+          "topic": "python-comprehensions",
+          "question": "Which clause filters elements in a list comprehension?",
+          "options": [
+            "if",
+            "where",
+            "filterby",
+            "when"
+          ],
+          "correctAnswer": "if",
+          "explanation": "An optional if clause decides which items are included.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "An optional if clause decides which items are included."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Comprehensions and Iteration",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-comprehensions-q3",
+          "topic": "python-comprehensions",
+          "question": "What does enumerate provide?",
+          "options": [
+            "Index-value pairs",
+            "Only values",
+            "Only keys",
+            "Sorted values"
+          ],
+          "correctAnswer": "Index-value pairs",
+          "explanation": "enumerate pairs a counter with each item.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "enumerate pairs a counter with each item."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Comprehensions and Iteration",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-comprehensions-q4",
+          "topic": "python-comprehensions",
+          "question": "How many pairs does zip([1,2], [3]) yield by default?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "0"
+          ],
+          "correctAnswer": "1",
+          "explanation": "zip stops at the shortest iterable.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "zip stops at the shortest iterable."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Comprehensions and Iteration",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-comprehensions-q5",
+          "topic": "python-comprehensions",
+          "question": "What is [n for n in [1,2,3] if n > 1]?",
+          "options": [
+            "[2, 3]",
+            "[1]",
+            "[1, 2, 3]",
+            "[3]"
+          ],
+          "correctAnswer": "[2, 3]",
+          "explanation": "Only two and three satisfy the filter.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Only two and three satisfy the filter."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Comprehensions and Iteration",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-comprehensions-c1",
+          "topic": "python-comprehensions",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "values = [1, 2, 3, 4]\nsquares = [x * x for x in values if x % 2 == 0]\nprint(squares)\nfor index, name in enumerate([\"Ada\", \"Lin\"], start=1):\n    print(index, name)",
+          "correctAnswer": "[4, 16]\n1 Ada\n2 Lin",
+          "explanation": "Trace each statement in order. Read the for clause and filter before evaluating the expression.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Comprehensions and Iteration",
+              "url": "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-errors": {
+      "sources": [
+        {
+          "title": "Python tutorial: Exceptions and Validation",
+          "url": "https://docs.python.org/3/tutorial/errors.html",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-errors-q1",
+          "topic": "python-errors",
+          "question": "Which exception does int(\"hello\") raise?",
+          "options": [
+            "ValueError",
+            "KeyError",
+            "IndexError",
+            "NameError"
+          ],
+          "correctAnswer": "ValueError",
+          "explanation": "The string is not a valid integer representation.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The string is not a valid integer representation."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Exceptions and Validation",
+              "url": "https://docs.python.org/3/tutorial/errors.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-errors-q2",
+          "topic": "python-errors",
+          "question": "Which block handles an expected exception?",
+          "options": [
+            "except",
+            "finally",
+            "elsewhere",
+            "handle"
+          ],
+          "correctAnswer": "except",
+          "explanation": "except matches and handles an exception type.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "except matches and handles an exception type."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Exceptions and Validation",
+              "url": "https://docs.python.org/3/tutorial/errors.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-errors-q3",
+          "topic": "python-errors",
+          "question": "Which keyword explicitly signals an exception?",
+          "options": [
+            "raise",
+            "throw",
+            "error",
+            "catch"
+          ],
+          "correctAnswer": "raise",
+          "explanation": "raise signals a Python exception.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "raise signals a Python exception."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Exceptions and Validation",
+              "url": "https://docs.python.org/3/tutorial/errors.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-errors-q4",
+          "topic": "python-errors",
+          "question": "When does the else block on try run?",
+          "options": [
+            "When try finishes without an exception",
+            "Only when an exception occurs",
+            "Before try",
+            "Only after finally"
+          ],
+          "correctAnswer": "When try finishes without an exception",
+          "explanation": "The else clause runs when the try suite raises no exception.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The else clause runs when the try suite raises no exception."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Exceptions and Validation",
+              "url": "https://docs.python.org/3/tutorial/errors.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-errors-q5",
+          "topic": "python-errors",
+          "question": "Why prefer except ValueError to a bare except?",
+          "options": [
+            "It avoids hiding unrelated failures",
+            "It catches more errors",
+            "It prevents all crashes",
+            "It deletes the error"
+          ],
+          "correctAnswer": "It avoids hiding unrelated failures",
+          "explanation": "A narrow handler handles only the expected category of failure.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "A narrow handler handles only the expected category of failure."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Exceptions and Validation",
+              "url": "https://docs.python.org/3/tutorial/errors.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-errors-c1",
+          "topic": "python-errors",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "try:\n    number = int(\"four\")\nexcept ValueError:\n    print(\"Enter digits\")\nfinally:\n    print(\"Checked\")",
+          "correctAnswer": "Enter digits\nChecked",
+          "explanation": "Trace each statement in order. ValueError often means a valid type has an inappropriate value.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Exceptions and Validation",
+              "url": "https://docs.python.org/3/tutorial/errors.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-files": {
+      "sources": [
+        {
+          "title": "Python tutorial: Files and JSON",
+          "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-files-q1",
+          "topic": "python-files",
+          "question": "Why open files with a with statement?",
+          "options": [
+            "It closes the file when the block exits",
+            "It encrypts all contents",
+            "It prevents invalid JSON",
+            "It always appends"
+          ],
+          "correctAnswer": "It closes the file when the block exits",
+          "explanation": "The context manager handles cleanup even when an exception occurs.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The context manager handles cleanup even when an exception occurs."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Files and JSON",
+              "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-files-q2",
+          "topic": "python-files",
+          "question": "What does opening an existing file in w mode do?",
+          "options": [
+            "Truncates its contents",
+            "Appends only",
+            "Makes it read-only",
+            "Leaves all contents unchanged"
+          ],
+          "correctAnswer": "Truncates its contents",
+          "explanation": "Write mode replaces the existing contents.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Write mode replaces the existing contents."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Files and JSON",
+              "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-files-q3",
+          "topic": "python-files",
+          "question": "Which function parses a JSON string?",
+          "options": [
+            "json.loads",
+            "json.dumps",
+            "json.open",
+            "json.stringify"
+          ],
+          "correctAnswer": "json.loads",
+          "explanation": "loads deserializes a JSON string.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "loads deserializes a JSON string."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Files and JSON",
+              "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-files-q4",
+          "topic": "python-files",
+          "question": "What Python value results from JSON true?",
+          "options": [
+            "True",
+            "\"true\"",
+            "1.0",
+            "None"
+          ],
+          "correctAnswer": "True",
+          "explanation": "JSON booleans are decoded as Python bool values.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "JSON booleans are decoded as Python bool values."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Files and JSON",
+              "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-files-q5",
+          "topic": "python-files",
+          "question": "Which file mode appends text?",
+          "options": [
+            "a",
+            "r",
+            "w",
+            "x"
+          ],
+          "correctAnswer": "a",
+          "explanation": "Append mode writes at the end of the file.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Append mode writes at the end of the file."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Files and JSON",
+              "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-files-c1",
+          "topic": "python-files",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "import json\ntext = '{\"course\": \"Python\", \"scores\": [4, 5]}'\nrecord = json.loads(text)\nprint(record[\"course\"])\nprint(sum(record[\"scores\"]))\nprint(json.dumps({\"passed\": True}))",
+          "correctAnswer": "Python\n9\n{\"passed\": true}",
+          "explanation": "Trace each statement in order. with closes a file when its block exits.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Files and JSON",
+              "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-modules": {
+      "sources": [
+        {
+          "title": "Python tutorial: Modules and Program Structure",
+          "url": "https://docs.python.org/3/tutorial/modules.html",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-modules-q1",
+          "topic": "python-modules",
+          "question": "After import math, how do you call its square-root function?",
+          "options": [
+            "math.sqrt(9)",
+            "sqrt.math(9)",
+            "math(9)",
+            "import.sqrt(9)"
+          ],
+          "correctAnswer": "math.sqrt(9)",
+          "explanation": "An imported module exposes attributes through its namespace.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "An imported module exposes attributes through its namespace."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Modules and Program Structure",
+              "url": "https://docs.python.org/3/tutorial/modules.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-modules-q2",
+          "topic": "python-modules",
+          "question": "What does if __name__ == \"__main__\" identify?",
+          "options": [
+            "Direct execution of the module",
+            "Every import of the module",
+            "An installed package",
+            "A syntax error"
+          ],
+          "correctAnswer": "Direct execution of the module",
+          "explanation": "Python uses __main__ as the name of the entry module.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Python uses __main__ as the name of the entry module."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Modules and Program Structure",
+              "url": "https://docs.python.org/3/tutorial/modules.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-modules-q3",
+          "topic": "python-modules",
+          "question": "Which statement imports sqrt directly?",
+          "options": [
+            "from math import sqrt",
+            "import sqrt from math",
+            "using math.sqrt",
+            "require math.sqrt"
+          ],
+          "correctAnswer": "from math import sqrt",
+          "explanation": "The from-import syntax imports the named attribute.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The from-import syntax imports the named attribute."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Modules and Program Structure",
+              "url": "https://docs.python.org/3/tutorial/modules.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-modules-q4",
+          "topic": "python-modules",
+          "question": "Why split a project into modules?",
+          "options": [
+            "To group related responsibilities",
+            "To avoid all exceptions",
+            "To hide syntax errors",
+            "To run every function automatically"
+          ],
+          "correctAnswer": "To group related responsibilities",
+          "explanation": "Modules help organize and reuse related code.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Modules help organize and reuse related code."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Modules and Program Structure",
+              "url": "https://docs.python.org/3/tutorial/modules.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-modules-q5",
+          "topic": "python-modules",
+          "question": "What does math.isqrt(20) return?",
+          "options": [
+            "4",
+            "5",
+            "4.5",
+            "20"
+          ],
+          "correctAnswer": "4",
+          "explanation": "isqrt gives the integer floor of the exact square root.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "isqrt gives the integer floor of the exact square root."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Modules and Program Structure",
+              "url": "https://docs.python.org/3/tutorial/modules.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-modules-c1",
+          "topic": "python-modules",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "import math\nfrom pathlib import PurePosixPath\nprint(math.isqrt(20))\nprint(PurePosixPath(\"notes/lesson.txt\").suffix)\nprint(__name__ == \"__main__\")",
+          "correctAnswer": "4\n.txt\nTrue",
+          "explanation": "Trace each statement in order. import module keeps names grouped under the module name.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Modules and Program Structure",
+              "url": "https://docs.python.org/3/tutorial/modules.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
+    },
+    "python-classes": {
+      "sources": [
+        {
+          "title": "Python tutorial: Classes and Objects",
+          "url": "https://docs.python.org/3/tutorial/classes.html",
+          "kind": "curated reference"
+        }
+      ],
+      "questions": [
+        {
+          "id": "python-classes-q1",
+          "topic": "python-classes",
+          "question": "What does self conventionally refer to in an instance method?",
+          "options": [
+            "The current instance",
+            "The parent module",
+            "Every object",
+            "The class name string"
+          ],
+          "correctAnswer": "The current instance",
+          "explanation": "The bound instance is passed as the first argument.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "The bound instance is passed as the first argument."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Classes and Objects",
+              "url": "https://docs.python.org/3/tutorial/classes.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-classes-q2",
+          "topic": "python-classes",
+          "question": "Which method initializes instance attributes?",
+          "options": [
+            "__init__",
+            "__start__",
+            "constructor",
+            "initObject"
+          ],
+          "correctAnswer": "__init__",
+          "explanation": "__init__ runs to initialize a newly created instance.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "__init__ runs to initialize a newly created instance."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Classes and Objects",
+              "url": "https://docs.python.org/3/tutorial/classes.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-classes-q3",
+          "topic": "python-classes",
+          "question": "Where should an instance keep its own list of items?",
+          "options": [
+            "self.items = [] inside __init__",
+            "items = [] in the class body",
+            "In every other object",
+            "In the builtins module"
+          ],
+          "correctAnswer": "self.items = [] inside __init__",
+          "explanation": "An instance attribute avoids sharing the same mutable list across instances.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "An instance attribute avoids sharing the same mutable list across instances."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Classes and Objects",
+              "url": "https://docs.python.org/3/tutorial/classes.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-classes-q4",
+          "topic": "python-classes",
+          "question": "What does Counter() usually create?",
+          "options": [
+            "A new instance",
+            "A module",
+            "A string",
+            "A function import"
+          ],
+          "correctAnswer": "A new instance",
+          "explanation": "Calling a class constructs an instance.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Calling a class constructs an instance."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Classes and Objects",
+              "url": "https://docs.python.org/3/tutorial/classes.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        },
+        {
+          "id": "python-classes-q5",
+          "topic": "python-classes",
+          "question": "If a.value changes, must b.value change too?",
+          "options": [
+            "No, distinct instance attributes are independent",
+            "Yes, always",
+            "Only for integers",
+            "Only after print"
+          ],
+          "correctAnswer": "No, distinct instance attributes are independent",
+          "explanation": "Separate objects can store independent instance attributes.",
+          "hints": [
+            "Identify the operation and the values involved.",
+            "Separate objects can store independent instance attributes."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Classes and Objects",
+              "url": "https://docs.python.org/3/tutorial/classes.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "python-classes-c1",
+          "topic": "python-classes",
+          "language": "python",
+          "question": "Predict the output. Enter one line per print call.",
+          "code": "class Counter:\n    def __init__(self):\n        self.value = 0\n    def increment(self):\n        self.value += 1\n\na = Counter()\nb = Counter()\na.increment()\na.increment()\nprint(a.value, b.value)",
+          "correctAnswer": "2 0",
+          "explanation": "Trace each statement in order. self refers to the instance on which a method is called.",
+          "hints": [
+            "Write down the values after each assignment.",
+            "Check the expression in each print call, in order."
+          ],
+          "sources": [
+            {
+              "title": "Python tutorial: Classes and Objects",
+              "url": "https://docs.python.org/3/tutorial/classes.html",
+              "kind": "curated reference"
+            }
+          ],
+          "origin": "reviewed"
+        }
+      ]
     }
   }
 }

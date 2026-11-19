@@ -80,9 +80,6 @@ You are a JavaScript tutor.
     return prompt
 
 def handle_doubt(request: DoubtRequest) -> str:
-    if request.topic not in ALLOWED_TOPICS:
-        request.topic = "variables"
-
     if request.contextChunks and len(request.contextChunks) > 0:
         chunks = request.contextChunks
     else:
@@ -93,6 +90,10 @@ def handle_doubt(request: DoubtRequest) -> str:
         return "I'm sorry, I don't have enough context in my documentation to answer that."
 
     prompt = build_chat_prompt(request, chunks)
+    if request.topic.startswith('python-'):
+        prompt = prompt.replace('JavaScript tutor', 'Python tutor')
+        prompt = '\n'.join(line for line in prompt.split('\n') if not line.startswith('ACCURACY:'))
+        prompt += '\nUse Python semantics and Python syntax only. The supplied lesson is the reference context.\n'
 
     try:
         answer = call_groq(prompt)

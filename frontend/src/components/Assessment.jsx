@@ -41,7 +41,7 @@ export default function Assessment({ topic, onComplete, onContext }) {
     } catch (failure) { setError(failure.message); }
     finally { setLoading(false); }
   };
-  if (!draft) return <section><h2 className="text-2xl font-bold mb-3">Five questions. One clear checkpoint.</h2><p className="text-slate-600 mb-5">Answer all five reviewed questions. Score at least 4/5 (80%) to unlock the coding challenge. Your result and mistakes are saved in this browser.</p><button onClick={start} disabled={loading} className="bg-blue-900 text-white rounded-xl px-6 py-3">{loading ? 'Preparing...' : 'Start assessment'}</button></section>;
+  if (!draft) return <section><h2 className="text-2xl font-bold mb-3">Five questions. One clear checkpoint.</h2><p className="text-slate-600 mb-5">Answer all five reviewed questions. Score at least 4/5 (80%) to unlock the coding challenge. Your result and mistakes are saved to your account.</p><button onClick={start} disabled={loading} className="bg-blue-900 text-white rounded-xl px-6 py-3">{loading ? 'Preparing...' : 'Start assessment'}</button></section>;
   return <section>
     <div className="flex flex-wrap justify-between gap-3 mb-4"><h2 className="text-2xl font-bold">Knowledge assessment</h2><span className="text-sm text-slate-500">Reviewed bank · {draft.assessment.grading === 'browser' ? 'Offline grading' : 'Server grading'}</span></div>
     {warning && <p role="status" className="bg-amber-50 text-amber-900 rounded-lg p-3 text-sm mb-4">{warning}</p>}
